@@ -7,7 +7,7 @@ import PageBanner from '@/app/components/shared/pageBanner';
 function AboutPage() {
   return (
     <>
-      <PageBanner title="Testimonial" />
+      <PageBanner title="About" />
       <Info />
       <Target />
       <WhyChooseUs />
