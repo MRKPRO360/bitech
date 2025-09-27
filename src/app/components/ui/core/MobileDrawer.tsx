@@ -187,11 +187,19 @@ const MobileDrawer = () => {
                 About Us
               </Link>
 
-              <Dropdown title="Services" items={servicesItems} />
+              <Dropdown
+                mainLink="/services"
+                title="Services"
+                items={servicesItems}
+              />
               <Link className="" href="/projects">
                 Projects
               </Link>
-              <Dropdown title="Products" items={productsItems} />
+              <Dropdown
+                mainLink="/products"
+                title="Products"
+                items={productsItems}
+              />
               <Link className="" href="/company">
                 Company
               </Link>
