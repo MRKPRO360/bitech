@@ -9,4 +9,5 @@ export interface IDropdownProps {
   items: IDropdownItem[];
   icon?: React.ReactNode;
   className?: string;
+  mainLink: string;
 }

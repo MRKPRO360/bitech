@@ -10,6 +10,7 @@ import { useGSAP } from '@gsap/react';
 export default function Dropdown({
   title,
   items,
+  mainLink,
   className = '',
 }: IDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -92,7 +93,15 @@ export default function Dropdown({
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <div className="flex items-center gap-2">{title}</div>
+        {mainLink ? (
+          <Link href={mainLink} className="flex items-center gap-2">
+            {title}
+          </Link>
+        ) : (
+          <span className="flex items-center gap-2 cursor-default">
+            {title}
+          </span>
+        )}
         <ChevronDown
           className={`w-4 h-4 ml-2 transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''

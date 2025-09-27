@@ -46,7 +46,7 @@ const stats: Stat[] = [
   },
 ];
 
-export default function StatsSection() {
+export default function Stats() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const statRefs = useRef<HTMLDivElement[]>([]);
   const ballRefs = useRef<HTMLDivElement[]>([]);

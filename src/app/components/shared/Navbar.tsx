@@ -225,11 +225,23 @@ function Navbar() {
                 Home
               </Link>
 
-              <Dropdown title="About Us" items={aboutUsItems} />
+              <Dropdown
+                mainLink="/about"
+                title="About Us"
+                items={aboutUsItems}
+              />
 
-              <Dropdown title="Services" items={servicesItems} />
+              <Dropdown
+                mainLink="/services"
+                title="Services"
+                items={servicesItems}
+              />
 
-              <Dropdown title="Products" items={productsItems} />
+              <Dropdown
+                mainLink="/products"
+                title="Products"
+                items={productsItems}
+              />
               <Link className="" href="/projects">
                 Projects
               </Link>
