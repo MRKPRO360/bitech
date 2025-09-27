@@ -94,7 +94,7 @@ function ServicesItems() {
   });
 
   return (
-    <Container>
+    <Container className="py-10 md:py-14 lg:py-16">
       <div
         ref={fadeRef}
         className="max-w-xl mx-auto mb-5 text-center flex flex-col justify-center items-center"
