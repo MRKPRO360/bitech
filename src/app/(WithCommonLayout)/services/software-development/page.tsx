@@ -1,4 +1,10 @@
+import PageBanner from '@/app/components/shared/pageBanner';
+
 function SoftwareDevelopmentPage() {
-  return <div>SoftwareDevelopmentPage</div>;
+  return (
+    <>
+      <PageBanner title="Software Development" />
+    </>
+  );
 }
 export default SoftwareDevelopmentPage;
