@@ -51,7 +51,7 @@ function ServicesItem({ service }: { service: IServiceItem }) {
 
         {/* Hover Border */}
         <div
-          className={`absolute inset-0 rounded-md border-2 border-transparent group-hover:border-blue-200 transition-all duration-300`}
+          className={`absolute inset-0 rounded-md border-2 border-transparent group-hover:border-primary/50 transition-all duration-300`}
         />
       </div>
     </Link>

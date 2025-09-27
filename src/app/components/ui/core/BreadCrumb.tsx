@@ -36,11 +36,14 @@ export default function Breadcrumbs() {
                 <FaChevronRight className="text-primary" />
                 <li>
                   {isLast ? (
-                    <span className="hover:text-primary duration-200">
+                    <span className="hover:text-primary transition duration-200">
                       {formatSegment(segment)}
                     </span>
                   ) : (
-                    <Link href={href} className="hover:underline">
+                    <Link
+                      href={href}
+                      className="hover:text-primary duration-200 transition "
+                    >
                       {formatSegment(segment)}
                     </Link>
                   )}
