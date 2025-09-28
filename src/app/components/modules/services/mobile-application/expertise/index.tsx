@@ -3,7 +3,7 @@ import Container from '@/app/components/ui/core/Container';
 import Para from '@/app/components/ui/core/Para';
 import SecondaryHeading from '@/app/components/ui/core/SecondaryHeading';
 import WandWithText from '@/app/components/ui/Wand';
-// import { useStaggerChildren } from '@/hooks/CardStagger';
+import { useStaggerChildren } from '@/hooks/CardStagger';
 import { useFadeUp } from '@/hooks/FadeUp';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -46,6 +46,10 @@ const platforms = [
 
 function Expertise() {
   const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });
+  const platformRef = useStaggerChildren<HTMLDivElement>({
+    stagger: 0.3,
+    y: 20,
+  });
   const barsRef = useRef<HTMLDivElement[]>([]);
 
   const addToRefs = (el: HTMLDivElement | null) => {
@@ -85,7 +89,7 @@ function Expertise() {
         </Para>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
+      <div ref={platformRef} className="grid md:grid-cols-2 gap-8">
         {platforms.map((platform, index) => (
           <div key={index} className="group">
             <div className=" rounded-md p-8  shadow-sm hover:border-white/30 transition-all duration-500 h-full">
