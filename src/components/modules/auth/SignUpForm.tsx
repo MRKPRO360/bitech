@@ -3,6 +3,7 @@ import Checkbox from '@/components/form/input/Checkbox';
 import Input from '@/components/form/input/InputField';
 import Label from '@/components/form/Label';
 import Cta from '@/components/ui/core/Cta';
+import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
 import { ChevronLeftIcon, EyeClosedIcon, EyeIcon } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -15,7 +16,7 @@ export default function SignUpForm() {
       <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
         <Link
           href="/"
-          className="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700"
+          className="inline-flex items-center text-sm text-grey transition-colors hover:text-gray-700"
         >
           <ChevronLeftIcon />
           Back to Home
@@ -24,9 +25,7 @@ export default function SignUpForm() {
       <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
         <div>
           <div className="mb-5 sm:mb-8">
-            <h1 className="mb-2 font-semibold text-2xl sm:text-title-md">
-              Sign Up
-            </h1>
+            <SecondaryHeading className="mb-2 ">Sign Up</SecondaryHeading>
             <p className="text-sm text-gray-500 ">
               Enter your email and password to sign up!
             </p>

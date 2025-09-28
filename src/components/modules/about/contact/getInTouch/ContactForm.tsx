@@ -36,7 +36,7 @@ function ContactForm() {
             id="name"
             type="text"
             placeholder="John Doe"
-            className={`w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 ${
+            className={`w-full pl-10 pr-4 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 ${
               errors.name
                 ? 'border-red-500 focus:ring-red-200'
                 : 'border-gray-300 focus:border-primary focus:ring-blue-200'

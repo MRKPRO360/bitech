@@ -44,7 +44,7 @@ const Input: FC<InputProps> = ({
   } else if (success) {
     inputClasses += ` text-success-500 border-success-400 focus:ring-success-500/10 focus:border-success-300  `;
   } else {
-    inputClasses += ` bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10`;
+    inputClasses += ` focus:border-primary focus:ring-blue-200 bg-transparent text-gray-800  w-full px-2 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10`;
   }
 
   return (
@@ -77,6 +77,19 @@ const Input: FC<InputProps> = ({
           {hint}
         </p>
       )}
+      {/*  
+      we have to pass the register and error and make this input to this look
+      <input
+            id="name"
+            type="text"
+            placeholder="John Doe"
+            className={`w-full pl-10 pr-4 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 ${
+              errors.name
+                ? 'border-red-500 focus:ring-red-200'
+                : 'border-gray-300 focus:border-primary focus:ring-blue-200'
+            }`}
+            {...register('name', { required: 'Name is required' })}
+          /> */}
     </div>
   );
 };

@@ -2,8 +2,7 @@
 
 import Label from '@/components/form/Label';
 import Checkbox from '@/components/form/input/Checkbox';
-import Input from '@/components/input/InputField';
-import Button from '@/components/ui/button/Button';
+import Input from '@/components/form/input/InputField';
 import Cta from '@/components/ui/core/Cta';
 import { ChevronLeftIcon, EyeClosedIcon, EyeIcon } from 'lucide-react';
 
