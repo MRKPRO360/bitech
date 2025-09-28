@@ -1,5 +1,5 @@
-import PageBanner from '@/app/components/shared/pageBanner';
-import TeamGroup from '@/app/components/shared/teamGroup';
+import PageBanner from '@/components/shared/pageBanner';
+import TeamGroup from '@/components/shared/teamGroup';
 
 function TeamPage() {
   return (

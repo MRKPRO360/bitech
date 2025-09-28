@@ -1,4 +1,4 @@
-import PageBanner from '@/app/components/shared/pageBanner';
+import PageBanner from '@/components/shared/pageBanner';
 
 function ItServicePage() {
   return (

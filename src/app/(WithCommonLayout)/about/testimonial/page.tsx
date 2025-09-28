@@ -1,5 +1,5 @@
-import TestimonialReview from '@/app/components/modules/about/testimonial/testimonialReview';
-import PageBanner from '@/app/components/shared/pageBanner';
+import TestimonialReview from '@/components/modules/about/testimonial/testimonialReview';
+import PageBanner from '@/components/shared/pageBanner';
 
 function TestimonialsPage() {
   return (

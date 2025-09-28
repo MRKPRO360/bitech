@@ -1,8 +1,8 @@
-import CareerCta from '@/app/components/shared/careerCta';
-import OpeningJobs from '@/app/components/modules/about/career/openingJob';
-import PerksAndBenefits from '@/app/components/modules/about/career/perksBenefits';
-import Stats from '@/app/components/shared/stats';
-import PageBanner from '@/app/components/shared/pageBanner';
+import CareerCta from '@/components/shared/careerCta';
+import OpeningJobs from '@/components/modules/about/career/openingJob';
+import PerksAndBenefits from '@/components/modules/about/career/perksBenefits';
+import Stats from '@/components/shared/stats';
+import PageBanner from '@/components/shared/pageBanner';
 
 function CareerPage() {
   return (

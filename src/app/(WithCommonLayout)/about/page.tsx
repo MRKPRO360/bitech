@@ -1,8 +1,8 @@
-import DataDriven from '@/app/components/modules/about/dataDriven';
-import Info from '@/app/components/modules/about/info';
-import Target from '@/app/components/modules/about/target';
-import WhyChooseUs from '@/app/components/modules/about/whyChooseUs';
-import PageBanner from '@/app/components/shared/pageBanner';
+import DataDriven from '@/components/modules/about/dataDriven';
+import Info from '@/components/modules/about/info';
+import Target from '@/components/modules/about/target';
+import WhyChooseUs from '@/components/modules/about/whyChooseUs';
+import PageBanner from '@/components/shared/pageBanner';
 
 function AboutPage() {
   return (

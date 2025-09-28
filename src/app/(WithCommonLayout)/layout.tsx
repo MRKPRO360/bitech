@@ -1,5 +1,5 @@
-import Footer from '../components/shared/Footer';
-import Navbar from '../components/shared/Navbar';
+import Footer from '../../components/shared/Footer';
+import Navbar from '../../components/shared/Navbar';
 
 function HomePageLayout({ children }: { children: React.ReactNode }) {
   return (

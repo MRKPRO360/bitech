@@ -1,6 +1,6 @@
-import ContactInfo from '@/app/components/modules/about/contact/contactInfo';
-import GetInTouch from '@/app/components/modules/about/contact/getInTouch';
-import PageBanner from '@/app/components/shared/pageBanner';
+import ContactInfo from '@/components/modules/about/contact/contactInfo';
+import GetInTouch from '@/components/modules/about/contact/getInTouch';
+import PageBanner from '@/components/shared/pageBanner';
 
 function ContactUsPage() {
   return (

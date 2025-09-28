@@ -1,9 +1,9 @@
-import DevelopmentProcess from '@/app/components/modules/services/softwareDevelopment/developmentProcess';
-import SoftwareDevelopmentOverview from '@/app/components/modules/services/softwareDevelopment/softwareDevelopmentOverview';
-import StandOut from '@/app/components/modules/services/softwareDevelopment/standOut';
-import TechnologyStack from '@/app/components/modules/services/softwareDevelopment/technologyStack';
-import CareerCta from '@/app/components/shared/careerCta';
-import PageBanner from '@/app/components/shared/pageBanner';
+import DevelopmentProcess from '@/components/modules/services/softwareDevelopment/developmentProcess';
+import SoftwareDevelopmentOverview from '@/components/modules/services/softwareDevelopment/softwareDevelopmentOverview';
+import StandOut from '@/components/modules/services/softwareDevelopment/standOut';
+import TechnologyStack from '@/components/modules/services/softwareDevelopment/technologyStack';
+import CareerCta from '@/components/shared/careerCta';
+import PageBanner from '@/components/shared/pageBanner';
 
 function SoftwareDevelopmentPage() {
   return (
