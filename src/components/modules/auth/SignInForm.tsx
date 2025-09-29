@@ -4,6 +4,8 @@ import Label from '@/components/form/Label';
 import Checkbox from '@/components/form/input/Checkbox';
 import Input from '@/components/form/input/InputField';
 import Cta from '@/components/ui/core/Cta';
+import Para from '@/components/ui/core/Para';
+import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
 import { ChevronLeftIcon, EyeClosedIcon, EyeIcon } from 'lucide-react';
 
 import Link from 'next/link';
@@ -26,12 +28,8 @@ export default function SignInForm() {
       <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
         <div>
           <div className="mb-5 sm:mb-8">
-            <h1 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
-              Sign In
-            </h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Enter your email and password to sign in!
-            </p>
+            <SecondaryHeading className="mb-2">Sign In</SecondaryHeading>
+            <Para>Enter your email and password to sign in!</Para>
           </div>
           <div>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">

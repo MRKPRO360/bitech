@@ -248,13 +248,16 @@ function Navbar() {
                 Projects
               </Link>
 
-              {isLoggedIn ? (
+              {!isLoggedIn ? (
                 <Link href="/admin" className="hover:text-primary duration-200">
                   Dashboard
                 </Link>
               ) : (
-                <Link href="/" className="hover:text-primary duration-200">
-                  Login
+                <Link
+                  href="/signin"
+                  className="hover:text-primary duration-200"
+                >
+                  Sign In
                 </Link>
               )}
             </div>
