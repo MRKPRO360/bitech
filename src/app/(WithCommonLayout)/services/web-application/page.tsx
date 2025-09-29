@@ -1,4 +1,10 @@
+import PageBanner from '@/components/shared/pageBanner';
+
 function WebApplicationPage() {
-  return <div>WebApplicationPage</div>;
+  return (
+    <>
+      <PageBanner title="Web Application" />
+    </>
+  );
 }
 export default WebApplicationPage;
