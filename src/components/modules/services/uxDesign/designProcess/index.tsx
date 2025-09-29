@@ -6,7 +6,14 @@ import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
 import WandWithText from '@/components/ui/Wand';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 import { useFadeUp } from '@/hooks/FadeUp';
-import { Workflow, Eye, Palette, MessageCircle } from 'lucide-react';
+import {
+  Workflow,
+  Eye,
+  Palette,
+  MessageCircle,
+  Code,
+  Rocket,
+} from 'lucide-react';
 const designProcess = [
   {
     step: '01',
@@ -40,7 +47,24 @@ const designProcess = [
     icon: <MessageCircle className="w-6 h-6" />,
     color: 'from-orange-500 to-amber-600',
   },
+  {
+    step: '05',
+    title: 'Implementation Support',
+    description:
+      'Collaborating with developers to ensure accurate design handoff and smooth implementation.',
+    icon: <Code className="w-6 h-6" />,
+    color: 'from-teal-500 to-green-700',
+  },
+  {
+    step: '06',
+    title: 'Launch & Monitor',
+    description:
+      'Releasing the product, tracking performance metrics, and continuously optimizing for growth.',
+    icon: <Rocket className="w-6 h-6" />,
+    color: 'from-red-500 to-pink-600',
+  },
 ];
+
 function DesignProcess() {
   const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });
 

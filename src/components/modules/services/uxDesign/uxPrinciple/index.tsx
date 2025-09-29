@@ -2,11 +2,18 @@
 import SimpleCard from '@/components/shared/simpleCard';
 import Container from '@/components/ui/core/Container';
 import Para from '@/components/ui/core/Para';
-import SubHeading from '@/components/ui/core/SubHeading';
+import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
 import WandWithText from '@/components/ui/Wand';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 import { useFadeUp } from '@/hooks/FadeUp';
-import { Users, Zap, Palette, Layout } from 'lucide-react';
+import {
+  Users,
+  Zap,
+  Palette,
+  Layout,
+  Accessibility,
+  Smile,
+} from 'lucide-react';
 const uxPrinciples = [
   {
     icon: <Users className="w-6 h-6" />,
@@ -32,6 +39,18 @@ const uxPrinciples = [
     desc: 'Maintaining uniform patterns and behaviors across the entire user experience.',
     gradient: 'from-purple-500 to-pink-600',
   },
+  {
+    icon: <Accessibility className="w-6 h-6" />,
+    title: 'Accessibility',
+    desc: 'Designing inclusive experiences that are usable by people of all abilities and backgrounds.',
+    gradient: 'from-cyan-500 to-blue-700',
+  },
+  {
+    icon: <Smile className="w-6 h-6" />,
+    title: 'Delight & Engagement',
+    desc: 'Adding thoughtful details and micro-interactions that create memorable user experiences.',
+    gradient: 'from-pink-500 to-rose-600',
+  },
 ];
 
 function UxPrinciple() {
@@ -45,8 +64,8 @@ function UxPrinciple() {
         ref={fadeRef}
         className="max-w-xl mx-auto mb-5 text-center flex flex-col justify-center items-center"
       >
-        <WandWithText text="Crown In Hand" />
-        <SubHeading>Our UX Design Principles</SubHeading>
+        <WandWithText text="Design Principle" />
+        <SecondaryHeading>Our UX Design Principles</SecondaryHeading>
         <Para className="mt-5">
           Grounded in human-centered design thinking, our principles guide every
           decision to create meaningful and effective user experiences.
