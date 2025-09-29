@@ -10,9 +10,9 @@ function ItServicePage() {
       <MethodologyProcess />
       <ItStack />
       <CtaSection
-        subHeading="Transform User Experience "
-        heading="We Like to Start Your Project With Us"
-        description="Let's collaborate to create digital experiences that delight your users and drive business growth. Get in touch to start your project."
+        subHeading="Transform Your IT Infrastructure"
+        heading="Start Your IT Transformation Today"
+        description="Let's implement comprehensive IT solutions that optimize your operations, enhance security, and drive digital transformation for sustainable business growth."
       />
     </>
   );

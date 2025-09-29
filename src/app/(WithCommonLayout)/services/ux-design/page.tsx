@@ -9,11 +9,10 @@ function UxDesignPage() {
       <PageBanner title="UX Design" />
       <UxPrinciple />
       <DesignProcess />
-
       <CtaSection
-        subHeading="Transform User Experience "
-        heading="We Like to Start Your Project With Us"
-        description="Let's collaborate to create digital experiences that delight your users and drive business growth. Get in touch to start your project."
+        subHeading="Elevate User Experiences"
+        heading="Start Your UX Design Project"
+        description="Let's create intuitive, user-centered designs that delight your customers, improve engagement, and drive conversions through thoughtful user experience strategies."
       />
     </>
   );

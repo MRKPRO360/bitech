@@ -78,9 +78,9 @@ function WebApplicationPage() {
         items={servicePoints}
       />
       <CtaSection
-        subHeading="Transform User Experience "
-        heading="We Like to Start Your Project With Us"
-        description="Let's collaborate to create digital experiences that delight your users and drive business growth. Get in touch to start your project."
+        subHeading="Build Powerful Web Solutions"
+        heading="Start Your Web Application Project"
+        description="Let's develop custom web applications that streamline your operations, enhance user experiences, and scale with your business needs using cutting-edge technologies."
       />
     </>
   );
