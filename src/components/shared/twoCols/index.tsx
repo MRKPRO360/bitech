@@ -79,6 +79,7 @@ function TwoCols({
         >
           <div className="flex-1 left-col">
             <Image
+              className="w-full h-full"
               src={image}
               alt="start your project"
               width={500}
