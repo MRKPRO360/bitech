@@ -6,6 +6,7 @@ import { IDropdownProps } from '@/types';
 import { ChevronDown } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import Container from './Container';
 
 export default function Dropdown({
   title,
@@ -112,26 +113,31 @@ export default function Dropdown({
       <div
         style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
         ref={menuRef}
-        className={`absolute left-1/2 -translate-x-1/2 z-10 mt-2 min-w-[60vw] origin-top rounded-md bg-white shadow-lg opacity-0`}
+        className={`fixed z-50 left-1/2 -translate-x-1/2  mt-2   origin-top rounded-md bg-white shadow-lg opacity-0`}
+        // className={`absolute left-1/2 -translate-x-1/2 z-10 mt-2 min-w-[60vw] origin-top rounded-md bg-white shadow-lg opacity-0`}
         role="menu"
       >
         <div className="py-1">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {items.map((item, index) => (
-              <Link
-                key={index}
-                href={item.href}
-                className={`flex items-center px-4 py-2 text-[16px] transition-colors duration-150 ${
-                  index !== items.length - 1 ? 'border-b border-gray-100' : ''
-                } hover:text-primary `}
-                role="menuitem"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.icon && <span className="mr-2 w-5 h-5">{item.icon}</span>}
-                {item.label}
-              </Link>
-            ))}
-          </div>
+          <Container>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {items.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className={`flex items-center px-4 py-2 text-[16px] transition-colors duration-150 ${
+                    index !== items.length - 1 ? 'border-b border-gray-100' : ''
+                  } hover:text-primary `}
+                  role="menuitem"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.icon && (
+                    <span className="mr-2 w-5 h-5">{item.icon}</span>
+                  )}
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </Container>
         </div>
       </div>
     </div>

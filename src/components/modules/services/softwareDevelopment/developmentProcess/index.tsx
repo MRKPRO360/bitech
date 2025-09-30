@@ -4,19 +4,10 @@ import GradientCard from '@/components/shared/gradientCard';
 import Container from '@/components/ui/core/Container';
 import Para from '@/components/ui/core/Para';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
-import SubHeading from '@/components/ui/core/SubHeading';
 import WandWithText from '@/components/ui/Wand';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 import { useFadeUp } from '@/hooks/FadeUp';
-import {
-  ArrowRight,
-  CheckCircle,
-  Cloud,
-  Code,
-  Palette,
-  Shield,
-  Users,
-} from 'lucide-react';
+import { CheckCircle, Cloud, Code, Palette, Shield, Users } from 'lucide-react';
 
 function DevelopmentProcess() {
   const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });

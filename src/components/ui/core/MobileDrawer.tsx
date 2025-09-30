@@ -179,11 +179,13 @@ const MobileDrawer = () => {
         </div>
 
         {/* Drawer Content */}
-        <nav className="p-4">
+        <nav className="p-4 ext-base sm:text-lg">
           <ul className="space-y-4">
-            <div className="flex flex-col lg:hidden  gap-6 text-lg font-bold">
-              <div className="">Home</div>
-              <Link className="" href="/about">
+            <div className="flex flex-col lg:hidden  gap-6 t font-bold">
+              <Link href="/" className="hover:text-primary duration-200">
+                Home
+              </Link>
+              <Link className="hover:text-primary duration-200" href="/about">
                 About Us
               </Link>
 

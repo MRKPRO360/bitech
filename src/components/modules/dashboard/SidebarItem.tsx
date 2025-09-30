@@ -6,7 +6,7 @@ import { IMenuItem } from './dashbaord.config';
 
 export default function SidebarItem({ item }: { item: IMenuItem }) {
   const [open, setOpen] = useState(false);
-  const Icon = item.icon;
+  const Icon = item?.icon;
 
   return (
     <div>
@@ -16,7 +16,7 @@ export default function SidebarItem({ item }: { item: IMenuItem }) {
           className="flex items-center justify-between w-full px-4 py-2 text-left hover:bg-gray-100 rounded-md"
         >
           <span className="flex items-center gap-2">
-            <Icon className="h-5 w-5" />
+            {Icon && <Icon className="h-5 w-5" />}
             {item.title}
           </span>
           <ChevronDown
@@ -30,7 +30,7 @@ export default function SidebarItem({ item }: { item: IMenuItem }) {
           href={item.href!}
           className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-md"
         >
-          <Icon className="h-5 w-5" />
+          {Icon && <Icon className="h-5 w-5" />}
           {item.title}
         </Link>
       )}

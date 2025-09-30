@@ -33,9 +33,11 @@ import {
   CheckCircle, // QA, QC & Testing
 } from 'lucide-react';
 
-import logo from '@/assets/file.png';
+import logo from '@/assets/logo.png';
 import Image from 'next/image';
 import MobileDrawer from '../ui/core/MobileDrawer';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -161,6 +163,7 @@ const aboutUsItems = [
 
 function Navbar() {
   const navbarRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   const isLoggedIn = true;
 
@@ -223,7 +226,13 @@ function Navbar() {
             </Link>
             {/* Navlink */}
             <div className="hidden lg:flex items-center gap-6 text-lg font-bold">
-              <Link href="/" className="hover:text-primary duration-200">
+              <Link
+                href="/"
+                className={clsx(
+                  'hover:text-primary duration-200',
+                  pathname === '/' && 'text-primary'
+                )}
+              >
                 Home
               </Link>
 
@@ -244,12 +253,24 @@ function Navbar() {
                 title="Products"
                 items={productsItems}
               />
-              <Link className="" href="/projects">
+              <Link
+                className={clsx(
+                  'hover:text-primary duration-200',
+                  pathname === '/projects' && 'text-primary'
+                )}
+                href="/projects"
+              >
                 Projects
               </Link>
 
               {!isLoggedIn ? (
-                <Link href="/admin" className="hover:text-primary duration-200">
+                <Link
+                  href="/admin"
+                  className={clsx(
+                    'hover:text-primary duration-200',
+                    pathname === '/admin' && 'text-primary'
+                  )}
+                >
                   Dashboard
                 </Link>
               ) : (
