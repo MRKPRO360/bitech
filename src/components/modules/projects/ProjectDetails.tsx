@@ -21,6 +21,7 @@ import { useStaggerChildren } from '@/hooks/CardStagger';
 import SubHeading from '@/components/ui/core/SubHeading';
 import Para from '@/components/ui/core/Para';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
+import formateDate from '@/components/utils/formateDate';
 
 function ProjectDetails({ project }: { project: IProject }) {
   const projectRef = useStaggerChildren<HTMLDivElement>({
@@ -130,7 +131,7 @@ function ProjectDetails({ project }: { project: IProject }) {
                   <div>
                     <p className="text-sm text-gray-600">Completion Date</p>
                     <p className="font-medium text-gray-900">
-                      {new Date(project.completionDate).toLocaleDateString()}
+                      {formateDate(project.completionDate)}
                     </p>
                   </div>
                 </div>
