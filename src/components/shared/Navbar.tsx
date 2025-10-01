@@ -188,9 +188,11 @@ function Navbar() {
           if (self.isActive) {
             // Scrolled down
             gsap.to(navbarRef.current, {
-              backgroundColor: 'rgba(255, 255, 255, 1)',
+              backgroundColor: 'rgba(255, 255, 255, .5)',
               boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
               color: '#171717',
+              backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
               duration: 0.3,
             });
             gsap.to(inner, {

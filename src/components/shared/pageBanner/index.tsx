@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import banner from '@/assets/aboutBg.png';
+import birds from '@/assets/birds.png';
 import shape from '@/assets/shape2.png';
 import Breadcrumbs from '@/components/ui/core/BreadCrumb';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
@@ -60,6 +61,14 @@ export default function PageBanner({
           <div className="relative z-10 mt-4">
             <Breadcrumbs />
           </div>
+
+          <Image
+            className="opacity-30 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            src={birds}
+            width={400}
+            height={400}
+            alt="decorative shape"
+          />
 
           {shapeImage ? (
             <Image
