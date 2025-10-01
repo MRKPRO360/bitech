@@ -64,7 +64,7 @@ function Cta({
     >
       <span
         className={clsx(
-          'absolute w-0 h-0 transition-all duration-500 ease-out  rounded-full group-hover:w-56 group-hover:h-56',
+          'absolute  w-0 h-0 transition-all duration-500 ease-out  rounded-full group-hover:w-full group-hover:h-56',
           outline ? 'bg-primary' : 'bg-gray-800'
         )}
       ></span>
@@ -84,18 +84,5 @@ function Cta({
   );
 
   return hasLink ? linkedButton : button;
-
-  //   return (
-  //     <button
-  //       className={clsx(
-  //         `${className} text-gray-50 text-sm sm:text-base md:px-4 px-2 py-2 md:py-2.5 rounded-sm cursor-pointer trnasition duration-300 hover:bg-primary-dark`,
-  //         outline
-  //           ? ' border-primary border-2 text-primary hover:text-white'
-  //           : 'bg-primary border-transparent'
-  //       )}
-  //     >
-  //       {text}
-  //     </button>
-  //   );
 }
 export default Cta;
