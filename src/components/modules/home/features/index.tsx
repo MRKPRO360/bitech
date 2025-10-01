@@ -113,7 +113,7 @@ function Features() {
         >
           {features.map((el) => (
             <div
-              className="flex flex-col items-center text-center p-8 bg-white transition duration-300 rounded-md "
+              className="flex flex-col items-center text-center p-8 bg-white rounded-md  border border-primary/10 hover:border-primary transition duration-300 shadow-sm hover:shadow-md"
               key={el.title}
             >
               <div className="mb-2 flex items-center flex-col ">

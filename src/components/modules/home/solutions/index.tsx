@@ -83,7 +83,7 @@ function Solutions() {
       >
         {ourSolutions.map((el) => (
           <div
-            className="flex flex-col items-center text-center border border-primary/10 hover:border-primary transition duration-300 rounded-md p-4 opacity-0"
+            className="flex flex-col items-center text-center border border-primary/10 hover:border-primary transition duration-300 rounded-md p-4 opacity-0 shadow-sm hover:shadow-md"
             key={el.title}
           >
             <div className="mb-2 flex items-center flex-col ">

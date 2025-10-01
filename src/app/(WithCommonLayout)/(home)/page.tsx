@@ -1,3 +1,4 @@
+import BannerSlider from '@/components/modules/home/BannerSlider';
 import Blogs from '@/components/modules/home/blog';
 import CloudHosting from '@/components/modules/home/cloud-hosting';
 import DesingAndDevelopment from '@/components/modules/home/desing&development';
@@ -13,7 +14,8 @@ import PricingAndPlans from '@/components/modules/pricingPlan';
 function HomePage() {
   return (
     <>
-      <HomeBanner />
+      {/* <HomeBanner /> */}
+      <BannerSlider />
       <Solutions />
       <CloudHosting />
       <DesingAndDevelopment />
