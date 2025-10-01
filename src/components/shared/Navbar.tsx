@@ -38,6 +38,7 @@ import Image from 'next/image';
 import MobileDrawer from '../ui/core/MobileDrawer';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import CategorizedDropdown from '../ui/core/CategorizedDropdown';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,42 +47,50 @@ const servicesItems = [
     label: 'Software Development',
     href: '/services/software-development',
     icon: <Laptop className="w-4 h-4 mr-2" />,
+    tag: 'Software & Apps',
   },
   {
     label: 'Web Application',
     href: '/services/web-application',
     icon: <Globe className="w-4 h-4 mr-2" />,
+    tag: 'Software & Apps',
   },
   {
     label: 'Mobile Application',
     href: '/services/mobile-application',
     icon: <Smartphone className="w-4 h-4 mr-2" />,
+    tag: 'Software & Apps',
   },
   {
     label: 'Websites',
     href: '/services/websites',
     icon: <Layout className="w-4 h-4 mr-2" />,
+    tag: 'Software & Apps',
   },
 
   {
     label: 'UX Design',
     href: '/services/ux-design',
     icon: <Palette className="w-4 h-4 mr-2" />,
+    tag: 'Outsourcing',
   },
   {
     label: 'NOC Support',
     href: '/services/noc-support',
     icon: <Server className="w-4 h-4 mr-2" />,
+    tag: 'Outsourcing',
   },
   {
     label: 'IT Services',
     href: '/services/it-services',
     icon: <Headphones className="w-4 h-4 mr-2" />,
+    tag: 'Outsourcing',
   },
   {
     label: 'QA, QC & Testing',
     href: '/services/qa-qc-testing',
     icon: <CheckCircle className="w-4 h-4 mr-2" />,
+    tag: 'Outsourcing',
   },
 ];
 
@@ -242,7 +251,7 @@ function Navbar() {
                 items={aboutUsItems}
               />
 
-              <Dropdown
+              <CategorizedDropdown
                 mainLink="/services"
                 title="Services"
                 items={servicesItems}

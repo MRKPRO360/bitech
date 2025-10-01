@@ -2,6 +2,7 @@ export interface IDropdownItem {
   label: string;
   href: string;
   icon?: React.ReactNode;
+  tag?: string;
 }
 
 export interface IDropdownProps {

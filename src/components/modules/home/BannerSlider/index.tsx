@@ -228,11 +228,9 @@ import clsx from 'clsx';
 
 function BannerSlider() {
   const swiperRef = useRef<SwiperClass | null>(null);
-  const shapesRef = useRef<HTMLDivElement>(null);
 
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
 
   const handlePrev = () => {
     swiperRef.current?.slidePrev();
@@ -245,40 +243,7 @@ function BannerSlider() {
   const updateNavState = (swiper: SwiperClass) => {
     setIsBeginning(swiper.isBeginning);
     setIsEnd(swiper.isEnd);
-    setCurrentSlide(swiper.activeIndex);
   };
-
-  // Animate floating shapes on slide change
-  useEffect(() => {
-    if (shapesRef.current) {
-      const shapes = shapesRef.current.querySelectorAll('.floating-shape');
-
-      // Reset all shapes to initial state
-      gsap.set(shapes, { clearProps: 'all' });
-
-      // Animate shapes with different effects
-      shapes.forEach((shape, index) => {
-        const delay = index * 0.1;
-
-        gsap.fromTo(
-          shape,
-          {
-            scale: 0,
-            rotation: -45,
-            opacity: 0,
-          },
-          {
-            scale: 1,
-            rotation: 0,
-            opacity: 0.1,
-            duration: 0.8,
-            delay: delay,
-            ease: 'back.out(1.7)',
-          }
-        );
-      });
-    }
-  }, [currentSlide]);
 
   const slides = [
     {
@@ -329,30 +294,6 @@ function BannerSlider() {
         overflow: 'hidden',
       }}
     >
-      {/* Animated Floating Shapes */}
-      <div
-        ref={shapesRef}
-        className="absolute inset-0 pointer-events-none overflow-hidden"
-      >
-        {/* Large geometric shapes */}
-        <div className="floating-shape absolute top-10 left-10 w-20 h-20 rounded-full border-2 border-gray-300" />
-        <div className="floating-shape absolute bottom-20 right-20 w-16 h-16 rounded-lg border border-gray-300 rotate-45" />
-        <div className="floating-shape absolute top-1/2 left-1/4 w-12 h-12 rounded-full border-2 border-gray-300" />
-        <div className="floating-shape absolute bottom-10 left-20 w-24 h-24 rounded-lg border border-gray-300 rotate-12" />
-        <div className="floating-shape absolute top-20 right-32 w-14 h-14 rounded-full border-2 border-gray-300" />
-        <div className="floating-shape absolute bottom-32 left-1/2 w-18 h-18 rounded-lg border border-gray-300 rotate-45" />
-
-        {/* Small decorative dots */}
-        <div className="floating-shape absolute top-40 left-40 w-3 h-3 rounded-full bg-gray-300" />
-        <div className="floating-shape absolute bottom-40 right-40 w-2 h-2 rounded-full bg-gray-300" />
-        <div className="floating-shape absolute top-1/3 right-1/4 w-4 h-4 rounded-full bg-gray-300" />
-        <div className="floating-shape absolute bottom-1/3 left-1/3 w-3 h-3 rounded-full bg-gray-300" />
-
-        {/* Line elements */}
-        <div className="floating-shape absolute top-16 right-16 w-16 h-0.5 bg-gray-300 rotate-45" />
-        <div className="floating-shape absolute bottom-16 left-16 w-12 h-0.5 bg-gray-300 -rotate-45" />
-      </div>
-
       <Container>
         <Swiper
           onSwiper={(swiper) => {
@@ -447,17 +388,13 @@ function BannerSlider() {
           }}
           spaceBetween={30}
           slidesPerView={1}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: true,
-          }}
         >
           {slides.map((el, key) => (
             <SwiperSlide key={key}>
               <div className="flex justify-between items-center flex-col lg:flex-row gap-14 lg:gap-0 py-34 sm:py-40 lg:py-40 relative">
                 {/* Slide-specific animated accent shapes */}
-                <div className="slide-accent absolute left-2 top-1/4 w-4 h-4 rounded-full bg-primary opacity-20" />
-                <div className="slide-accent absolute right-2 bottom-1/4 w-6 h-6 rounded-lg bg-primary opacity-20 rotate-45" />
+                <div className="slide-accent absolute left-2 top-1/4 w-8 h-8 rounded-full bg-primary opacity-20" />
+                <div className="slide-accent absolute right-2 bottom-1/4 w-10 h-10 rounded-lg bg-primary opacity-20 rotate-45" />
                 <div className="slide-accent absolute left-1/4 bottom-60 w-3 h-3 rounded-full bg-primary opacity-30" />
 
                 <div className="flex-1 flex flex-col justify-center items-center sm:block relative z-10">

@@ -3,7 +3,6 @@ import Blogs from '@/components/modules/home/blog';
 import CloudHosting from '@/components/modules/home/cloud-hosting';
 import DesingAndDevelopment from '@/components/modules/home/desing&development';
 import Features from '@/components/modules/home/features';
-import HomeBanner from '@/components/modules/home/HomeBanner';
 import Projects from '@/components/modules/home/projects';
 import Review from '@/components/modules/home/review';
 import Solutions from '@/components/modules/home/solutions';
@@ -14,7 +13,6 @@ import PricingAndPlans from '@/components/modules/pricingPlan';
 function HomePage() {
   return (
     <>
-      {/* <HomeBanner /> */}
       <BannerSlider />
       <Solutions />
       <CloudHosting />
