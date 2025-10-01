@@ -173,7 +173,7 @@ function Navbar() {
       if (!navbarRef.current || !inner) return;
 
       ScrollTrigger.create({
-        start: 'top top-=-20', // Start after scrolling 20px
+        start: 'top top+=-40', // Start after scrolling 20px
         end: 99999,
         onToggle: (self) => {
           if (self.isActive) {
