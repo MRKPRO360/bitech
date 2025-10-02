@@ -1,56 +1,64 @@
 'use client';
 
+import SimpleCard from '@/components/shared/simpleCard';
 import Container from '@/components/ui/core/Container';
 import Para from '@/components/ui/core/Para';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
 import WandWithText from '@/components/ui/Wand';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 import { useFadeUp } from '@/hooks/FadeUp';
-import {
-  FaCalendarAlt,
-  FaGraduationCap,
-  FaHeart,
-  FaMoneyBillWave,
-  FaRocket,
-  FaUsers,
-} from 'react-icons/fa';
 
-const benefits = [
+import {
+  DollarSign,
+  GraduationCap,
+  Calendar,
+  HeartPulse,
+  Rocket,
+  Users,
+} from 'lucide-react';
+
+const benefitsItems = [
   {
-    icon: FaMoneyBillWave,
+    icon: <DollarSign className="w-8 h-8" />,
     title: 'Competitive Salary',
-    description: 'We offer competitive compensation packages',
+    desc: 'We offer competitive compensation packages',
+    gradient: 'from-green-500 to-emerald-500',
   },
   {
-    icon: FaGraduationCap,
+    icon: <GraduationCap className="w-8 h-8" />,
     title: 'Learning & Development',
-    description: 'Annual budget for professional growth',
+    desc: 'Annual budget for professional growth',
+    gradient: 'from-blue-500 to-cyan-500',
   },
   {
-    icon: FaCalendarAlt,
+    icon: <Calendar className="w-8 h-8" />,
     title: 'Flexible Time Off',
-    description: 'Unlimited PTO to recharge',
+    desc: 'Unlimited PTO to recharge',
+    gradient: 'from-amber-500 to-orange-500',
   },
   {
-    icon: FaHeart,
+    icon: <HeartPulse className="w-8 h-8" />,
     title: 'Health & Wellness',
-    description: 'Comprehensive health benefits',
+    desc: 'Comprehensive health benefits',
+    gradient: 'from-pink-500 to-rose-500',
   },
   {
-    icon: FaRocket,
+    icon: <Rocket className="w-8 h-8" />,
     title: 'Career Growth',
-    description: 'Clear paths for advancement',
+    desc: 'Clear paths for advancement',
+    gradient: 'from-purple-500 to-indigo-500',
   },
   {
-    icon: FaUsers,
+    icon: <Users className="w-8 h-8" />,
     title: 'Great Team',
-    description: 'Work with amazing people',
+    desc: 'Work with amazing people',
+    gradient: 'from-red-500 to-pink-500',
   },
 ];
 
 function PerksAndBenefits() {
   const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });
-  const containerRef = useStaggerChildren<HTMLDivElement>({
+  const benefitsRef = useStaggerChildren<HTMLDivElement>({
     y: 30,
     stagger: 0.15,
     once: true,
@@ -64,26 +72,20 @@ function PerksAndBenefits() {
       >
         <WandWithText text="Perks & Benefits" />
 
-        <SecondaryHeading>Our Awesome Team</SecondaryHeading>
+        <SecondaryHeading> Enjoy Our Perks & Benefits</SecondaryHeading>
         <Para className="mt-5">
-          We take care of our team with comprehensive benefits and perks that
-          matter.
+          We believe in fostering a supportive and rewarding environment for our
+          team members. Explore the benefits that make Bitech a great place to
+          work.
         </Para>
       </div>
 
       <div
-        ref={containerRef}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16"
+        ref={benefitsRef}
+        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-10 lg:mt-16"
       >
-        {benefits.map((benefit, PerksAndBenefits) => (
-          <div
-            key={PerksAndBenefits}
-            className="bg-grey-light rounded-md px-6 py-3 shadow-sm hover:shadow-md transition duration-300"
-          >
-            <benefit.icon className="text-4xl text-primary mb-4" />
-            <h2 className="text-2xl font-bold mb-1">{benefit.title}</h2>
-            <Para>{benefit.description}</Para>
-          </div>
+        {benefitsItems.map((benefit, index) => (
+          <SimpleCard key={index} feature={benefit} />
         ))}
       </div>
     </Container>

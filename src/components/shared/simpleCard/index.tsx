@@ -7,7 +7,7 @@ interface ISimpleCard {
 }
 function SimpleCard({ feature }: ISimpleCard) {
   return (
-    <div className="group relative rounded-md shadow-lg hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer transform hover:-translate-y-2 h-full">
+    <div className="group relative rounded-md shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer transform hover:-translate-y-2 h-full">
       <div
         className={`h-full w-full absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-md`}
       />
