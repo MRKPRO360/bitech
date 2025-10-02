@@ -6,6 +6,7 @@ import { IDropdownProps } from '@/types';
 import { ChevronDown } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import clsx from 'clsx';
 
 export default function CategorizedDropdown({
   title,
@@ -65,7 +66,7 @@ export default function CategorizedDropdown({
             { opacity: 0, y: 90 }, // start slightly above & hidden
             {
               opacity: 1,
-              y: 20,
+              y: 35,
               duration: 0.3,
               ease: 'power2.out',
             }
@@ -105,7 +106,10 @@ export default function CategorizedDropdown({
         aria-haspopup="true"
       >
         {mainLink ? (
-          <Link href={mainLink} className="flex items-center gap-2">
+          <Link
+            href={mainLink}
+            className="flex items-center gap-2 transition-colors duration-150 hover:text-primary"
+          >
             {title}
           </Link>
         ) : (
@@ -123,34 +127,48 @@ export default function CategorizedDropdown({
       <div
         style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
         ref={menuRef}
-        className="fixed z-50 left-1/2 -translate-x-1/2 lg:container lg:mx-auto mt-2 origin-top rounded-md bg-white shadow-lg opacity-0"
+        className="fixed z-50 left-1/2 -translate-x-1/2 w-full container origin-top  opacity-0"
         role="menu"
       >
-        <div className="py-4 px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {Object.entries(categorizedItems).map(
-              ([category, categoryItems], idx) => (
-                <div key={idx}>
-                  <h4 className="font-bold text-grey mb-2 px-2 ">{category}</h4>
-                  <div className="flex flex-col gap-2">
-                    {categoryItems.map((item, index) => (
-                      <Link
-                        key={index}
-                        href={item.href}
-                        className="flex items-center px-2 py-2 text-[16px] transition-colors duration-150 hover:text-primary"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {item.icon && (
-                          <span className="mr-2 w-5 h-5">{item.icon}</span>
-                        )}
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
+        <div
+          className={clsx(
+            `bg-white rounded-md shadow-md grid grid-cols-1 gap-6 p-5 `,
+            Object.keys(categorizedItems).length > 2
+              ? 'sm:grid-cols-3  justify-between'
+              : 'sm:grid-cols-2 '
+          )}
+        >
+          {Object.entries(categorizedItems)
+            .sort((a, b) => b[1].length - a[1].length)
+            .map(([category, categoryItems], idx) => (
+              <div
+                key={idx}
+                className={clsx(
+                  'pr-4',
+
+                  (idx + 1) %
+                    (Object.keys(categorizedItems).length > 2 ? 3 : 2) !==
+                    0 && 'sm:border-r-2 sm:border-gray-100'
+                )}
+              >
+                <h4 className="font-bold text-grey mb-2 px-2 ">{category}</h4>
+                <div className="flex flex-col gap-2">
+                  {categoryItems.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      className="flex items-center px-2 py-2 text-[16px] transition-colors duration-150 hover:text-primary"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.icon && (
+                        <span className="mr-2 w-5 h-5">{item.icon}</span>
+                      )}
+                      {item.label}
+                    </Link>
+                  ))}
                 </div>
-              )
-            )}
-          </div>
+              </div>
+            ))}
         </div>
       </div>
     </div>

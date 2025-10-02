@@ -99,41 +99,49 @@ const productsItems = [
     label: 'School Management System',
     href: '/products/school-management-system',
     icon: <BookOpen className="w-4 h-4 mr-2" />,
+    tag: 'Education',
   },
   {
     label: 'Pharmacy Software',
     href: '/products/pharmacy-software',
     icon: <Pill className="w-4 h-4 mr-2" />,
+    tag: 'Healthcare',
   },
   {
     label: 'POS Management',
     href: '/products/pos-management',
     icon: <CreditCard className="w-4 h-4 mr-2" />,
+    tag: 'Business',
   },
   {
     label: 'ERP Software',
     href: '/products/erp-software',
     icon: <Layers className="w-4 h-4 mr-2" />,
+    tag: 'Business',
   },
   {
     label: 'Tailor Management',
     href: '/products/tailor-management',
     icon: <Scissors className="w-4 h-4 mr-2" />,
+    tag: 'Business',
   },
   {
     label: 'Courier Management',
     href: '/products/courier-management',
     icon: <Truck className="w-4 h-4 mr-2" />,
+    tag: 'Logistics',
   },
   {
     label: 'E-Commerce Website',
     href: '/products/e-commerce-website',
     icon: <ShoppingCart className="w-4 h-4 mr-2" />,
+    tag: 'Websites',
   },
   {
     label: 'Publication Website',
     href: '/products/publication-website',
     icon: <FileText className="w-4 h-4 mr-2" />,
+    tag: 'Websites',
   },
 ];
 
@@ -142,31 +150,37 @@ const aboutUsItems = [
     label: 'About',
     href: '/about',
     icon: <BookOpen className="w-4 h-4 mr-2" />,
+    tag: 'Company',
   },
   {
     label: 'Career',
     href: '/about/career',
     icon: <Briefcase className="w-4 h-4 mr-2" />,
+    tag: 'Company',
   },
   {
     label: 'Culture',
     href: '/about/culture',
     icon: <Globe className="w-4 h-4 mr-2" />,
+    tag: 'Company',
   },
   {
     label: 'Team',
     href: '/about/team',
     icon: <UserRound className="w-4 h-4 mr-2" />,
+    tag: 'People',
   },
   {
     label: 'Testimonial',
     href: '/about/testimonial',
     icon: <Quote className="w-4 h-4 mr-2" />,
+    tag: 'People',
   },
   {
     label: 'Contact Us',
     href: '/about/contact-us',
     icon: <Phone className="w-4 h-4 mr-2" />,
+    tag: 'Support',
   },
 ];
 
@@ -247,7 +261,7 @@ function Navbar() {
                 Home
               </Link>
 
-              <Dropdown
+              <CategorizedDropdown
                 mainLink="/about"
                 title="About Us"
                 items={aboutUsItems}
@@ -259,7 +273,7 @@ function Navbar() {
                 items={servicesItems}
               />
 
-              <Dropdown
+              <CategorizedDropdown
                 mainLink="/products"
                 title="Products"
                 items={productsItems}
