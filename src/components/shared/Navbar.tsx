@@ -9,6 +9,7 @@ import {
   CreditCard,
   FileText,
   Layers,
+  Palette,
   Phone,
   Pill,
   Quote,
@@ -20,17 +21,15 @@ import {
 import Cta from '../ui/core/Cta';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Container from '../ui/core/Container';
-import Dropdown from '../ui/core/Dropdown';
 
 import {
-  Laptop, // Software & Apps
-  Globe, // Web Application
-  Smartphone, // Mobile Application
-  Layout, // Websites
-  Palette, // UX Design
-  Server, // NOC Support
-  Headphones, // IT Services (support vibe)
-  CheckCircle, // QA, QC & Testing
+  Laptop,
+  Globe,
+  Smartphone,
+  Layout,
+  Server,
+  Headphones,
+  CheckCircle,
 } from 'lucide-react';
 
 import logo from '@/assets/logo.png';

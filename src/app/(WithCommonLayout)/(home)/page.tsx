@@ -3,6 +3,7 @@ import Blogs from '@/components/modules/home/blog';
 import CloudHosting from '@/components/modules/home/cloud-hosting';
 import DesingAndDevelopment from '@/components/modules/home/desing&development';
 import Features from '@/components/modules/home/features';
+import Map from '@/components/modules/home/location';
 import Projects from '@/components/modules/home/projects';
 import Review from '@/components/modules/home/review';
 import Solutions from '@/components/modules/home/solutions';
@@ -23,6 +24,7 @@ function HomePage() {
       <Review />
       <PricingAndPlans />
       <Blogs />
+      <Map coords={[23.8103, 90.4125]} />
       <Start />
     </>
   );
