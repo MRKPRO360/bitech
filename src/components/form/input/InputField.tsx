@@ -1,4 +1,11 @@
+import { CircleAlert } from 'lucide-react';
 import React, { FC } from 'react';
+import {
+  FieldError,
+  FieldErrorsImpl,
+  Merge,
+  UseFormRegisterReturn,
+} from 'react-hook-form';
 
 interface InputProps {
   type?: 'text' | 'number' | 'email' | 'password' | 'date' | 'time' | string;
@@ -13,8 +20,9 @@ interface InputProps {
   step?: number;
   disabled?: boolean;
   success?: boolean;
-  error?: boolean;
+  error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
   hint?: string; // Optional hint text
+  register?: UseFormRegisterReturn;
 }
 
 const Input: FC<InputProps> = ({
@@ -30,17 +38,17 @@ const Input: FC<InputProps> = ({
   step,
   disabled = false,
   success = false,
-  error = false,
+  error,
   hint,
+  register,
 }) => {
   // Determine input styles based on state (disabled, success, error)
   let inputClasses = `h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3  ${className}`;
 
-  // Add styles for the different states
   if (disabled) {
     inputClasses += ` text-gray-500 border-gray-300 cursor-not-allowed `;
   } else if (error) {
-    inputClasses += ` text-error-800 border-error-500 focus:ring-3 focus:ring-error-500/10`;
+    inputClasses += `border-red-500 focus:ring-red-200`;
   } else if (success) {
     inputClasses += ` text-success-500 border-success-400 focus:ring-success-500/10 focus:border-success-300  `;
   } else {
@@ -61,7 +69,16 @@ const Input: FC<InputProps> = ({
         step={step}
         disabled={disabled}
         className={inputClasses}
+        {...register}
       />
+
+      {error && (
+        <p className="bg-red-100/90 rounded-2xl text-red-800 text-sm mt-1 inline-flex px-1 py-0.5 gap-0.5">
+          {error?.message as string}
+
+          <CircleAlert className="text-red-800" size={20} />
+        </p>
+      )}
 
       {/* Optional Hint Text */}
       {hint && (
@@ -77,19 +94,6 @@ const Input: FC<InputProps> = ({
           {hint}
         </p>
       )}
-      {/*  
-      we have to pass the register and error and make this input to this look
-      <input
-            id="name"
-            type="text"
-            placeholder="John Doe"
-            className={`w-full pl-10 pr-4 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 ${
-              errors.name
-                ? 'border-red-500 focus:ring-red-200'
-                : 'border-gray-300 focus:border-primary focus:ring-blue-200'
-            }`}
-            {...register('name', { required: 'Name is required' })}
-          /> */}
     </div>
   );
 };

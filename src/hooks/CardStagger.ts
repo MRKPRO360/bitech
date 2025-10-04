@@ -36,6 +36,8 @@ export function useStaggerChildren<T extends HTMLElement>({
 
       const children = Array.from(containerRef.current.children);
 
+      if (!children.length) return;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -71,12 +73,24 @@ export function useStaggerChildren<T extends HTMLElement>({
 
       // cleanup to avoid double animations in strict mode
       return () => {
+        gsap.set(children, { opacity: 1 });
         tl.kill();
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
     {
       scope: containerRef,
-      dependencies: [y, opacity, duration, stagger, ease, once, start, delay],
+      dependencies: [
+        containerRef.current?.children,
+        y,
+        opacity,
+        duration,
+        stagger,
+        ease,
+        once,
+        start,
+        delay,
+      ],
     }
   );
 

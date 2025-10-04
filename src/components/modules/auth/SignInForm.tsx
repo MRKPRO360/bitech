@@ -10,10 +10,21 @@ import { ChevronLeftIcon, EyeClosedIcon, EyeIcon } from 'lucide-react';
 
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { FieldValues, useForm } from 'react-hook-form';
 
 export default function SignInForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+
+  const onSubmit = (data: FieldValues) => {
+    console.log(data);
+  };
+
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
       <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
@@ -84,32 +95,39 @@ export default function SignInForm() {
                 </span>
               </div>
             </div>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-6">
                 <div>
                   <Label>
-                    Email <span className="text-red-500">*</span>{' '}
+                    Email <span className="text-red-500">*</span>
                   </Label>
-                  <Input placeholder="info@gmail.com" type="email" />
+                  <Input
+                    error={errors.email}
+                    register={register('email', {
+                      required: 'Email is required',
+                    })}
+                    placeholder="info@gmail.com"
+                    type="email"
+                  />
                 </div>
                 <div>
                   <Label>
-                    Password <span className="text-red-500">*</span>{' '}
+                    Password <span className="text-red-500">*</span>
                   </Label>
                   <div className="relative">
                     <Input
                       type={showPassword ? 'text' : 'password'}
                       placeholder="Enter your password"
+                      register={register('password', {
+                        required: 'Password is required',
+                      })}
+                      error={errors.password}
                     />
                     <span
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+                      className="absolute z-30  cursor-pointer right-4 top-2"
                     >
-                      {showPassword ? (
-                        <EyeIcon className="fill-gray-500 " />
-                      ) : (
-                        <EyeClosedIcon className="fill-gray-500 " />
-                      )}
+                      {showPassword ? <EyeIcon /> : <EyeClosedIcon />}
                     </span>
                   </div>
                 </div>

@@ -1,4 +1,3 @@
-import PharmacySoftware from '@/components/modules/products/pharmacySoftware';
 import PharmacyFeatures from '@/components/modules/products/pharmacySoftware/pharmacyFeatures';
 import PharmacyHeading from '@/components/modules/products/pharmacySoftware/pharmacyHeading';
 import TransformPharmacy from '@/components/modules/products/pharmacySoftware/transformPharmacy';
