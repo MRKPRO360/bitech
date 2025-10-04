@@ -1,5 +1,5 @@
 import { getCurrentUser } from '@/services/projectService/authService';
-import { IUser } from '@/types/user';
+import { IUser } from '@/types';
 import {
   createContext,
   Dispatch,

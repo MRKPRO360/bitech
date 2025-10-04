@@ -48,7 +48,7 @@ export const signupAdmin = async (userData: FormData) => {
   }
 };
 
-export const signupUser = async (userData: FieldValues) => {
+export const signinUser = async (userData: FieldValues) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/login`, {
       method: 'POST',

@@ -6,7 +6,8 @@ import Input from '@/components/form/input/InputField';
 import Cta from '@/components/ui/core/Cta';
 import Para from '@/components/ui/core/Para';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
-import { signupUser } from '@/services/projectService/authService';
+import { useUser } from '@/context/UserContext';
+import { signinUser } from '@/services/projectService/authService';
 import { ChevronLeftIcon, EyeClosedIcon, EyeIcon } from 'lucide-react';
 
 import Link from 'next/link';
@@ -16,28 +17,34 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 export default function SignInForm() {
+  const { setIsLoading } = useUser();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
+
   const [showPassword, setShowPassword] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+
+  const termsChecked = watch('terms', false);
 
   // REDIRECT USER IN AUTH GUARD ROUTE
   const searchParams = useSearchParams();
   const redirect = searchParams.get('redirectPath');
   const router = useRouter();
+
   const onSubmit = async (data: FieldValues) => {
     try {
-      const res = await signupUser(data);
-      console.log(res);
+      const res = await signinUser(data);
 
       if (res.success) {
         toast.success('Logged in successfully!');
 
         // REDIRECTING USER
         router.push(redirect || '/');
+        setIsLoading(true);
       }
     } catch (err: any) {
       console.log(err);
@@ -47,7 +54,7 @@ export default function SignInForm() {
 
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
-      <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
+      <div className="w-full  mx-auto max-w-lg sm:pt-10  mb-5">
         <Link
           href="/"
           className="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700"
@@ -118,10 +125,11 @@ export default function SignInForm() {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="space-y-6">
                 <div>
-                  <Label>
+                  <Label htmlFor="email">
                     Email <span className="text-red-500">*</span>
                   </Label>
                   <Input
+                    id="email"
                     error={errors.email}
                     register={register('email', {
                       required: 'Email is required',
@@ -131,11 +139,12 @@ export default function SignInForm() {
                   />
                 </div>
                 <div>
-                  <Label>
+                  <Label htmlFor="password">
                     Password <span className="text-red-500">*</span>
                   </Label>
                   <div className="relative">
                     <Input
+                      id="password"
                       type={showPassword ? 'text' : 'password'}
                       placeholder="Enter your password"
                       register={register('password', {
@@ -154,9 +163,9 @@ export default function SignInForm() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <Checkbox
+                      register={register('terms')}
                       className="w-5 h-5"
-                      checked={isChecked}
-                      onChange={setIsChecked}
+                      value={termsChecked}
                     />
                     <span className="block font-normal">Keep me logged in</span>
                   </div>
@@ -171,11 +180,11 @@ export default function SignInForm() {
             </form>
 
             <div className="mt-5">
-              <p className="text-sm font-normal text-center sm:text-start">
+              <p className="text-base font-semibold text-center sm:text-start">
                 Don&apos;t have an account? {''}
                 <Link
                   href="/signup"
-                  className="text-brand-500 hover:text-brand-600 dark:text-brand-400"
+                  className="underline underline-offset-4  text-brand-500 hover:text-brand-600 dark:text-brand-400 decoration-2 decoration-primary"
                 >
                   Sign Up
                 </Link>

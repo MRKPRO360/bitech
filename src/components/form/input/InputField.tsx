@@ -21,8 +21,8 @@ interface InputProps {
   disabled?: boolean;
   success?: boolean;
   error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
-  hint?: string; // Optional hint text
   register?: UseFormRegisterReturn;
+  hint?: string; // Optional hint text
 }
 
 const Input: FC<InputProps> = ({
@@ -52,7 +52,7 @@ const Input: FC<InputProps> = ({
   } else if (success) {
     inputClasses += ` text-success-500 border-success-400 focus:ring-success-500/10 focus:border-success-300  `;
   } else {
-    inputClasses += ` focus:border-primary focus:ring-blue-200 bg-transparent text-gray-800  w-full px-2 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10`;
+    inputClasses += ` focus:border-primary  bg-transparent text-gray-800  w-full px-2 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10`;
   }
 
   return (
@@ -72,7 +72,7 @@ const Input: FC<InputProps> = ({
         {...register}
       />
 
-      {error && (
+      {error && 'message' in error && (
         <p className="bg-red-100/90 rounded-2xl text-red-800 text-sm mt-1 inline-flex px-1 py-0.5 gap-0.5">
           {error?.message as string}
 

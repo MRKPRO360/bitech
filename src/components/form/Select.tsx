@@ -1,50 +1,39 @@
-import React, { useState } from "react";
-
-interface Option {
-  value: string;
-  label: string;
-}
+import { ISelectOpton } from '@/types';
+import React from 'react';
+import {
+  FieldError,
+  FieldErrorsImpl,
+  Merge,
+  UseFormRegisterReturn,
+} from 'react-hook-form';
 
 interface SelectProps {
-  options: Option[];
+  options: ISelectOpton[];
   placeholder?: string;
-  onChange: (value: string) => void;
   className?: string;
   defaultValue?: string;
+  error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
+  register?: UseFormRegisterReturn;
 }
 
 const Select: React.FC<SelectProps> = ({
   options,
-  placeholder = "Select an option",
-  onChange,
-  className = "",
-  defaultValue = "",
+  placeholder = 'Select an option',
+  className = '',
+  error,
+  register,
+  defaultValue = '',
 }) => {
-  // Manage the selected value
-  const [selectedValue, setSelectedValue] = useState<string>(defaultValue);
-
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    setSelectedValue(value);
-    onChange(value); // Trigger parent handler
-  };
-
   return (
     <select
-      className={`h-11 w-full appearance-none rounded-lg border border-gray-300  px-4 py-2.5 pr-11 text-sm shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800 ${
-        selectedValue
-          ? "text-gray-800 dark:text-white/90"
-          : "text-gray-400 dark:text-gray-400"
-      } ${className}`}
-      value={selectedValue}
-      onChange={handleChange}
+      defaultValue={defaultValue}
+      {...register}
+      className={`focus:border-primary   text-gray-800 px-2 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 h-11 w-full appearance-none  text-sm shadow-theme-xs placeholder:text-gray-400  focus:outline-hidden  cursor-pointer $ ${
+        error ? 'border-red-500' : 'border-gray-300 focus:border-primary'
+      }  ${className}`}
     >
       {/* Placeholder option */}
-      <option
-        value=""
-        disabled
-        className="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
-      >
+      <option value="" disabled className="text-gray-700">
         {placeholder}
       </option>
       {/* Map over options */}
@@ -52,7 +41,7 @@ const Select: React.FC<SelectProps> = ({
         <option
           key={option.value}
           value={option.value}
-          className="text-gray-700 dark:bg-gray-900 dark:text-gray-400"
+          className="text-gray-700"
         >
           {option.label}
         </option>

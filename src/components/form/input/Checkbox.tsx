@@ -1,21 +1,30 @@
+import { CircleAlert } from 'lucide-react';
 import type React from 'react';
+import {
+  FieldError,
+  FieldErrorsImpl,
+  Merge,
+  UseFormRegisterReturn,
+} from 'react-hook-form';
 
 interface CheckboxProps {
   label?: string;
-  checked: boolean;
+  value?: boolean;
   className?: string;
   id?: string;
-  onChange: (checked: boolean) => void;
+  error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
+  register?: UseFormRegisterReturn;
   disabled?: boolean;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
   label,
-  checked,
+  value = false,
   id,
-  onChange,
   className = '',
   disabled = false,
+  error,
+  register,
 }) => {
   return (
     <label
@@ -27,13 +36,14 @@ const Checkbox: React.FC<CheckboxProps> = ({
         <input
           id={id}
           type="checkbox"
-          className={`w-5 h-5 appearance-none cursor-pointer  border border-gray-300 checked:border-transparent rounded-md checked:bg-primary disabled:opacity-60 
-          ${className}`}
-          checked={checked}
-          onChange={(e) => onChange(e.target.checked)}
+          className={`w-5 h-5 appearance-none border rounded-md cursor-pointer transition-all
+            ${error ? 'border-red-500 ring-red-300 ring-2' : 'border-gray-300'}
+            checked:bg-primary checked:border-transparent 
+            focus:outline-none focus:ring-2 focus:ring-primary/40 ${className}`}
+          {...register}
           disabled={disabled}
         />
-        {checked && (
+        {value && (
           <svg
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
             xmlns="http://www.w3.org/2000/svg"
@@ -72,6 +82,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
       </div>
       {label && (
         <span className="text-sm font-medium text-gray-800">{label}</span>
+      )}
+
+      {error && 'message' in error && (
+        <p className="flex items-center gap-1 text-red-600 text-sm mt-0.5">
+          <CircleAlert size={16} /> {error.message as string}
+        </p>
       )}
     </label>
   );
