@@ -6,11 +6,14 @@ import Input from '@/components/form/input/InputField';
 import Cta from '@/components/ui/core/Cta';
 import Para from '@/components/ui/core/Para';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
+import { signupUser } from '@/services/projectService/authService';
 import { ChevronLeftIcon, EyeClosedIcon, EyeIcon } from 'lucide-react';
 
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 export default function SignInForm() {
   const {
@@ -21,8 +24,25 @@ export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
-  const onSubmit = (data: FieldValues) => {
-    console.log(data);
+  // REDIRECT USER IN AUTH GUARD ROUTE
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get('redirectPath');
+  const router = useRouter();
+  const onSubmit = async (data: FieldValues) => {
+    try {
+      const res = await signupUser(data);
+      console.log(res);
+
+      if (res.success) {
+        toast.success('Logged in successfully!');
+
+        // REDIRECTING USER
+        router.push(redirect || '/');
+      }
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err?.message || 'Something went wrong');
+    }
   };
 
   return (
