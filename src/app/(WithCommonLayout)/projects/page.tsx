@@ -6,7 +6,7 @@ async function ProjectsPage() {
 
   return (
     <div>
-      <Projects projects={projects.data} />
+      <Projects projects={projects.data.result} />
     </div>
   );
 }

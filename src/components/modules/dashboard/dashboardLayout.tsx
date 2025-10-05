@@ -1,4 +1,4 @@
-import { adminMenu, userMenu } from './dashbaord.config';
+import { adminMenu, getMenuByRole } from './dashbaord.config';
 import Sidebar from './Sidebar';
 
 import Topbar from './Topbar';
@@ -8,9 +8,9 @@ export default function DashboardLayout({
   role,
 }: {
   children: React.ReactNode;
-  role: 'admin' | 'user';
+  role: 'admin' | 'customer' | undefined;
 }) {
-  const menu = role === 'admin' ? adminMenu : userMenu;
+  const menu = getMenuByRole(role!);
 
   return (
     <div className="flex">

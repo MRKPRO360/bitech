@@ -1,4 +1,6 @@
-function AdminHomePage() {
-  return <div>AdminHomePage</div>;
+import Profile from '@/components/modules/dashboard/profile';
+
+function DashboardHomePage() {
+  return <Profile />;
 }
-export default AdminHomePage;
+export default DashboardHomePage;

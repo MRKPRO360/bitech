@@ -11,6 +11,7 @@ export interface IPrebuiltProject {
   fullDescription: string;
   technologies: string[];
   results: IPrebuiltProjectResults;
+  rating?: string;
   images: IPrebuiltProjectImages;
   liveLink: string;
   price: string;

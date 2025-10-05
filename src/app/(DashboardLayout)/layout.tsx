@@ -1,14 +1,13 @@
 'use client';
 import DashboardLayout from '@/components/modules/dashboard/dashboardLayout';
+import { useUser } from '@/context/UserContext';
 
-export default function DashboardLayoutPage() {
-  // pretend we fetch role from session or backend
-  const role: 'admin' | 'user' = 'admin';
+export default function DashboardLayoutPage({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { user } = useUser();
 
-  return (
-    <DashboardLayout role={role}>
-      <h1 className="text-2xl font-bold mb-4">Dashboard Overview</h1>
-      <p className="text-gray-600">Welcome to your dashboard.</p>
-    </DashboardLayout>
-  );
+  return <DashboardLayout role={user?.role}>{children}</DashboardLayout>;
 }

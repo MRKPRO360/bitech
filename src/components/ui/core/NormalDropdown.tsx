@@ -19,7 +19,6 @@ export default function NormalDropdown({
 }: INormalDropdown) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  console.log(user);
 
   const handleLogout = () => {
     logout();
