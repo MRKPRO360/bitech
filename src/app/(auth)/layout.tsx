@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import logo from '@/assets/logo.png';
 import Para from '@/components/ui/core/Para';
-
+// import GridDistortion from '@/components/modules/auth/GridDistortion';
 export default function AuthLayout({
   children,
 }: {
@@ -26,6 +26,8 @@ export default function AuthLayout({
                 BiTech - Your Gateway to Cutting-Edge Technology Solutions
               </Para>
             </div>
+            {/* <GridDistortion>
+            </GridDistortion> */}
           </div>
         </div>
       </div>
