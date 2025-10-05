@@ -7,7 +7,7 @@ import Cta from '@/components/ui/core/Cta';
 import ImageUpload from '@/components/ui/core/ImageUpload';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
 import { countriesOptions } from '@/constant/country';
-import { signupCustomer } from '@/services/projectService/authService';
+import { signupCustomer } from '@/services/authService';
 import { ISignupValues } from '@/types';
 import {
   ChevronLeft,

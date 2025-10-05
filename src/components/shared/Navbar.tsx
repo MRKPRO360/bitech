@@ -38,6 +38,8 @@ import MobileDrawer from '../ui/core/MobileDrawer';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import CategorizedDropdown from '../ui/core/CategorizedDropdown';
+import { useUser } from '@/context/UserContext';
+import NormalDropdown from '../ui/core/NormalDropdown';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -187,7 +189,7 @@ function Navbar() {
   const navbarRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
-  const isLoggedIn = true;
+  const { user, setIsLoading } = useUser();
 
   useGSAP(
     () => {
@@ -286,36 +288,29 @@ function Navbar() {
               >
                 Projects
               </Link>
-
-              {!isLoggedIn ? (
-                <Link
-                  href="/admin"
-                  className={clsx(
-                    'hover:text-primary duration-200',
-                    pathname === '/admin' && 'text-primary'
-                  )}
-                >
-                  Dashboard
-                </Link>
-              ) : (
-                <Link
-                  href="/signin"
-                  className="hover:text-primary duration-200"
-                >
-                  Sign In
-                </Link>
-              )}
             </div>
 
             {/* 3rd item */}
-            <div className="flex items-center gap-6">
-              <div className="hidden lg:block">
-                <Cta
-                  hasLink={true}
-                  path="/about/contact-us"
-                  renderIcon={false}
-                  text="Get Started"
-                />
+            <div className="">
+              <div className="lg:flex text-lg items-center gap-6 hidden font-bold">
+                {user?.email ? (
+                  <NormalDropdown setIsLoading={setIsLoading} user={user} />
+                ) : (
+                  <Link
+                    href="/signin"
+                    className="hover:text-primary duration-200"
+                  >
+                    Sign In
+                  </Link>
+                )}
+                {user?.role === 'customer' && (
+                  <Cta
+                    hasLink={true}
+                    path="/about/contact-us"
+                    renderIcon={false}
+                    text="Get Started"
+                  />
+                )}
               </div>
               {/* <Menu className="lg:hidden" /> */}
               <MobileDrawer />

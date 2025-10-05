@@ -7,7 +7,7 @@ import Cta from '@/components/ui/core/Cta';
 import Para from '@/components/ui/core/Para';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
 import { useUser } from '@/context/UserContext';
-import { signinUser } from '@/services/projectService/authService';
+import { signinUser } from '@/services/authService';
 import { ChevronLeftIcon, EyeClosedIcon, EyeIcon } from 'lucide-react';
 
 import Link from 'next/link';

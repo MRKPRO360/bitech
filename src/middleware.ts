@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getCurrentUser } from './services/projectService/authService';
+import { getCurrentUser } from './services/authService';
 
 type Role = keyof typeof roleBasedPrivateRoutes;
 
@@ -15,6 +15,9 @@ const roleBasedPrivateRoutes = {
     '/create-preprojects',
     '/update-preprojects',
     '/preprojects',
+    '/create-projects',
+    '/update-projects',
+    '/projects',
   ],
 };
 
