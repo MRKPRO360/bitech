@@ -13,6 +13,7 @@ import WandWithText from '@/components/ui/Wand';
 import { Phone } from 'lucide-react';
 import Cta from '@/components/ui/core/Cta';
 import start from '@/assets/project-start1.png';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 interface ICtaSeciton {
   heading?: string;
@@ -35,40 +36,42 @@ function CtaSection({
   secondaryLink = '#',
   image,
 }: ICtaSeciton) {
-  const containerRef = useRef<HTMLDivElement>(null);
   const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(
     () => {
-      if (!image) return; // no animation if no image
-
       const ctx = gsap.context(() => {
         if (!containerRef.current) return;
-
-        gsap.from(containerRef.current.querySelector('.left-col'), {
-          x: -150,
-          opacity: 0,
-          duration: 0.4,
-          ease: 'power3.out',
+        const tl = gsap.timeline({
           scrollTrigger: {
-            trigger: containerRef.current.querySelector('.left-col img'),
-            start: 'top 80%',
+            trigger: containerRef.current.querySelector('.img-wrapper'),
+            start: 'top 70%',
             end: 'top 20%',
             toggleActions: 'play none none none',
           },
+          duration: 0.8,
         });
 
-        gsap.from(containerRef.current.querySelector('.right-col'), {
+        const left = containerRef.current.querySelector('.left-col');
+        const right = containerRef.current.querySelector('.right-col');
+        const imgWrapper = containerRef.current.querySelector('.img-wrapper');
+        if (!left || !right || !imgWrapper) return;
+
+        tl.from(containerRef.current.querySelector('.left-col'), {
+          x: -150,
+          opacity: 0,
+
+          ease: 'power3.out',
+        });
+
+        tl.from(containerRef.current.querySelector('.right-col'), {
           x: 150,
           opacity: 0,
-          duration: 0.4,
+
           ease: 'power3.out',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top 40%',
-            end: 'top 20%',
-            toggleActions: 'play none none none',
-          },
         });
       });
 
@@ -84,7 +87,9 @@ function CtaSection({
         className="flex items-center flex-col lg:flex-row gap-8 lg:gap-0"
       >
         <div className="flex-1 left-col">
-          <Image src={image || start} alt="cta" width={500} height={500} />
+          <div className="img-wrapper">
+            <Image src={image || start} alt="cta" width={500} height={500} />
+          </div>
         </div>
 
         <div className="flex-1 right-col">

@@ -8,11 +8,13 @@ import {
   Briefcase,
   CreditCard,
   FileText,
+  FolderKanban,
   Layers,
   Palette,
   Phone,
   Pill,
   Quote,
+  Rocket,
   Scissors,
   ShoppingCart,
   Truck,
@@ -40,6 +42,7 @@ import clsx from 'clsx';
 import CategorizedDropdown from '../ui/core/CategorizedDropdown';
 import { useUser } from '@/context/UserContext';
 import NormalDropdown from '../ui/core/NormalDropdown';
+import Dropdown from '../ui/core/Dropdown';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -185,6 +188,19 @@ const aboutUsItems = [
   },
 ];
 
+const projectsItems = [
+  {
+    label: 'Our Projects',
+    href: '/projects',
+    icon: <FolderKanban className="w-4 h-4 mr-2" />,
+  },
+  {
+    label: 'Our Prebuilt Projects',
+    href: '/prebuiltProjects',
+    icon: <Rocket className="w-4 h-4 mr-2" />,
+  },
+];
+
 function Navbar() {
   const navbarRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -279,15 +295,12 @@ function Navbar() {
                 title="Products"
                 items={productsItems}
               />
-              <Link
-                className={clsx(
-                  'hover:text-primary duration-200',
-                  pathname === '/projects' && 'text-primary'
-                )}
-                href="/projects"
-              >
-                Projects
-              </Link>
+
+              <Dropdown
+                title="Projects"
+                items={projectsItems}
+                mainLink="/projects"
+              />
             </div>
 
             {/* 3rd item */}

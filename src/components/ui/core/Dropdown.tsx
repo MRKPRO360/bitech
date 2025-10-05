@@ -54,7 +54,7 @@ export default function Dropdown({
             { opacity: 0, y: 90 }, // start slightly above & hidden
             {
               opacity: 1,
-              y: 50,
+              y: 25,
               duration: 0.3,
               ease: 'power2.out',
             }
@@ -89,12 +89,15 @@ export default function Dropdown({
     >
       <button
         type="button"
-        className="flex items-center justify-between w-full cursor-pointer rounded-lg transition-all duration-200"
+        className="flex items-center justify-between w-full cursor-pointer  transition-all duration-200"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
         {mainLink ? (
-          <Link href={mainLink} className="flex items-center gap-2">
+          <Link
+            href={mainLink}
+            className="flex items-center gap-2 transition-colors duration-150 hover:text-primary"
+          >
             {title}
           </Link>
         ) : (
@@ -112,12 +115,12 @@ export default function Dropdown({
       <div
         style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
         ref={menuRef}
-        className={`fixed z-50 left-1/2 -translate-x-1/2 lg:container lg:mx-auto  mt-2   origin-top rounded-md bg-white shadow-lg opacity-0`}
+        className={`fixed z-50 right-0 -translate-x-[90%] max-w-lg w-md mx-auto  mt-2   origin-top rounded-md bg-white shadow-lg opacity-0`}
         // className={`absolute left-1/2 -translate-x-1/2 z-10 mt-2 min-w-[60vw] origin-top rounded-md bg-white shadow-lg opacity-0`}
         role="menu"
       >
         <div className="py-1">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 gap-2">
             {items.map((item, index) => (
               <Link
                 key={index}
