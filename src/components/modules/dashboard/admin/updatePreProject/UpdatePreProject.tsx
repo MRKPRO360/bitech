@@ -1,7 +1,7 @@
 'use client';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller, Path } from 'react-hook-form';
 import {
   ChevronLeft,
   ChevronRight,
@@ -33,7 +33,7 @@ import {
 import Input from '@/components/form/input/InputField';
 import { useFieldArray } from 'react-hook-form';
 
-import { createPrebuiltProject } from '@/services/prebuiltProjectService';
+import { updatePrebuiltProject } from '@/services/prebuiltProjectService';
 import MultipleSelector, {
   Option,
 } from '@/components/ui/core/MultipleSelector';
@@ -95,26 +95,30 @@ export default function UpdatePreProjectForm({
   const [step, setStep] = useState(1);
   const totalSteps = 3;
 
+  const defaultValues = useMemo(() => {
+    if (!project) {
+      return { features: [{ value: '' }] };
+    }
+    return {
+      ...project,
+      features: project.features.map((feature) => ({ value: feature })),
+      technologies: project.technologies.map((tech) => ({
+        value: tech,
+        label: tech,
+      })),
+    };
+  }, [project]);
+
   const {
     register,
     handleSubmit,
-    setValue,
     trigger,
+    setValue,
     control,
-    reset,
     watch,
     formState: { errors, isSubmitting },
   } = useForm<IPrebuiltProjectForm>({
-    defaultValues: {
-      status: 'completed',
-      featured: false,
-      features: [{ value: '' }],
-      technologies: [{ value: '', label: '' }],
-      results: {
-        rating: '4.5',
-        pageLoadTime: '1.2s',
-      },
-    },
+    defaultValues,
   });
 
   const {
@@ -127,12 +131,10 @@ export default function UpdatePreProjectForm({
   });
 
   const featured = watch('featured', false);
-  // const thumbnail = watch('images.thumbnail');
-  // const gallery = watch('images.gallery');
 
   // Step Navigation
   const handleNext = async () => {
-    let fieldsToValidate: (keyof IPrebuiltProject)[] = [];
+    let fieldsToValidate: Path<IPrebuiltProject>[] = [];
 
     if (step === 1) {
       fieldsToValidate = [
@@ -147,7 +149,7 @@ export default function UpdatePreProjectForm({
       fieldsToValidate = ['technologies', 'features', 'price', 'budget'];
     }
     if (step === 3) {
-      fieldsToValidate = ['liveLink'];
+      fieldsToValidate = ['liveLink', 'results.rating', 'results.pageLoadTime'];
     }
 
     const valid = await trigger(fieldsToValidate);
@@ -160,28 +162,24 @@ export default function UpdatePreProjectForm({
 
   // Form Submission
   const onSubmit: SubmitHandler<IPrebuiltProjectForm> = async (data) => {
-    const toastId = toast.loading('Creating project...');
+    const cleanData = {
+      ...data,
+      features: data.features.map((feature) => feature.value),
+      technologies: data.technologies
+        .map((tech) => tech.value)
+        .filter((t) => t),
+    };
+
+    delete (cleanData as any).createdAt;
+    delete (cleanData as any).updatedAt;
+
+    const toastId = toast.loading('Updating project...');
 
     try {
       const formData = new FormData();
 
-      // Append main data
-      formData.append(
-        'data',
-        JSON.stringify({
-          ...data,
-          features: data.features.map((feature) => feature.value),
-          technologies: data.technologies
-            .map((tech) => tech.value)
-            .filter((tech) => tech !== ''),
-        })
-      );
-
-      console.log({
-        ...data,
-        features: data.features.map((feature) => feature.value),
-        technologies: data.technologies.map((tech) => tech.value),
-      });
+      // Append main data, converting technologies back to an array of strings
+      formData.append('data', JSON.stringify(cleanData));
 
       // Append thumbnail
       if (data.images.thumbnail && data.images.thumbnail[0]) {
@@ -195,18 +193,18 @@ export default function UpdatePreProjectForm({
         });
       }
 
-      const res = await createPrebuiltProject(formData);
+      const res = await updatePrebuiltProject(project._id, formData);
 
       console.log(res);
 
       if (res.success) {
-        toast.success('Project created successfully!', { id: toastId });
+        toast.success('Project updated successfully!', { id: toastId });
         router.push('/dashboard/admin/preprojects');
-        reset();
+        // No need to call reset() here as we are navigating away
       }
     } catch (error) {
-      toast.error('Failed to create project', { id: toastId });
-      console.error('Error creating project:', error);
+      toast.error('Failed to update project', { id: toastId });
+      console.error('Error updating project:', error);
     }
   };
 
@@ -222,9 +220,9 @@ export default function UpdatePreProjectForm({
             <ChevronLeft className="w-4 h-4" />
             Back to Projects
           </Link>
-          <SecondaryHeading>Create Prebuilt Project</SecondaryHeading>
+          <SecondaryHeading>Update {project.title} Project</SecondaryHeading>
           <p className="text-gray-600 mt-2">
-            Add a new prebuilt project to your portfolio
+            Update prebuilt project to your portfolio
           </p>
         </div>
 
@@ -456,11 +454,12 @@ export default function UpdatePreProjectForm({
                     rules={{
                       required: 'Please select at least 3 technology',
                       validate: (value) =>
-                        value.length > 3 ||
+                        value.length >= 3 ||
                         'Please select at least three technology',
                     }}
                     render={({ field }) => (
                       <MultipleSelector
+                        {...field}
                         value={field.value}
                         onChange={field.onChange}
                         defaultOptions={technologyOptions}
@@ -488,61 +487,6 @@ export default function UpdatePreProjectForm({
                     10 technologies allowed.
                   </p>
                 </div>
-                {/* <div>
-                  <Label className="mb-4">Technology</Label>
-
-                  <div className="space-y-3">
-                    {technologyFields.map((field, index) => {
-                      const fieldError = errors.technologies?.[index]?.value;
-                      return (
-                        <div key={field.id} className="space-y-2">
-                          <div className="flex items-center gap-3">
-                            <input
-                              type="text"
-                              placeholder={`Technology ${index + 1}`}
-                              {...register(`technologies.${index}.value`, {
-                                required: 'Technology cannot be empty',
-                              })}
-                              className={`flex-1 focus:border-primary  bg-transparent text-gray-800  w-full px-2 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 ${
-                                fieldError
-                                  ? 'border-red-500'
-                                  : 'border-gray-300 focus:border-primary'
-                              }`}
-                            />
-
-                            {technologyFields.length > 1 && (
-                              <button
-                                type="button"
-                                onClick={() => removeFeature(index)}
-                                className="hover:text-red-600 text-red-500 transition duration-300 cursor-pointer"
-                                title="Remove"
-                              >
-                                <Trash2 className="w-5 h-5" />
-                              </button>
-                            )}
-                          </div>
-
-                          {fieldError && (
-                            <p className="bg-red-100/90 rounded-2xl text-red-800 text-sm mt-1 inline-flex px-1 py-0.5 gap-0.5">
-                              {fieldError?.message}
-
-                              <CircleAlert className="text-red-800" size={20} />
-                            </p>
-                          )}
-                        </div>
-                      );
-                    })}
-
-                    <button
-                      type="button"
-                      onClick={() => addTechnology({ value: '' })}
-                      className="inline-flex items-center gap-2 px-3 py-1 text-sm text-primary border border-primary rounded-md hover:bg-primary hover:text-white transition-colors duration-300 cursor-pointer"
-                    >
-                      <Plus className="w-4 h-4" />
-                      Add Technology
-                    </button>
-                  </div>
-                </div> */}
 
                 {/* Performance Metrics */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -634,18 +578,33 @@ export default function UpdatePreProjectForm({
                   <ImageUpload
                     label="Upload Thumbnail Image"
                     multiple={false}
+                    // onChange={(files) => {
+                    //   if (
+                    //     Array.isArray(files) &&
+                    //     files.length > 0 &&
+                    //     files[0] instanceof File
+                    //   ) {
+                    //     setValue('images.thumbnail', files as File[], {
+                    //       shouldValidate: true,
+                    //     });
+                    //     trigger('images.thumbnail');
+                    //   }
+                    // }}
                     onChange={(files) => {
-                      if (
-                        Array.isArray(files) &&
-                        files.length > 0 &&
-                        files[0] instanceof File
-                      ) {
+                      if (Array.isArray(files) && files.length > 0) {
                         setValue('images.thumbnail', files as File[], {
                           shouldValidate: true,
                         });
-                        trigger('images.thumbnail');
+                      } else {
+                        setValue('images.thumbnail', []);
                       }
+                      trigger('images.thumbnail');
                     }}
+                    initialImages={
+                      project.images.thumbnail
+                        ? [project.images.thumbnail as string]
+                        : []
+                    }
                   />
 
                   <Input
@@ -677,15 +636,21 @@ export default function UpdatePreProjectForm({
                     multiple={true}
                     minFiles={3}
                     onChange={(files) => {
-                      if (
-                        Array.isArray(files) &&
-                        files.length > 0 &&
-                        files[0] instanceof File
-                      ) {
-                        setValue('images.gallery', files as File[]);
-                        trigger('images.gallery');
+                      if (Array.isArray(files) && files.length > 0) {
+                        setValue('images.gallery', files as File[], {
+                          shouldValidate: true,
+                        });
+                      } else {
+                        //  No files left after removal
+                        setValue('images.gallery', []);
                       }
+                      trigger('images.gallery');
                     }}
+                    initialImages={
+                      project.images.gallery
+                        ? (project.images.gallery as string[])
+                        : []
+                    }
                   />
 
                   <Input
@@ -751,7 +716,7 @@ export default function UpdatePreProjectForm({
                   </button>
                 ) : (
                   <Cta
-                    text={isSubmitting ? 'Creating...' : 'Create Project'}
+                    text={isSubmitting ? 'Updating...' : 'Update Project'}
                     renderIcon={false}
                     disabled={isSubmitting}
                   />
