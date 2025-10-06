@@ -91,7 +91,7 @@ const DataTable = <T,>({
                   onView(item);
                   onClose();
                 }}
-                className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 transition"
+                className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 transition cursor-pointer"
               >
                 <Eye className="w-4 h-4 text-blue-500" />
                 View
@@ -105,7 +105,7 @@ const DataTable = <T,>({
                   onEdit(item);
                   onClose();
                 }}
-                className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 transition"
+                className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 transition cursor-pointer"
               >
                 <Edit className="w-4 h-4 text-green-500" />
                 Edit
@@ -119,7 +119,7 @@ const DataTable = <T,>({
                   onDelete(item);
                   onClose();
                 }}
-                className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-red-600 transition"
+                className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-red-600 transition cursor-pointer"
               >
                 <Trash2 className="w-4 h-4" />
                 Delete

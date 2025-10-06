@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { CircleAlert } from 'lucide-react';
 import React, { FC } from 'react';
 import {
@@ -8,20 +9,34 @@ import {
 } from 'react-hook-form';
 
 interface InputProps {
-  type?: 'text' | 'number' | 'email' | 'password' | 'date' | 'time' | string;
+  type?:
+    | 'text'
+    | 'number'
+    | 'email'
+    | 'password'
+    | 'date'
+    | 'time'
+    | 'file'
+    | 'textarea'
+    | string;
   id?: string;
+  rows?: number; // For textarea
   name?: string;
   placeholder?: string;
   defaultValue?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
-  min?: string;
-  max?: string;
+  min?: string | number;
+  max?: string | number;
   step?: number;
   disabled?: boolean;
   success?: boolean;
-  error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
+  error?:
+    | FieldError
+    | Merge<FieldError, FieldErrorsImpl<any>>
+    | Merge<FieldError, (FieldError | undefined)[]>;
   register?: UseFormRegisterReturn;
+  value?: string | number;
   hint?: string; // Optional hint text
 }
 
@@ -31,6 +46,7 @@ const Input: FC<InputProps> = ({
   name,
   placeholder,
   defaultValue,
+  value,
   onChange,
   className = '',
   min,
@@ -41,9 +57,10 @@ const Input: FC<InputProps> = ({
   error,
   hint,
   register,
+  rows = 3,
 }) => {
   // Determine input styles based on state (disabled, success, error)
-  let inputClasses = `h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3  ${className}`;
+  let inputClasses = `w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3  ${className}`;
 
   if (disabled) {
     inputClasses += ` text-gray-500 border-gray-300 cursor-not-allowed `;
@@ -57,20 +74,38 @@ const Input: FC<InputProps> = ({
 
   return (
     <div className="relative">
-      <input
-        type={type}
-        id={id}
-        name={name}
-        placeholder={placeholder}
-        defaultValue={defaultValue}
-        onChange={onChange}
-        min={min}
-        max={max}
-        step={step}
-        disabled={disabled}
-        className={inputClasses}
-        {...register}
-      />
+      {type === 'textarea' ? (
+        <textarea
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          defaultValue={defaultValue}
+          value={value}
+          disabled={disabled}
+          rows={10}
+          className={clsx(
+            inputClasses,
+            type !== 'textarea' ? 'h-11' : 'resize-none'
+          )}
+          {...register}
+        />
+      ) : (
+        <input
+          value={value}
+          type={type}
+          id={id}
+          name={name}
+          placeholder={placeholder}
+          defaultValue={defaultValue}
+          onChange={onChange}
+          min={min}
+          max={max}
+          step={step}
+          disabled={disabled}
+          className={inputClasses}
+          {...register}
+        />
+      )}
 
       {error && 'message' in error && (
         <p className="bg-red-100/90 rounded-2xl text-red-800 text-sm mt-1 inline-flex px-1 py-0.5 gap-0.5">

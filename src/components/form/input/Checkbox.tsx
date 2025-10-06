@@ -8,6 +8,7 @@ import {
 } from 'react-hook-form';
 
 interface CheckboxProps {
+  // checked?: boolean;
   label?: string;
   value?: boolean;
   className?: string;
@@ -25,6 +26,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   disabled = false,
   error,
   register,
+  // checked,
 }) => {
   return (
     <label
@@ -36,6 +38,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         <input
           id={id}
           type="checkbox"
+          // checked={checked ?? value}
           className={`w-5 h-5 appearance-none border rounded-md cursor-pointer transition-all
             ${error ? 'border-red-500 ring-red-300 ring-2' : 'border-gray-300'}
             checked:bg-primary checked:border-transparent 

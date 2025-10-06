@@ -1,4 +1,4 @@
-async function UpdateSingleProjectPage({
+async function SingleProjectPage({
   params,
 }: {
   params: Promise<{ preProjectId: string }>;
@@ -6,4 +6,4 @@ async function UpdateSingleProjectPage({
   const { preProjectId } = await params;
   return <div>{preProjectId}</div>;
 }
-export default UpdateSingleProjectPage;
+export default SingleProjectPage;

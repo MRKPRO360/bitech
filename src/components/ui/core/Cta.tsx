@@ -12,6 +12,7 @@ interface ICta {
   renderIcon?: boolean;
   icon?: ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 function Cta({
@@ -23,6 +24,7 @@ function Cta({
   renderIcon = true,
   icon = '',
   onClick,
+  disabled = false,
 }: ICta) {
   const linkedButton = (
     <Link
@@ -57,6 +59,7 @@ function Cta({
 
   const button = (
     <button
+      disabled={disabled}
       onClick={onClick}
       className={clsx(
         `relative inline-flex items-center justify-center px-5 py-2.5 overflow-hidden font-semibold tracking-wider  rounded-lg group  transform hover:-translate-y-1 duration-400 cursor-pointer shadow-sm hover:shadow-md ${className}`,

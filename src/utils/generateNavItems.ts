@@ -62,8 +62,8 @@ const getNavItemsByRole = (role: string) => {
               icon: SquareTerminal,
             },
             {
-              title: 'Create Projects',
-              url: '/admin/create-projects',
+              title: 'Create Project',
+              url: '/admin/createProject',
               icon: SquareTerminal,
             },
           ],
@@ -80,7 +80,7 @@ const getNavItemsByRole = (role: string) => {
             },
             {
               title: 'Create Projects',
-              url: '/admin/create-preprojects',
+              url: '/admin/createPreProjects',
               icon: SquareTerminal,
             },
           ],

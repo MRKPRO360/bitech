@@ -1,4 +1,6 @@
+import CreatePreProject from '@/components/modules/dashboard/admin/createPreProject';
+
 function CreatePreProjectPage() {
-  return <div>CreatePreProjectPage</div>;
+  return <CreatePreProject />;
 }
 export default CreatePreProjectPage;

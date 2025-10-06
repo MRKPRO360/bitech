@@ -25,6 +25,12 @@ export interface IPrebuiltProjectResults {
 }
 
 export interface IPrebuiltProjectImages {
-  thumbnail: string;
-  gallery: string[];
+  thumbnail: string | File[];
+  gallery: string[] | File[];
+}
+
+export interface IPrebuiltProjectForm
+  extends Omit<IPrebuiltProject, 'features' | 'technologies'> {
+  features: { value: string }[];
+  technologies: { value: string; label: string }[];
 }

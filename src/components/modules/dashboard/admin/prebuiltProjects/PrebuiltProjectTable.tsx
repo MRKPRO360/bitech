@@ -23,7 +23,12 @@ const PrebuiltProjectsTable = ({
       label: 'Image',
       sortable: true,
       render: (value: IPrebuiltProject['images']) => (
-        <Image src={value.thumbnail} alt="thumbnail" width={100} height={100} />
+        <Image
+          src={value.thumbnail as string}
+          alt="thumbnail"
+          width={100}
+          height={100}
+        />
       ),
     },
     { key: 'title', label: 'Project', sortable: true },
@@ -106,7 +111,7 @@ const PrebuiltProjectsTable = ({
   ];
 
   const handleEdit = (project: IPrebuiltProject) => {
-    console.log('Edit project:', project);
+    router.push(`/dashboard/admin/updatePreProject/${project._id}`);
   };
 
   const handleDelete = (project: IPrebuiltProject) => {

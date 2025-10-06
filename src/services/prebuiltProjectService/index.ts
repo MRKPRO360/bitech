@@ -55,7 +55,7 @@ export const getSinglePrebuiltProject = async (id: string) => {
 export const createPrebuiltProject = async (payload: FormData) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/prebuilt-projects}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/prebuilt-projects`,
       {
         method: 'POST',
         headers: {

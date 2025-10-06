@@ -55,7 +55,7 @@ export const adminMenu: IMenuItem[] = [
       { title: 'Our Projects', href: '/admin/projects', icon: List },
       {
         title: 'Create Projects',
-        href: '/dashboard/admin/create-projects',
+        href: '/dashboard/admin/createProject',
         icon: PlusSquare,
       },
     ],
@@ -70,8 +70,8 @@ export const adminMenu: IMenuItem[] = [
         icon: List,
       },
       {
-        title: 'Create Projects',
-        href: '/dashboard/admin/create-preprojects',
+        title: 'Create Project',
+        href: '/dashboard/admin/createPreProject',
         icon: PlusSquare,
       },
     ],
