@@ -118,7 +118,7 @@ const PrebuiltProjectsTable = ({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-[50vh] py-8">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
           <SecondaryHeading>Projects</SecondaryHeading>

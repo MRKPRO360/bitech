@@ -1,4 +1,4 @@
-import PreProjectDetails from '@/components/modules/preProjects/preProjectDetails';
+import PreProjectDetails from '@/components/modules/preProjects/PreProjectDetails';
 import { getSinglePrebuiltProject } from '@/services/prebuiltProjectService';
 
 async function SingleProjectPage({
