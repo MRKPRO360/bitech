@@ -38,6 +38,7 @@ export default function SignInForm() {
   const onSubmit = async (data: FieldValues) => {
     try {
       const res = await signinUser(data);
+      console.log(res);
 
       if (res.success) {
         toast.success('Logged in successfully!');

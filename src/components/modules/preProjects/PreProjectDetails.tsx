@@ -66,7 +66,7 @@ function PreProjectDetails({ project }: { project: IPrebuiltProject }) {
             <div className="mb-8">
               <div className="relative rounded-md overflow-hidden bg-gray-100">
                 <Image
-                  src={galleryImages[selectedImage]}
+                  src={galleryImages[selectedImage] as string}
                   alt={`${project.title} - Image ${selectedImage + 1}`}
                   width={800}
                   height={500}
@@ -106,7 +106,7 @@ function PreProjectDetails({ project }: { project: IPrebuiltProject }) {
                       }`}
                     >
                       <Image
-                        src={image}
+                        src={image as string}
                         alt={`Thumbnail ${index + 1}`}
                         width={100}
                         height={80}

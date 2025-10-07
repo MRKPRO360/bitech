@@ -31,7 +31,10 @@ export const getAllPrebuiltProjects = async (
       }
     );
 
-    return await res.json();
+    if (!res.ok) {
+      throw new Error(`Failed to fetch prebuilt projects: ${res.statusText}`);
+    }
+    return res.json();
   } catch (err: any) {
     throw new Error(err);
   }
@@ -46,7 +49,11 @@ export const getSinglePrebuiltProject = async (id: string) => {
       }
     );
 
-    return await res.json();
+    if (!res.ok) {
+      throw new Error(`Failed to fetch prebuilt project: ${res.statusText}`);
+    }
+
+    return res.json();
   } catch (err: any) {
     throw new Error(err);
   }
@@ -59,13 +66,21 @@ export const createPrebuiltProject = async (payload: FormData) => {
       {
         method: 'POST',
         headers: {
-          Authorization: (await cookies()).get('accessToken')!.value,
+          Authorization: (await cookies()).get('accessToken')?.value || '',
         },
         body: payload,
         next: { tags: ['prebuilt-projects'] },
       }
     );
-    return await res.json();
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(
+        errorData.message || `Failed to create project: ${res.statusText}`
+      );
+    }
+
+    return res.json();
   } catch (error: any) {
     throw new Error(error);
   }
@@ -78,13 +93,21 @@ export const updatePrebuiltProject = async (id: string, payload: FormData) => {
       {
         method: 'PATCH',
         headers: {
-          Authorization: (await cookies()).get('accessToken')!.value,
+          Authorization: (await cookies()).get('accessToken')?.value || '',
         },
         body: payload,
         next: { tags: ['prebuilt-projects'] },
       }
     );
-    return await res.json();
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(
+        errorData.message || `Failed to update project: ${res.statusText}`
+      );
+    }
+
+    return res.json();
   } catch (error: any) {
     throw new Error(error);
   }
@@ -97,12 +120,20 @@ export const deletePrebuiltProject = async (id: string) => {
       {
         method: 'DELETE',
         headers: {
-          Authorization: (await cookies()).get('accessToken')!.value,
+          Authorization: (await cookies()).get('accessToken')?.value || '',
         },
         next: { tags: ['prebuilt-projects'] },
       }
     );
-    return await res.json();
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(
+        errorData.message || `Failed to delete project: ${res.statusText}`
+      );
+    }
+
+    return res.json();
   } catch (error: any) {
     throw new Error(error);
   }

@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { ImagePlus, Trash2 } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 interface ImageUploadProps {
@@ -94,7 +95,9 @@ function ImageUpload({
         <div className="grid grid-cols-3 gap-4 my-4">
           {previews.map((src, idx) => (
             <div className="relative" key={idx}>
-              <img
+              <Image
+                width={200}
+                height={200}
                 src={src}
                 alt="preview"
                 className="hover:shadow-lg transtion object-cover w-full h-32 duration-300 rounded-lg shadow-md"

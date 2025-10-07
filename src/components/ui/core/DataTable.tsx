@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Edit, Trash2, Eye, Loader2, MoreVertical } from 'lucide-react';
 import { TableColumn, TableProps } from '@/types/table';
@@ -132,15 +132,15 @@ const DataTable = <T,>({
     );
   };
 
-  const renderActions = (item: T) => {
-    const [open, setOpen] = React.useState(false);
-    const [position, setPosition] = React.useState<{
+  const RenderActions = (item: T) => {
+    const [open, setOpen] = useState(false);
+    const [position, setPosition] = useState<{
       top: number;
       left: number;
     } | null>(null);
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
         if (
           buttonRef.current &&
@@ -221,7 +221,7 @@ const DataTable = <T,>({
                     className="p-3 whitespace-nowrap"
                   >
                     {column.key === 'actions'
-                      ? renderActions(item)
+                      ? RenderActions(item)
                       : renderCellContent(column, item)}
                   </td>
                 ))}
@@ -238,7 +238,7 @@ const DataTable = <T,>({
           </div>
           <p className="text-gray-500 text-lg font-medium">No data found</p>
           <p className="text-gray-400 text-sm mt-1">
-            There's nothing to display at the moment
+            There&apos;s nothing to display at the moment
           </p>
         </div>
       )}

@@ -15,7 +15,7 @@ export default function PreProjectCard({
       {/* Image Container */}
       <div className="relative overflow-hidden">
         <Image
-          src={project.images.thumbnail}
+          src={project.images.thumbnail as string}
           alt={project.title}
           width={400}
           height={250}

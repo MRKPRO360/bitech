@@ -1,3 +1,5 @@
+// export const dynamic = 'force-dynamic';
+
 import PrebuiltProjects from '@/components/modules/dashboard/admin/prebuiltProjects';
 import { getAllPrebuiltProjects } from '@/services/prebuiltProjectService';
 import { TSearchParams } from '@/types';
