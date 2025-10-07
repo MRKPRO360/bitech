@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { LoaderCircle } from 'lucide-react';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { FaArrowRightLong } from 'react-icons/fa6';
@@ -12,7 +13,9 @@ interface ICta {
   renderIcon?: boolean;
   icon?: ReactNode;
   onClick?: () => void;
-  disabled?: boolean;
+  isSubmitting?: boolean;
+  submittingText?: string;
+  type?: 'button' | 'reset' | 'submit' | undefined;
 }
 
 function Cta({
@@ -24,7 +27,9 @@ function Cta({
   renderIcon = true,
   icon = '',
   onClick,
-  disabled = false,
+  isSubmitting = false,
+  submittingText,
+  type = 'button',
 }: ICta) {
   const linkedButton = (
     <Link
@@ -59,13 +64,15 @@ function Cta({
 
   const button = (
     <button
-      disabled={disabled}
+      type={type}
+      disabled={isSubmitting}
       onClick={onClick}
       className={clsx(
         `relative inline-flex items-center justify-center px-5 py-2.5 overflow-hidden font-semibold tracking-wider  rounded-lg group  transform hover:-translate-y-1 duration-400 cursor-pointer shadow-sm hover:shadow-md ${className}`,
         outline
           ? 'border border-primary/40 hover:text-gray-800'
-          : 'bg-primary text-white '
+          : 'bg-primary text-white ',
+        isSubmitting && 'cursor-not-allowed opacity-60'
       )}
     >
       <span
@@ -83,8 +90,10 @@ function Cta({
         )}
       >
         {icon ? icon : renderIcon && <FaArrowRightLong />}
-
-        <span>{text}</span>
+        {isSubmitting && (
+          <LoaderCircle className="animate-spin w-6 h-6 text-white group-hover:text-primary" />
+        )}
+        <span>{isSubmitting ? submittingText : text}</span>
       </div>
     </button>
   );

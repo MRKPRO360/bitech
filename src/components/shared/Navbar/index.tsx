@@ -141,7 +141,7 @@ function Navbar() {
                     Sign In
                   </Link>
                 )}
-                {user?.role === 'customer' && (
+                {user?.role !== 'admin' && (
                   <Cta
                     hasLink={true}
                     path="/about/contact-us"

@@ -211,6 +211,7 @@
 //   );
 // }
 // export default BannerSlider;
+
 'use client';
 import Cta from '@/components/ui/core/Cta';
 import Image from 'next/image';
@@ -219,7 +220,7 @@ import Container from '@/components/ui/core/Container';
 import heroBottom from '@/assets/banner-bg.png';
 import Para from '@/components/ui/core/Para';
 import gsap from 'gsap';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';

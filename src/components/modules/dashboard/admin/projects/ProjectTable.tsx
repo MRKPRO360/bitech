@@ -6,7 +6,6 @@ import { toast } from 'sonner';
 import Image from 'next/image';
 import { Clock10, Star } from 'lucide-react';
 
-import { IPrebuiltProject } from '@/types/prebuiltProjects';
 import { TableColumn } from '@/types/table';
 import DataTable from '@/components/ui/core/DataTable';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
@@ -17,26 +16,22 @@ import {
   deletePrebuiltProject,
   revalidatePrebuiltProjects,
 } from '@/services/prebuiltProjectService';
+import { IProject } from '@/types/project';
 
-const PrebuiltProjectsTable = ({
-  projects,
-}: {
-  projects: IPrebuiltProject[];
-}) => {
+const ProjectTable = ({ projects }: { projects: IProject[] }) => {
   const router = useRouter();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [projectToDelete, setProjectToDelete] =
-    useState<IPrebuiltProject | null>(null);
+  const [projectToDelete, setProjectToDelete] = useState<IProject | null>(null);
 
-  const handleView = (project: IPrebuiltProject) => {
+  const handleView = (project: IProject) => {
     router.push(`/prebuiltProjects/${project._id}`);
   };
 
-  const handleEdit = (project: IPrebuiltProject) => {
+  const handleEdit = (project: IProject) => {
     router.push(`/dashboard/admin/updatePreProject/${project._id}`);
   };
 
-  const handleDelete = (project: IPrebuiltProject) => {
+  const handleDelete = (project: IProject) => {
     setProjectToDelete(project);
     setShowDeleteModal(true);
   };
@@ -60,7 +55,7 @@ const PrebuiltProjectsTable = ({
     }
   };
 
-  const columns: TableColumn<IPrebuiltProject>[] = [
+  const columns: TableColumn<IProject>[] = [
     {
       key: 'images',
       label: 'Image',
@@ -94,8 +89,8 @@ const PrebuiltProjectsTable = ({
       ),
     },
     {
-      key: 'price',
-      label: 'Price',
+      key: 'budget',
+      label: 'Budget',
       render: (value: string) =>
         value === '0' || value === 'Free' ? (
           <span className="text-green-700 font-medium">Free</span>
@@ -125,7 +120,7 @@ const PrebuiltProjectsTable = ({
     {
       key: 'actions',
       label: 'Actions',
-      render: (value: any, row: IPrebuiltProject) => (
+      render: (value: any, row: IProject) => (
         <div className="flex items-center gap-2">
           <button
             onClick={() => handleView(row)}
@@ -163,7 +158,7 @@ const PrebuiltProjectsTable = ({
         {!projects ? (
           <p>Loading projects...</p>
         ) : (
-          <DataTable<IPrebuiltProject>
+          <DataTable<IProject>
             data={projects}
             columns={columns}
             onEdit={handleEdit}
@@ -193,4 +188,4 @@ const PrebuiltProjectsTable = ({
   );
 };
 
-export default PrebuiltProjectsTable;
+export default ProjectTable;

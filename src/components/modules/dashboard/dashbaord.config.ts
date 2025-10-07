@@ -52,7 +52,7 @@ export const adminMenu: IMenuItem[] = [
     title: 'Projects',
     icon: FolderKanban,
     children: [
-      { title: 'Our Projects', href: '/admin/projects', icon: List },
+      { title: 'Our Projects', href: '/dashboard/admin/projects', icon: List },
       {
         title: 'Create Projects',
         href: '/dashboard/admin/createProject',

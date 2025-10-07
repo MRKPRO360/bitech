@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 
 export const getAllPrebuiltProjects = async (
@@ -138,3 +139,7 @@ export const deletePrebuiltProject = async (id: string) => {
     throw new Error(error);
   }
 };
+
+export async function revalidatePrebuiltProjects() {
+  revalidateTag('prebuilt-projects');
+}

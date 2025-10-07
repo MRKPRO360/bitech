@@ -22,7 +22,7 @@ export default function SignInForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     watch,
   } = useForm();
 
@@ -175,14 +175,20 @@ export default function SignInForm() {
                   </Link>
                 </div>
                 <div>
-                  <Cta text="Sign In" renderIcon={false} />
+                  <Cta
+                    isSubmitting={isSubmitting}
+                    submittingText="Signing In..."
+                    type="submit"
+                    text="Sign In"
+                    renderIcon={false}
+                  />
                 </div>
               </div>
             </form>
 
             <div className="mt-5">
               <p className="text-base font-semibold text-center sm:text-start">
-                Don&apos;t have an account? {''}
+                Don&apos;t have an account?
                 <Link
                   href="/signup"
                   className="underline underline-offset-4  text-brand-500 hover:text-brand-600 dark:text-brand-400 decoration-2 decoration-primary"

@@ -5,6 +5,121 @@ import ReactDOM from 'react-dom';
 import { Edit, Trash2, Eye, Loader2, MoreVertical } from 'lucide-react';
 import { TableColumn, TableProps } from '@/types/table';
 
+const RowActions = <T,>({
+  item,
+  actions,
+  onView,
+  onEdit,
+  onDelete,
+}: {
+  item: T;
+  actions: string[];
+  onView?: (item: T) => void;
+  onEdit?: (item: T) => void;
+  onDelete?: (item: T) => void;
+}) => {
+  const [open, setOpen] = useState(false);
+  const [position, setPosition] = useState<{
+    top: number;
+    left: number;
+  } | null>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
+  const handleOpen = () => {
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      setPosition({
+        top: rect.bottom + window.scrollY + 4,
+        left: rect.right - 130 + window.scrollX,
+      });
+    }
+    setOpen((prev) => !prev);
+  };
+
+  return (
+    <>
+      <button
+        ref={buttonRef}
+        onClick={handleOpen}
+        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition"
+      >
+        <MoreVertical className="w-5 h-5" />
+      </button>
+
+      {open &&
+        position &&
+        ReactDOM.createPortal(
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: 'absolute',
+              top: position.top,
+              left: position.left,
+              zIndex: 9999,
+            }}
+            className="w-32 bg-white border border-gray-200 rounded-lg shadow-lg"
+          >
+            <ul className="py-1 text-sm text-gray-700">
+              {actions.includes('view') && onView && (
+                <li>
+                  <button
+                    onClick={() => {
+                      onView(item);
+                      setOpen(false);
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 transition cursor-pointer"
+                  >
+                    <Eye className="w-4 h-4 text-blue-500" /> View
+                  </button>
+                </li>
+              )}
+              {actions.includes('edit') && onEdit && (
+                <li>
+                  <button
+                    onClick={() => {
+                      onEdit(item);
+                      setOpen(false);
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 transition cursor-pointer"
+                  >
+                    <Edit className="w-4 h-4 text-green-500" /> Edit
+                  </button>
+                </li>
+              )}
+              {actions.includes('delete') && onDelete && (
+                <li>
+                  <button
+                    onClick={() => {
+                      onDelete(item);
+                      setOpen(false);
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-red-600 transition cursor-pointer"
+                  >
+                    <Trash2 className="w-4 h-4" /> Delete
+                  </button>
+                </li>
+              )}
+            </ul>
+          </div>,
+          document.body
+        )}
+    </>
+  );
+};
+
 const DataTable = <T,>({
   data,
   columns,
@@ -15,9 +130,8 @@ const DataTable = <T,>({
   actions = ['view', 'edit', 'delete'],
 }: TableProps<T>) => {
   const renderCellContent = (column: TableColumn<T>, item: T) => {
-    if (column.render) {
+    if (column.render)
       return column.render((item as any)[column.key as keyof T], item);
-    }
 
     const value = (item as any)[column.key as keyof T];
 
@@ -34,18 +148,16 @@ const DataTable = <T,>({
         );
 
       case 'object':
-        if (value instanceof Date) {
-          return value.toLocaleDateString();
-        }
-        if (Array.isArray(value)) {
+        if (value instanceof Date) return value.toLocaleDateString();
+        if (Array.isArray(value))
           return (
             <div className="flex flex-wrap gap-1">
-              {value.slice(0, 2).map((item, index) => (
+              {value.slice(0, 2).map((v, i) => (
                 <span
-                  key={index}
+                  key={i}
                   className="inline-block bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded"
                 >
-                  {String(item)}
+                  {String(v)}
                 </span>
               ))}
               {value.length > 2 && (
@@ -55,7 +167,6 @@ const DataTable = <T,>({
               )}
             </div>
           );
-        }
         return JSON.stringify(value);
 
       default:
@@ -63,135 +174,25 @@ const DataTable = <T,>({
     }
   };
 
-  const ActionDropdown = ({
-    item,
-    onClose,
-    position,
-  }: {
-    item: T;
-    onClose: () => void;
-    position: { top: number; left: number };
-  }) => {
-    return ReactDOM.createPortal(
-      <div
-        onClick={(e) => e.stopPropagation()} // 🧠 prevent bubbling up
-        style={{
-          position: 'absolute',
-          top: position.top,
-          left: position.left,
-          zIndex: 9999,
-        }}
-        className="w-32 bg-white border border-gray-200 rounded-lg shadow-lg"
-      >
-        <ul className="py-1 text-sm text-gray-700">
-          {actions.includes('view') && onView && (
-            <li>
-              <button
-                onClick={() => {
-                  onView(item);
-                  onClose();
-                }}
-                className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 transition cursor-pointer"
-              >
-                <Eye className="w-4 h-4 text-blue-500" />
-                View
-              </button>
-            </li>
-          )}
-          {actions.includes('edit') && onEdit && (
-            <li>
-              <button
-                onClick={() => {
-                  onEdit(item);
-                  onClose();
-                }}
-                className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 transition cursor-pointer"
-              >
-                <Edit className="w-4 h-4 text-green-500" />
-                Edit
-              </button>
-            </li>
-          )}
-          {actions.includes('delete') && onDelete && (
-            <li>
-              <button
-                onClick={() => {
-                  onDelete(item);
-                  onClose();
-                }}
-                className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-red-600 transition cursor-pointer"
-              >
-                <Trash2 className="w-4 h-4" />
-                Delete
-              </button>
-            </li>
-          )}
-        </ul>
-      </div>,
-      document.body
-    );
-  };
-
-  const RenderActions = (item: T) => {
-    const [open, setOpen] = useState(false);
-    const [position, setPosition] = useState<{
-      top: number;
-      left: number;
-    } | null>(null);
-    const buttonRef = useRef<HTMLButtonElement>(null);
-
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (
-          buttonRef.current &&
-          !buttonRef.current.contains(event.target as Node)
-        ) {
-          setOpen(false);
-        }
-      };
-      document.addEventListener('click', handleClickOutside);
-      return () => document.removeEventListener('click', handleClickOutside);
-    }, []);
-
-    const handleOpen = () => {
-      if (buttonRef.current) {
-        const rect = buttonRef.current.getBoundingClientRect();
-        setPosition({
-          top: rect.bottom + window.scrollY + 4,
-          left: rect.right - 130 + window.scrollX,
-        });
-      }
-      setOpen((prev) => !prev);
-    };
-
-    return (
-      <>
-        <button
-          ref={buttonRef}
-          onClick={handleOpen}
-          className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition"
-        >
-          <MoreVertical className="w-5 h-5" />
-        </button>
-
-        {open && position && (
-          <ActionDropdown
-            item={item}
-            onClose={() => setOpen(false)}
-            position={position}
-          />
-        )}
-      </>
-    );
-  };
-
-  if (isLoading) {
+  if (isLoading)
     return (
       <div className="flex justify-center items-center h-64">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
       </div>
     );
-  }
+
+  if (!data || data.length === 0)
+    return (
+      <div className="text-center py-12">
+        <div className="text-gray-400 mb-2">
+          <Eye className="w-12 h-12 mx-auto opacity-50" />
+        </div>
+        <p className="text-gray-500 text-lg font-medium">No data found</p>
+        <p className="text-gray-400 text-sm mt-1">
+          There&apos;s nothing to display at the moment
+        </p>
+      </div>
+    );
 
   return (
     <div className="bg-white shadow-lg rounded-lg border border-gray-200">
@@ -199,12 +200,12 @@ const DataTable = <T,>({
         <table className="min-w-full divide-y divide-gray-200 relative">
           <thead className="bg-gray-50">
             <tr>
-              {columns.map((column) => (
+              {columns.map((col) => (
                 <th
-                  key={String(column.key)}
+                  key={String(col.key)}
                   className="p-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  {column.label}
+                  {col.label}
                 </th>
               ))}
             </tr>
@@ -215,14 +216,19 @@ const DataTable = <T,>({
                 key={index}
                 className="hover:bg-gray-50 transition-colors duration-150"
               >
-                {columns.map((column) => (
-                  <td
-                    key={String(column.key)}
-                    className="p-3 whitespace-nowrap"
-                  >
-                    {column.key === 'actions'
-                      ? RenderActions(item)
-                      : renderCellContent(column, item)}
+                {columns.map((col) => (
+                  <td key={String(col.key)} className="p-3 whitespace-nowrap">
+                    {col.key === 'actions' ? (
+                      <RowActions
+                        item={item}
+                        actions={actions}
+                        onView={onView}
+                        onEdit={onEdit}
+                        onDelete={onDelete}
+                      />
+                    ) : (
+                      renderCellContent(col, item)
+                    )}
                   </td>
                 ))}
               </tr>
@@ -230,18 +236,6 @@ const DataTable = <T,>({
           </tbody>
         </table>
       </div>
-
-      {data.length === 0 && !isLoading && (
-        <div className="text-center py-12">
-          <div className="text-gray-400 mb-2">
-            <Eye className="w-12 h-12 mx-auto opacity-50" />
-          </div>
-          <p className="text-gray-500 text-lg font-medium">No data found</p>
-          <p className="text-gray-400 text-sm mt-1">
-            There&apos;s nothing to display at the moment
-          </p>
-        </div>
-      )}
     </div>
   );
 };

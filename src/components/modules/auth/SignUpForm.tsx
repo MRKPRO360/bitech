@@ -37,7 +37,7 @@ export default function SignUpForm() {
     reset,
     setValue,
     trigger,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     watch,
   } = useForm<ISignupValues>();
 
@@ -344,7 +344,13 @@ export default function SignUpForm() {
                 )}
 
                 {step === totalSteps && (
-                  <Cta text="Sign Up" renderIcon={false} />
+                  <Cta
+                    text="Sign Up"
+                    renderIcon={false}
+                    isSubmitting={isSubmitting}
+                    submittingText="Signing Up..."
+                    type="submit"
+                  />
                 )}
               </div>
             </form>

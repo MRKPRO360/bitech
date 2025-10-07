@@ -21,38 +21,36 @@ const MobileDrawer = ({ user, setIsLoading }: IMoblieDrawer) => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
 
-  // Close drawer when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const drawer = document.getElementById('mobile-drawer');
-      const button = document.getElementById('mobile-menu-button');
-
-      if (
-        drawer &&
-        button &&
-        !drawer.contains(event.target as Node) &&
-        !button.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    // Close on escape key press
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false);
-      }
-    };
-
     if (isOpen) {
+      const handleClickOutside = (event: MouseEvent) => {
+        const drawer = document.getElementById('mobile-drawer');
+        const button = document.getElementById('mobile-menu-button');
+
+        if (
+          drawer &&
+          button &&
+          !drawer.contains(event.target as Node) &&
+          !button.contains(event.target as Node)
+        ) {
+          setIsOpen(false);
+        }
+      };
+
+      const handleEscape = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') {
+          setIsOpen(false);
+        }
+      };
+
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleEscape);
-    }
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscape);
-    };
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('keydown', handleEscape);
+      };
+    }
   }, [isOpen]);
 
   return (
@@ -161,7 +159,7 @@ const MobileDrawer = ({ user, setIsLoading }: IMoblieDrawer) => {
               />
 
               <ExpandableMenu
-                setIsOpen={setIsOpen}
+                setIsOpen={setIsOpen} // This prop is not used in ExpandableMenu
                 mainLink="/projects"
                 isExpanded={expandedMenu === 'projects'}
                 onToggle={() =>

@@ -747,9 +747,11 @@ export default function CreatePreProjectForm() {
                   </button>
                 ) : (
                   <Cta
-                    text={isSubmitting ? 'Creating...' : 'Create Project'}
+                    text="Create Project"
                     renderIcon={false}
-                    disabled={isSubmitting}
+                    isSubmitting={isSubmitting}
+                    submittingText="Creating..."
+                    type="submit"
                   />
                 )}
               </div>
