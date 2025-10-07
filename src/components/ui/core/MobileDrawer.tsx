@@ -1,115 +1,25 @@
-import { useState, useEffect } from 'react';
-import {
-  BookOpen,
-  CheckCircle,
-  CreditCard,
-  FileText,
-  Globe,
-  Headphones,
-  Laptop,
-  Layers,
-  Layout,
-  Palette,
-  Pill,
-  Scissors,
-  Server,
-  ShoppingCart,
-  Smartphone,
-  Truck,
-} from 'lucide-react';
-import { Menu, X } from 'lucide-react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+
+import { Home, Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import Dropdown from './Dropdown';
+import ExpandableMenu from './ExpandableMenu';
+import {
+  aboutUsItems,
+  productsItems,
+  projectsItems,
+  servicesItems,
+} from '@/components/shared/Navbar/navbar.const';
+import { IUser } from '@/types';
+import NormalDropdown from './NormalDropdown';
 
-const servicesItems = [
-  {
-    label: 'Software Development',
-    href: '/services/software-development',
-    icon: <Laptop className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'Web Application',
-    href: '/services/web-application',
-    icon: <Globe className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'Mobile Application',
-    href: '/services/mobile-application',
-    icon: <Smartphone className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'Websites',
-    href: '/services/websites',
-    icon: <Layout className="w-4 h-4 mr-2" />,
-  },
+interface IMoblieDrawer {
+  user: IUser | null;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}
 
-  {
-    label: 'UX Design',
-    href: '/services/ux-design',
-    icon: <Palette className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'NOC Support',
-    href: '/services/noc-support',
-    icon: <Server className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'IT Services',
-    href: '/services/it-services',
-    icon: <Headphones className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'QA, QC & Testing',
-    href: '/services/qa-qc-testing',
-    icon: <CheckCircle className="w-4 h-4 mr-2" />,
-  },
-];
-
-const productsItems = [
-  {
-    label: 'School Management System',
-    href: '/products/school-management-system',
-    icon: <BookOpen className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'Pharmacy Software',
-    href: '/products/pharmacy-software',
-    icon: <Pill className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'POS Management',
-    href: '/products/pos-management',
-    icon: <CreditCard className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'ERP Software',
-    href: '/products/erp-software',
-    icon: <Layers className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'Tailor Management',
-    href: '/products/tailor-management',
-    icon: <Scissors className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'Courier Management',
-    href: '/products/courier-management',
-    icon: <Truck className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'E-Commerce Website',
-    href: '/products/e-commerce-website',
-    icon: <ShoppingCart className="w-4 h-4 mr-2" />,
-  },
-  {
-    label: 'Publication Website',
-    href: '/products/publication-website',
-    icon: <FileText className="w-4 h-4 mr-2" />,
-  },
-];
-
-const MobileDrawer = () => {
+const MobileDrawer = ({ user, setIsLoading }: IMoblieDrawer) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
 
   // Close drawer when clicking outside
   useEffect(() => {
@@ -158,12 +68,17 @@ const MobileDrawer = () => {
       </button>
 
       {/* Overlay */}
-      {isOpen && <div className="fixed inset-0 bg-transparent z-40" />}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-transparent z-40"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
 
       {/* Drawer */}
       <div
         id="mobile-drawer"
-        className={`fixed top-0 left-0 min-h-screen w-full bg-light-bg bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed overflow-y-auto top-0 left-0 h-screen max-h-screen w-full bg-light-bg bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -179,32 +94,84 @@ const MobileDrawer = () => {
         </div>
 
         {/* Drawer Content */}
-        <nav className="p-4 ext-base sm:text-lg">
+        <nav className="p-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
           <ul className="space-y-4">
-            <div className="flex flex-col lg:hidden  gap-6 t font-bold">
-              <Link href="/" className="hover:text-primary duration-200">
-                Home
-              </Link>
-              <Link className="hover:text-primary duration-200" href="/about">
-                About Us
-              </Link>
+            <div className="flex flex-col lg:hidden gap-6 text-lg font-semibold text-gray-900">
+              <div className="flex gap-5 items-center">
+                <Link
+                  href="/"
+                  className="hover:text-primary duration-200 flex items-center gap-2"
+                >
+                  <span>
+                    <Home />
+                  </span>
+                  Home
+                </Link>
 
-              <Dropdown
-                mainLink="/services"
+                {user?.email && (
+                  <NormalDropdown setIsLoading={setIsLoading} user={user} />
+                )}
+              </div>
+
+              {!user?.email && (
+                <Link
+                  onClick={() => setIsOpen(false)}
+                  href="/signin"
+                  className="hover:text-primary w-full bg-white rounded-lg border border-gray-200 overflow-hidden px-4 py-3 cursor-pointer hover:bg-gray-50 transition-colors duration-200"
+                >
+                  Sign In
+                </Link>
+              )}
+
+              <ExpandableMenu
+                setIsOpen={setIsOpen}
+                title="About Us"
+                isExpanded={expandedMenu === 'about'}
+                onToggle={() =>
+                  setExpandedMenu(expandedMenu === 'about' ? null : 'about')
+                }
+                mainLink="/about"
+                items={aboutUsItems}
+              />
+
+              <ExpandableMenu
+                setIsOpen={setIsOpen}
                 title="Services"
+                isExpanded={expandedMenu === 'services'}
+                onToggle={() =>
+                  setExpandedMenu(
+                    expandedMenu === 'services' ? null : 'services'
+                  )
+                }
+                mainLink="/services"
                 items={servicesItems}
               />
-              <Link className="" href="/projects">
-                Projects
-              </Link>
-              <Dropdown
+
+              <ExpandableMenu
+                setIsOpen={setIsOpen}
                 mainLink="/products"
+                isExpanded={expandedMenu === 'products'}
+                onToggle={() =>
+                  setExpandedMenu(
+                    expandedMenu === 'products' ? null : 'products'
+                  )
+                }
                 title="Products"
                 items={productsItems}
               />
-              <Link className="" href="/company">
-                Company
-              </Link>
+
+              <ExpandableMenu
+                setIsOpen={setIsOpen}
+                mainLink="/projects"
+                isExpanded={expandedMenu === 'projects'}
+                onToggle={() =>
+                  setExpandedMenu(
+                    expandedMenu === 'projects' ? null : 'projects'
+                  )
+                }
+                title="Projects"
+                items={projectsItems}
+              />
             </div>
           </ul>
         </nav>
