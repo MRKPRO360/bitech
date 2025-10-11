@@ -5,7 +5,7 @@ import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
 import Cta from '@/components/ui/core/Cta';
 import Para from '@/components/ui/core/Para';
 
-function PharmacyHeading() {
+function PublicationHeading() {
   return (
     <section
       //   ref={heroRef}
@@ -46,4 +46,4 @@ function PharmacyHeading() {
     </section>
   );
 }
-export default PharmacyHeading;
+export default PublicationHeading;

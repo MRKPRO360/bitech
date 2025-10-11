@@ -6,16 +6,17 @@ import PageBanner from '@/components/shared/pageBanner';
 import ProductStats from '@/components/shared/productStats';
 
 const statsData = [
-  { value: 200, label: 'Schools Digitized', color: 'text-blue-600' },
+  { value: 120, label: 'Tailors Using', color: 'text-blue-600' },
   {
     value: 95,
     suffix: '%',
-    label: 'Admin Time Saved',
+    label: 'Customer Retention',
     color: 'text-green-600',
   },
-  { value: 10, label: 'K+ Students Managed', color: 'text-purple-600' },
-  { value: 99, suffix: '%', label: 'Data Accuracy', color: 'text-orange-600' },
+  { value: 60, label: '% Faster Deliveries', color: 'text-purple-600' },
+  { value: 80, label: '% Paperwork Reduced', color: 'text-orange-600' },
 ];
+
 function TailorManagementPage() {
   return (
     <>

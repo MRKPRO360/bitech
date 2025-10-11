@@ -8,52 +8,57 @@ import WandWithText from '@/components/ui/Wand';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 import { useFadeUp } from '@/hooks/FadeUp';
 
-import { Rocket, Bug, Clock, BarChart, Shield, Users } from 'lucide-react';
+import {
+  FileText,
+  User,
+  Clock,
+  CreditCard,
+  TrendingUp,
+  Star,
+} from 'lucide-react';
 
 const transformItems = [
   {
     step: '01',
-    title: 'Increase Efficiency',
-    description: 'Automate daily operations and reduce manual work by 70%',
-    icon: <Rocket className="w-6 h-6" />,
-    color: 'from-green-500 to-emerald-500',
-  },
-  {
-    step: '02',
-    title: 'Reduce Errors',
-    description: 'Minimize human errors in billing and inventory management',
-    icon: <Bug className="w-6 h-6" />,
-    color: 'from-red-500 to-pink-500',
-  },
-  {
-    step: '03',
-    title: 'Save Time',
-    description: 'Quick billing and instant report generation',
-    icon: <Clock className="w-6 h-6" />,
+    title: 'Digitize Orders',
+    description: 'No more paper slips — manage every order online.',
+    icon: <FileText className="w-6 h-6" />,
     color: 'from-blue-500 to-indigo-500',
   },
   {
-    step: '04',
-    title: 'Grow Business',
-    description: 'Data-driven insights to help expand your pharmacy business',
-    icon: <BarChart className="w-6 h-6" />,
+    step: '02',
+    title: 'Personalize Service',
+    description: 'Store customer measurements and preferences securely.',
+    icon: <User className="w-6 h-6" />,
+    color: 'from-green-500 to-emerald-500',
+  },
+  {
+    step: '03',
+    title: 'Improve Turnaround',
+    description: 'Track deadlines and reduce delivery delays.',
+    icon: <Clock className="w-6 h-6" />,
     color: 'from-purple-500 to-pink-500',
   },
   {
+    step: '04',
+    title: 'Streamline Billing',
+    description: 'Generate professional invoices and receipts automatically.',
+    icon: <CreditCard className="w-6 h-6" />,
+    color: 'from-yellow-500 to-orange-500',
+  },
+  {
     step: '05',
-    title: 'Enhance Security',
-    description:
-      'Protect sensitive customer and business data with robust security measures',
-    icon: <Shield className="w-6 h-6" />,
-    color: 'from-amber-500 to-orange-500',
+    title: 'Boost Productivity',
+    description: 'Coordinate tasks and tailor workloads efficiently.',
+    icon: <TrendingUp className="w-6 h-6" />,
+    color: 'from-cyan-500 to-blue-500',
   },
   {
     step: '06',
-    title: 'Boost Collaboration',
-    description:
-      'Improve teamwork with multi-user access and role-based permissions',
-    icon: <Users className="w-6 h-6" />,
-    color: 'from-cyan-500 to-blue-500',
+    title: 'Enhance Reputation',
+    description: 'Deliver faster, impress clients, and get more referrals.',
+    icon: <Star className="w-6 h-6" />,
+    color: 'from-red-500 to-pink-500',
   },
 ];
 

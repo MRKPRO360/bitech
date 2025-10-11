@@ -1,6 +1,9 @@
 import CourierManagementFeatures from '@/components/modules/products/courierManagement/courierManagementFeatures';
 import CourierManagementHeading from '@/components/modules/products/courierManagement/courierManagementHeading';
 import TransformCourierManagement from '@/components/modules/products/courierManagement/transformCourierManagement';
+import PublicationFeatures from '@/components/modules/products/publicationWebsite/publicationFeatures';
+import PublicationHeading from '@/components/modules/products/publicationWebsite/publicationHeading';
+import TransformPublication from '@/components/modules/products/publicationWebsite/transformPublication';
 import CtaSection from '@/components/shared/careerCta';
 import PageBanner from '@/components/shared/pageBanner';
 import ProductStats from '@/components/shared/productStats';
@@ -16,13 +19,13 @@ function PublicationWebsitePage() {
   return (
     <>
       <PageBanner title="Publication Website" />
-      <CourierManagementHeading />
-      <CourierManagementFeatures />
-      <TransformCourierManagement />
+      <PublicationHeading />
+      <PublicationFeatures />
+      <TransformPublication />
       <ProductStats stats={statsData} />
       <CtaSection
-        subHeading="Courier Management"
-        heading="Ready to Transform Your Courier Management?"
+        subHeading="Publication Website"
+        heading="Ready to Transform Your Publication Website?"
         description="Contact us today to learn how our software can streamline your operations, reduce costs, and improve customer satisfaction
         ."
       />

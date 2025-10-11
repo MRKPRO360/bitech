@@ -8,56 +8,54 @@ import WandWithText from '@/components/ui/Wand';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 import { useFadeUp } from '@/hooks/FadeUp';
 
-import { Rocket, Bug, Clock, BarChart, Shield, Users } from 'lucide-react';
+import { Rocket, BarChart, Users } from 'lucide-react';
 
 const transformItems = [
   {
     step: '01',
-    title: 'Increase Efficiency',
-    description: 'Automate daily operations and reduce manual work by 70%',
-    icon: <Rocket className="w-6 h-6" />,
-    color: 'from-green-500 to-emerald-500',
-  },
-  {
-    step: '02',
-    title: 'Reduce Errors',
-    description: 'Minimize human errors in billing and inventory management',
-    icon: <Bug className="w-6 h-6" />,
-    color: 'from-red-500 to-pink-500',
-  },
-  {
-    step: '03',
-    title: 'Save Time',
-    description: 'Quick billing and instant report generation',
-    icon: <Clock className="w-6 h-6" />,
+    title: 'Unify Operations',
+    description: 'Bring HR, finance, and logistics under one platform.',
+    icon: <Layers className="w-6 h-6" />,
     color: 'from-blue-500 to-indigo-500',
   },
   {
-    step: '04',
-    title: 'Grow Business',
-    description: 'Data-driven insights to help expand your pharmacy business',
+    step: '02',
+    title: 'Eliminate Redundancy',
+    description: 'Automate repetitive business tasks efficiently.',
+    icon: <Repeat className="w-6 h-6" />,
+    color: 'from-green-500 to-emerald-500',
+  },
+  {
+    step: '03',
+    title: 'Improve Forecasting',
+    description: 'Predict sales and inventory needs with analytics.',
     icon: <BarChart className="w-6 h-6" />,
     color: 'from-purple-500 to-pink-500',
   },
   {
+    step: '04',
+    title: 'Empower Teams',
+    description: 'Collaborate through shared dashboards and reports.',
+    icon: <Users className="w-6 h-6" />,
+    color: 'from-yellow-500 to-orange-500',
+  },
+  {
     step: '05',
-    title: 'Enhance Security',
-    description:
-      'Protect sensitive customer and business data with robust security measures',
-    icon: <Shield className="w-6 h-6" />,
-    color: 'from-amber-500 to-orange-500',
+    title: 'Enhance Control',
+    description: 'Gain real-time visibility into operations and finances.',
+    icon: <Eye className="w-6 h-6" />,
+    color: 'from-cyan-500 to-blue-500',
   },
   {
     step: '06',
-    title: 'Boost Collaboration',
-    description:
-      'Improve teamwork with multi-user access and role-based permissions',
-    icon: <Users className="w-6 h-6" />,
-    color: 'from-cyan-500 to-blue-500',
+    title: 'Scale Seamlessly',
+    description: 'Expand departments or branches without workflow chaos.',
+    icon: <Rocket className="w-6 h-6" />,
+    color: 'from-amber-500 to-red-500',
   },
 ];
 
-function TransformSoftware() {
+function TransformErpSoftware() {
   const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });
 
   const processRef = useStaggerChildren<HTMLDivElement>({ stagger: 0.4 });
@@ -86,4 +84,4 @@ function TransformSoftware() {
     </Container>
   );
 }
-export default TransformSoftware;
+export default TransformErpSoftware;

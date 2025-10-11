@@ -8,56 +8,61 @@ import WandWithText from '@/components/ui/Wand';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 import { useFadeUp } from '@/hooks/FadeUp';
 
-import { Rocket, Bug, Clock, BarChart, Shield, Users } from 'lucide-react';
+import {
+  Bell,
+  DollarSign,
+  FileText,
+  Search,
+  Shield,
+  Users,
+} from 'lucide-react';
 
 const transformItems = [
   {
     step: '01',
-    title: 'Increase Efficiency',
-    description: 'Automate daily operations and reduce manual work by 70%',
-    icon: <Rocket className="w-6 h-6" />,
-    color: 'from-green-500 to-emerald-500',
-  },
-  {
-    step: '02',
-    title: 'Reduce Errors',
-    description: 'Minimize human errors in billing and inventory management',
-    icon: <Bug className="w-6 h-6" />,
-    color: 'from-red-500 to-pink-500',
-  },
-  {
-    step: '03',
-    title: 'Save Time',
-    description: 'Quick billing and instant report generation',
-    icon: <Clock className="w-6 h-6" />,
+    title: 'Streamline Publishing',
+    description: 'Manage all articles, authors, and categories seamlessly.',
+    icon: <FileText className="w-6 h-6" />,
     color: 'from-blue-500 to-indigo-500',
   },
   {
-    step: '04',
-    title: 'Grow Business',
-    description: 'Data-driven insights to help expand your pharmacy business',
-    icon: <BarChart className="w-6 h-6" />,
+    step: '02',
+    title: 'Boost Readership',
+    description: 'Optimize for SEO and mobile for maximum reach.',
+    icon: <Search className="w-6 h-6" />,
+    color: 'from-green-500 to-emerald-500',
+  },
+  {
+    step: '03',
+    title: 'Increase Engagement',
+    description: 'Send newsletters and notifications automatically.',
+    icon: <Bell className="w-6 h-6" />,
     color: 'from-purple-500 to-pink-500',
   },
   {
+    step: '04',
+    title: 'Collaborate Easily',
+    description: 'Authors and editors work together in real time.',
+    icon: <Users className="w-6 h-6" />,
+    color: 'from-yellow-500 to-orange-500',
+  },
+  {
     step: '05',
-    title: 'Enhance Security',
-    description:
-      'Protect sensitive customer and business data with robust security measures',
-    icon: <Shield className="w-6 h-6" />,
-    color: 'from-amber-500 to-orange-500',
+    title: 'Monetize Content',
+    description: 'Ad placement and subscription models made simple.',
+    icon: <DollarSign className="w-6 h-6" />,
+    color: 'from-cyan-500 to-blue-500',
   },
   {
     step: '06',
-    title: 'Boost Collaboration',
-    description:
-      'Improve teamwork with multi-user access and role-based permissions',
-    icon: <Users className="w-6 h-6" />,
-    color: 'from-cyan-500 to-blue-500',
+    title: 'Ensure Reliability',
+    description: 'High uptime and strong security for global readers.',
+    icon: <Shield className="w-6 h-6" />,
+    color: 'from-red-500 to-pink-500',
   },
 ];
 
-function TransformPharmacy() {
+function TransformPublication() {
   const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });
 
   const processRef = useStaggerChildren<HTMLDivElement>({ stagger: 0.4 });
@@ -86,4 +91,4 @@ function TransformPharmacy() {
     </Container>
   );
 }
-export default TransformPharmacy;
+export default TransformPublication;

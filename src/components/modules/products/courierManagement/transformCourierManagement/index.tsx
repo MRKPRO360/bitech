@@ -8,52 +8,50 @@ import WandWithText from '@/components/ui/Wand';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 import { useFadeUp } from '@/hooks/FadeUp';
 
-import { Rocket, Bug, Clock, BarChart, Shield, Users } from 'lucide-react';
+import { Rocket, Truck, MapPin, Eye, Scan, CreditCard } from 'lucide-react';
 
 const transformItems = [
   {
     step: '01',
-    title: 'Increase Efficiency',
-    description: 'Automate daily operations and reduce manual work by 70%',
-    icon: <Rocket className="w-6 h-6" />,
-    color: 'from-green-500 to-emerald-500',
-  },
-  {
-    step: '02',
-    title: 'Reduce Errors',
-    description: 'Minimize human errors in billing and inventory management',
-    icon: <Bug className="w-6 h-6" />,
-    color: 'from-red-500 to-pink-500',
-  },
-  {
-    step: '03',
-    title: 'Save Time',
-    description: 'Quick billing and instant report generation',
-    icon: <Clock className="w-6 h-6" />,
+    title: 'Automate Deliveries',
+    description: 'Assign and track parcels with live route updates.',
+    icon: <Truck className="w-6 h-6" />,
     color: 'from-blue-500 to-indigo-500',
   },
   {
-    step: '04',
-    title: 'Grow Business',
-    description: 'Data-driven insights to help expand your pharmacy business',
-    icon: <BarChart className="w-6 h-6" />,
+    step: '02',
+    title: 'Cut Delivery Time',
+    description: 'Smart route optimization improves driver efficiency.',
+    icon: <MapPin className="w-6 h-6" />,
+    color: 'from-green-500 to-emerald-500',
+  },
+  {
+    step: '03',
+    title: 'Enhance Transparency',
+    description: 'Give customers real-time tracking and updates.',
+    icon: <Eye className="w-6 h-6" />,
     color: 'from-purple-500 to-pink-500',
   },
   {
+    step: '04',
+    title: 'Eliminate Errors',
+    description: 'Barcode scanning reduces parcel mix-ups.',
+    icon: <Scan className="w-6 h-6" />,
+    color: 'from-yellow-500 to-orange-500',
+  },
+  {
     step: '05',
-    title: 'Enhance Security',
-    description:
-      'Protect sensitive customer and business data with robust security measures',
-    icon: <Shield className="w-6 h-6" />,
-    color: 'from-amber-500 to-orange-500',
+    title: 'Simplify Billing',
+    description: 'Generate invoices automatically post-delivery.',
+    icon: <CreditCard className="w-6 h-6" />,
+    color: 'from-cyan-500 to-blue-500',
   },
   {
     step: '06',
-    title: 'Boost Collaboration',
-    description:
-      'Improve teamwork with multi-user access and role-based permissions',
-    icon: <Users className="w-6 h-6" />,
-    color: 'from-cyan-500 to-blue-500',
+    title: 'Expand Operations',
+    description: 'Scale delivery zones without complexity.',
+    icon: <Rocket className="w-6 h-6" />,
+    color: 'from-red-500 to-pink-500',
   },
 ];
 

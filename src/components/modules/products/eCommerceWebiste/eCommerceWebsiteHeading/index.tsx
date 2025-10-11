@@ -5,7 +5,7 @@ import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
 import Cta from '@/components/ui/core/Cta';
 import Para from '@/components/ui/core/Para';
 
-function EcommerceSoftwareHeading() {
+function ECommereceWebsiteHeading() {
   return (
     <section
       //   ref={heroRef}
@@ -45,4 +45,4 @@ function EcommerceSoftwareHeading() {
     </section>
   );
 }
-export default EcommerceSoftwareHeading;
+export default ECommereceWebsiteHeading;

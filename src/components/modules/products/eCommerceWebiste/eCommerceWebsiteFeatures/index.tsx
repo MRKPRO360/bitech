@@ -55,7 +55,7 @@ const ecommerceFeatures = [
   },
 ];
 
-function EcommerceSoftwareFeatures() {
+function ECommereceWebsiteFeatures() {
   const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });
 
   const featuresRef = useStaggerChildren<HTMLDivElement>({ stagger: 0.4 });
@@ -85,4 +85,4 @@ function EcommerceSoftwareFeatures() {
     </Container>
   );
 }
-export default EcommerceSoftwareFeatures;
+export default ECommereceWebsiteFeatures;

@@ -54,7 +54,7 @@ const erpFeatures = [
   },
 ];
 
-function ErpFeatures() {
+function ErpSoftwareFeatures() {
   const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });
 
   const featuresRef = useStaggerChildren<HTMLDivElement>({ stagger: 0.4 });
@@ -85,4 +85,4 @@ function ErpFeatures() {
     </Container>
   );
 }
-export default ErpFeatures;
+export default ErpSoftwareFeatures;
