@@ -66,11 +66,12 @@ function ECommereceWebsiteFeatures() {
         ref={fadeRef}
         className="max-w-xl mx-auto mb-5 text-center flex flex-col justify-center items-center"
       >
-        <WandWithText text="Pharmacy Features" />
-        <SecondaryHeading>Powerful Features for Your Pharmacy</SecondaryHeading>
+        <WandWithText text="E-Commerece Features" />
+        <SecondaryHeading>
+          Powerful Features for Your E-Commerce Website
+        </SecondaryHeading>
         <Para className="mt-5">
-          Everything you need to manage your pharmacy efficiently in one
-          integrated platform
+          Explore the robust features that make our e-commerce website solution
         </Para>
       </div>
 

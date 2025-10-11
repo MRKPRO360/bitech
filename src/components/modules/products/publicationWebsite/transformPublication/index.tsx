@@ -74,9 +74,9 @@ function TransformPublication() {
         className="max-w-xl mx-auto mb-5 text-center flex flex-col justify-center items-center"
       >
         <WandWithText text="Transform" />
-        <SecondaryHeading>Transform Your Pharmacy Business</SecondaryHeading>
+        <SecondaryHeading>Transform Your Publication Website</SecondaryHeading>
         <Para className="mt-5">
-          Discover how our software can revolutionize your daily operations{' '}
+          Empower your online store with features designed to enhance user.
         </Para>
       </div>
 

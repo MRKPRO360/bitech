@@ -67,10 +67,12 @@ function CourierManagementFeatures() {
         className="max-w-xl mx-auto mb-5 text-center flex flex-col justify-center items-center"
       >
         <WandWithText text="Pharmacy Features" />
-        <SecondaryHeading>Powerful Features for Your Pharmacy</SecondaryHeading>
+        <SecondaryHeading>
+          Key Features of Our Courier Management Software
+        </SecondaryHeading>
         <Para className="mt-5">
-          Everything you need to manage your pharmacy efficiently in one
-          integrated platform
+          Streamline your delivery operations with advanced tracking, route
+          optimization, and automated notifications.
         </Para>
       </div>
 

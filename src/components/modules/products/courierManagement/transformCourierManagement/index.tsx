@@ -67,9 +67,10 @@ function TransformCourierManagement() {
         className="max-w-xl mx-auto mb-5 text-center flex flex-col justify-center items-center"
       >
         <WandWithText text="Transform" />
-        <SecondaryHeading>Transform Your Pharmacy Business</SecondaryHeading>
+        <SecondaryHeading>Transform Your Courier Business</SecondaryHeading>
         <Para className="mt-5">
-          Discover how our software can revolutionize your daily operations{' '}
+          Revolutionize your delivery operations with our cutting-edge courier
+          management software.
         </Para>
       </div>
 

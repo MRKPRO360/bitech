@@ -8,7 +8,7 @@ import WandWithText from '@/components/ui/Wand';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 import { useFadeUp } from '@/hooks/FadeUp';
 
-import { Rocket, BarChart, Users } from 'lucide-react';
+import { Rocket, BarChart, Users, Layers, Repeat, Eye } from 'lucide-react';
 
 const transformItems = [
   {

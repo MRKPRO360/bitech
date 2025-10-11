@@ -1,6 +1,6 @@
 import PharmacyFeatures from '@/components/modules/products/pharmacySoftware/pharmacyFeatures';
-import PharmacyHeading from '@/components/modules/products/pharmacySoftware/pharmacyHeading';
 import TransformPharmacy from '@/components/modules/products/pharmacySoftware/transformPharmacy';
+import ProductHero from '@/components/modules/products/ProductsHero';
 import CtaSection from '@/components/shared/careerCta';
 import PageBanner from '@/components/shared/pageBanner';
 import ProductStats from '@/components/shared/productStats';
@@ -12,11 +12,19 @@ const statsData = [
   { value: 50, suffix: '%', label: 'Time Saved', color: 'text-orange-600' },
 ];
 
+import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
+
 function PharmacySoftwarePage() {
   return (
     <>
       <PageBanner title="Pharmacy Software" />
-      <PharmacyHeading />
+      <ProductHero
+        title="Advanced Pharmacy Management Software"
+        description="Streamline your pharmacy operations with our comprehensive software solution. Manage inventory, billing, prescriptions, and customers efficiently."
+        image={pharmacyDashboard}
+        alt="Pharmacy Software Dashboard"
+        path="/"
+      />
       <PharmacyFeatures />
       <TransformPharmacy />
       <ProductStats stats={statsData} />

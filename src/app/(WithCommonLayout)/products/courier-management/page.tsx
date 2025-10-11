@@ -1,9 +1,10 @@
 import CourierManagementFeatures from '@/components/modules/products/courierManagement/courierManagementFeatures';
-import CourierManagementHeading from '@/components/modules/products/courierManagement/courierManagementHeading';
 import TransformCourierManagement from '@/components/modules/products/courierManagement/transformCourierManagement';
+import ProductHero from '@/components/modules/products/ProductsHero';
 import CtaSection from '@/components/shared/careerCta';
 import PageBanner from '@/components/shared/pageBanner';
 import ProductStats from '@/components/shared/productStats';
+import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
 
 const statsData = [
   { value: 300, label: 'Couriers Using', color: 'text-blue-600' },
@@ -26,7 +27,16 @@ function CourierManagementPage() {
   return (
     <>
       <PageBanner title="Courier Management" />
-      <CourierManagementHeading />
+      <ProductHero
+        title="Courier Management System"
+        description=" Simplify logistics operations with automated parcel tracking,
+              delivery management, and real-time notifications for senders and
+              recipients."
+        image={pharmacyDashboard}
+        alt="Pharmacy Software Dashboard"
+        path="/"
+      />
+
       <CourierManagementFeatures />
       <TransformCourierManagement />
       <ProductStats stats={statsData} />

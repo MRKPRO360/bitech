@@ -1,3 +1,4 @@
+import ProductHero from '@/components/modules/products/ProductsHero';
 import SchoolManagementFeatures from '@/components/modules/products/schoolManagement/schoolManagementFeatures';
 import SchoolManagementHeading from '@/components/modules/products/schoolManagement/schoolManagementHeading';
 import TransformSchoolManagement from '@/components/modules/products/schoolManagement/transformSchoolManagement';
@@ -17,11 +18,21 @@ const statsData = [
   { value: 99, suffix: '%', label: 'Data Accuracy', color: 'text-orange-600' },
 ];
 
+import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
+
 function SchoolManagementSystemPage() {
   return (
     <>
       <PageBanner title="School Management System" />
-      <SchoolManagementHeading />
+      <ProductHero
+        title="Comprehensive School Management System"
+        description="Simplify academic and administrative tasks with our all-in-one
+              school management platform. Manage students, teachers, attendance,
+              results, and communication — all from one place."
+        image={pharmacyDashboard}
+        alt="Pharmacy Software Dashboard"
+        path="/"
+      />
       <SchoolManagementFeatures />
       <TransformSchoolManagement />
       <ProductStats stats={statsData} />

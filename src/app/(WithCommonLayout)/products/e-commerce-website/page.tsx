@@ -1,6 +1,6 @@
 import ECommereceWebsiteFeatures from '@/components/modules/products/eCommerceWebiste/eCommerceWebsiteFeatures';
-import ECommereceWebsiteHeading from '@/components/modules/products/eCommerceWebiste/eCommerceWebsiteHeading';
 import TransformECommereceWebsite from '@/components/modules/products/eCommerceWebiste/transformeCommerceWebsite';
+import ProductHero from '@/components/modules/products/ProductsHero';
 import CtaSection from '@/components/shared/careerCta';
 import PageBanner from '@/components/shared/pageBanner';
 import ProductStats from '@/components/shared/productStats';
@@ -12,11 +12,19 @@ const statsData = [
   { value: 40, label: '% Sales Increase', color: 'text-orange-600' },
 ];
 
+import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
+
 function ECommereceWebsitePage() {
   return (
     <>
       <PageBanner title="E Commerece Website" />
-      <ECommereceWebsiteHeading />
+      <ProductHero
+        title="Next-Gen E-Commerce Website Solution"
+        description="Build your online store with blazing-fast performance, modern UI, and integrated payment gateways. Sell smarter and scale faster."
+        image={pharmacyDashboard}
+        alt="Pharmacy Software Dashboard"
+        path="/"
+      />
       <ECommereceWebsiteFeatures />
       <TransformECommereceWebsite />
       <ProductStats stats={statsData} />

@@ -1,6 +1,6 @@
 import PosManagementFeatures from '@/components/modules/products/posManagement/posMangementFeatures';
-import PosManagementHeading from '@/components/modules/products/posManagement/posMangementHeading';
 import TransformPosManagement from '@/components/modules/products/posManagement/transformPosMangement';
+import ProductHero from '@/components/modules/products/ProductsHero';
 import CtaSection from '@/components/shared/careerCta';
 import PageBanner from '@/components/shared/pageBanner';
 import ProductStats from '@/components/shared/productStats';
@@ -17,11 +17,19 @@ const statsData = [
   { value: 25, label: '% Sales Growth', color: 'text-orange-600' },
 ];
 
+import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
+
 function PosManagementPage() {
   return (
     <>
-      <PageBanner title="Erp Software" />
-      <PosManagementHeading />
+      <PageBanner title="Pos Management" />
+      <ProductHero
+        title="Smart POS Management Software"
+        description="Simplify sales, manage inventory, and analyze business growth with our modern POS system designed for retail and restaurant businesses."
+        image={pharmacyDashboard}
+        alt="Pharmacy Software Dashboard"
+        path="/"
+      />
       <PosManagementFeatures />
       <TransformPosManagement />
       <ProductStats stats={statsData} />

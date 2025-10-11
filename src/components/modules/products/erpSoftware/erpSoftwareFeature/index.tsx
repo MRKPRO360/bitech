@@ -13,6 +13,7 @@ import {
   ClipboardCheck,
   LineChart,
   Layers,
+  BarChart,
 } from 'lucide-react';
 
 const erpFeatures = [
@@ -66,11 +67,13 @@ function ErpSoftwareFeatures() {
         className="max-w-xl mx-auto mb-5 text-center flex flex-col justify-center items-center"
       >
         <WandWithText text="Erp Features" />
-        <SecondaryHeading>Powerful Features for Your Pharmacy</SecondaryHeading>
+        <SecondaryHeading>
+          Discover the Power of Our ERP Software Solutions
+        </SecondaryHeading>
         <Para className="mt-5">
-          Streamline operations, enhance decision-making, and drive growth with
-          our comprehensive suite of tools designed to meet the unique demands
-          of the pharmaceutical industry.
+          Streamline operations, enhance collaboration, and drive growth with
+          our comprehensive suite of ERP features designed for modern
+          businesses.
         </Para>
       </div>
 

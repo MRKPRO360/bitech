@@ -1,8 +1,5 @@
-import CourierManagementFeatures from '@/components/modules/products/courierManagement/courierManagementFeatures';
-import CourierManagementHeading from '@/components/modules/products/courierManagement/courierManagementHeading';
-import TransformCourierManagement from '@/components/modules/products/courierManagement/transformCourierManagement';
+import ProductHero from '@/components/modules/products/ProductsHero';
 import PublicationFeatures from '@/components/modules/products/publicationWebsite/publicationFeatures';
-import PublicationHeading from '@/components/modules/products/publicationWebsite/publicationHeading';
 import TransformPublication from '@/components/modules/products/publicationWebsite/transformPublication';
 import CtaSection from '@/components/shared/careerCta';
 import PageBanner from '@/components/shared/pageBanner';
@@ -15,11 +12,19 @@ const statsData = [
   { value: 50, suffix: '%', label: 'Time Saved', color: 'text-orange-600' },
 ];
 
+import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
+
 function PublicationWebsitePage() {
   return (
     <>
       <PageBanner title="Publication Website" />
-      <PublicationHeading />
+      <ProductHero
+        title="Modern Publication & News Website"
+        description="Launch your digital magazine or news platform with a stylish, responsive, and easy-to-manage publication system built for high performance."
+        image={pharmacyDashboard}
+        alt="Pharmacy Software Dashboard"
+        path="/"
+      />
       <PublicationFeatures />
       <TransformPublication />
       <ProductStats stats={statsData} />

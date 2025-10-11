@@ -58,7 +58,10 @@ const tailorFeatures = [
 function TailorManagementFeatures() {
   const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });
 
-  const featuresRef = useStaggerChildren<HTMLDivElement>({ stagger: 0.4 });
+  const featuresRef = useStaggerChildren<HTMLDivElement>({
+    y: 20,
+    stagger: 0.4,
+  });
 
   return (
     <Container className="py-20 px-4 sm:px-6 lg:px-8 relative">

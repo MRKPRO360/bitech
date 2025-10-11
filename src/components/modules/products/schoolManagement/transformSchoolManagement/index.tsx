@@ -69,9 +69,11 @@ function TransformSchoolManagement() {
         className="max-w-xl mx-auto mb-5 text-center flex flex-col justify-center items-center"
       >
         <WandWithText text="Transform" />
-        <SecondaryHeading>Transform Your Pharmacy Business</SecondaryHeading>
+        <SecondaryHeading>Transform School Management System</SecondaryHeading>
         <Para className="mt-5">
-          Discover how our software can revolutionize your daily operations{' '}
+          Our school management system streamlines administrative tasks,
+          enhances communication, and provides valuable insights to drive
+          student success.
         </Para>
       </div>
 

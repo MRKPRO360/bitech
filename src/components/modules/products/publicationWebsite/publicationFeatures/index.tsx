@@ -66,10 +66,12 @@ function PublicationFeatures() {
         ref={fadeRef}
         className="max-w-xl mx-auto mb-5 text-center flex flex-col justify-center items-center"
       >
-        <WandWithText text="Pharmacy Features" />
-        <SecondaryHeading>Powerful Features for Your Pharmacy</SecondaryHeading>
+        <WandWithText text="Publication Features" />
+        <SecondaryHeading>
+          Powerful Features for Your Publication Website
+        </SecondaryHeading>
         <Para className="mt-5">
-          Everything you need to manage your pharmacy efficiently in one
+          Everything you need to manage your publication efficiently in one
           integrated platform
         </Para>
       </div>
