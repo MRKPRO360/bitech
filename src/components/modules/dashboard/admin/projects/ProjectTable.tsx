@@ -24,11 +24,11 @@ const ProjectTable = ({ projects }: { projects: IProject[] }) => {
   const [projectToDelete, setProjectToDelete] = useState<IProject | null>(null);
 
   const handleView = (project: IProject) => {
-    router.push(`/prebuiltProjects/${project._id}`);
+    router.push(`/projects/${project._id}`);
   };
 
   const handleEdit = (project: IProject) => {
-    router.push(`/dashboard/admin/updatePreProject/${project._id}`);
+    router.push(`/dashboard/admin/updateProject/${project._id}`);
   };
 
   const handleDelete = (project: IProject) => {

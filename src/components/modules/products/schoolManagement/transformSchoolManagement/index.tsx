@@ -1,0 +1,89 @@
+'use client';
+
+import GlassCard from '@/components/shared/glassCard';
+import Container from '@/components/ui/core/Container';
+import Para from '@/components/ui/core/Para';
+import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
+import WandWithText from '@/components/ui/Wand';
+import { useStaggerChildren } from '@/hooks/CardStagger';
+import { useFadeUp } from '@/hooks/FadeUp';
+
+import { Rocket, Users, BookOpen, Cpu, BarChart } from 'lucide-react';
+import { FaChalkboard } from 'react-icons/fa6';
+
+const transformItems = [
+  {
+    step: '01',
+    title: 'Simplify Administration',
+    description: 'Automate admissions, attendance, and fee collection.',
+    icon: <Cpu className="w-6 h-6" />,
+    color: 'from-blue-500 to-indigo-500',
+  },
+  {
+    step: '02',
+    title: 'Empower Teachers',
+    description:
+      'Save time on grading and class scheduling with digital tools.',
+    icon: <FaChalkboard className="w-6 h-6" />,
+    color: 'from-green-500 to-emerald-500',
+  },
+  {
+    step: '03',
+    title: 'Enhance Learning',
+    description: 'Provide interactive portals for students and parents.',
+    icon: <BookOpen className="w-6 h-6" />,
+    color: 'from-purple-500 to-pink-500',
+  },
+  {
+    step: '04',
+    title: 'Data Transparency',
+    description: 'Centralize academic data for quick reporting and insights.',
+    icon: <BarChart className="w-6 h-6" />,
+    color: 'from-cyan-500 to-blue-500',
+  },
+  {
+    step: '05',
+    title: 'Increase Engagement',
+    description: 'Connect parents, teachers, and students on one platform.',
+    icon: <Users className="w-6 h-6" />,
+    color: 'from-orange-500 to-yellow-500',
+  },
+  {
+    step: '06',
+    title: 'Grow Institution',
+    description: 'Scale up operations smoothly with digital transformation.',
+    icon: <Rocket className="w-6 h-6" />,
+    color: 'from-amber-500 to-red-500',
+  },
+];
+
+function TransformSchoolManagement() {
+  const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });
+
+  const processRef = useStaggerChildren<HTMLDivElement>({ stagger: 0.4 });
+
+  return (
+    <Container className="py-20 px-4 sm:px-6 lg:px-8 relative">
+      <div
+        ref={fadeRef}
+        className="max-w-xl mx-auto mb-5 text-center flex flex-col justify-center items-center"
+      >
+        <WandWithText text="Transform" />
+        <SecondaryHeading>Transform Your Pharmacy Business</SecondaryHeading>
+        <Para className="mt-5">
+          Discover how our software can revolutionize your daily operations{' '}
+        </Para>
+      </div>
+
+      <div
+        ref={processRef}
+        className="mt-10 lg:mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        {transformItems.map((step, index) => (
+          <GlassCard key={index} feature={step} />
+        ))}
+      </div>
+    </Container>
+  );
+}
+export default TransformSchoolManagement;

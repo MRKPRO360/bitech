@@ -38,10 +38,12 @@ interface InputProps {
   register?: UseFormRegisterReturn;
   value?: string | number;
   hint?: string; // Optional hint text
+  readonly?: boolean;
 }
 
 const Input: FC<InputProps> = ({
   type = 'text',
+  readonly = false,
   id,
   name,
   placeholder,
@@ -91,6 +93,7 @@ const Input: FC<InputProps> = ({
         />
       ) : (
         <input
+          readOnly={readonly}
           value={value}
           type={type}
           id={id}

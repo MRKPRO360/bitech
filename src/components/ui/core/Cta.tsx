@@ -85,8 +85,9 @@ function Cta({
 
       <div
         className={clsx(
-          'relative flex items-center gap-2',
-          outline ? 'text-primary group-hover:text-white' : 'text-inherit'
+          'relative flex items-center',
+          outline ? 'text-primary group-hover:text-white' : 'text-inherit',
+          text === '' ? 'gap-0' : 'gap-2'
         )}
       >
         {icon ? icon : renderIcon && <FaArrowRightLong />}

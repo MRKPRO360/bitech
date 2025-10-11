@@ -1,33 +1,52 @@
 import { IPrebuiltProject } from '@/types/prebuiltProjects';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { toast } from 'sonner';
 
 interface IInitialState {
   prebuiltProjects: IPrebuiltProject[];
   city: string;
-  shippingAddress: string;
   name: string;
   email: string;
+  services: string[];
 }
 
 const initialState: IInitialState = {
   name: '',
   email: '',
-  shippingAddress: '',
-  prebuiltProjects: [],
   city: '',
+  prebuiltProjects: [],
+  services: [],
 };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addPrebuiltProjects: (state, { payload }) => {
-      state.prebuiltProjects.push(payload);
+    addPrebuiltProjects: (
+      state,
+      { payload }: { payload: IPrebuiltProject }
+    ) => {
+      const isPrebuiltProjectExists = state.prebuiltProjects.find(
+        (project) => project._id === payload._id
+      );
+
+      const addToast = toast.loading('Adding project to cart...');
+
+      if (isPrebuiltProjectExists) {
+        toast.error('Project already added!', { id: addToast });
+      } else {
+        toast.success('Project added to the cart :)', { id: addToast });
+        state.prebuiltProjects.push(payload);
+      }
       return;
     },
 
-    removePrebuiltProjects: (state, { payload }) => {
+    removePrebuiltProjects: (
+      state,
+      { payload }: { payload: IPrebuiltProject }
+    ) => {
+      const removeToast = toast.loading('Removing project from cart..');
       const isPrebuiltProjectExists = state.prebuiltProjects.find(
         (project) => project._id === payload._id
       );
@@ -36,8 +55,22 @@ const cartSlice = createSlice({
         state.prebuiltProjects = state.prebuiltProjects.filter(
           (project) => project._id !== payload._id
         );
+        toast.success('Removed project from cart', { id: removeToast });
+      } else {
+        toast.error('Project is not found!', { id: removeToast });
+        state.prebuiltProjects.push(payload);
       }
+      return;
+    },
 
+    clearCart: (state) => {
+      state.prebuiltProjects = [];
+      state.services = [];
+      return;
+    },
+
+    clearPrebuiltProject: (state) => {
+      state.prebuiltProjects = [];
       return;
     },
   },
@@ -52,10 +85,6 @@ export const citySelector = (state: RootState) => {
   return state.cart.city;
 };
 
-export const shippingAddressSelector = (state: RootState) => {
-  return state.cart.shippingAddress;
-};
-
 export const userNameAndEmailSelector = (state: RootState) => {
   return {
     name: state.cart.name,
@@ -63,10 +92,16 @@ export const userNameAndEmailSelector = (state: RootState) => {
   };
 };
 
-export const selectCartPrebuiltProjects = (state: RootState) =>
+export const orderedPrebuiltProjects = (state: RootState) =>
   state.cart.prebuiltProjects;
+
+export const orderSelector = (state: RootState) => state.cart;
 
 export default cartSlice.reducer;
 
-export const { addPrebuiltProjects, removePrebuiltProjects } =
-  cartSlice.actions;
+export const {
+  addPrebuiltProjects,
+  removePrebuiltProjects,
+  clearPrebuiltProject,
+  clearCart,
+} = cartSlice.actions;

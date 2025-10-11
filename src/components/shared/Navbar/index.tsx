@@ -141,6 +141,7 @@ function Navbar() {
                     Sign In
                   </Link>
                 )}
+
                 {user?.role !== 'admin' && (
                   <Cta
                     hasLink={true}

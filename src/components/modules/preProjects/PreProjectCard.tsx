@@ -1,15 +1,21 @@
+'use client';
+
 import Cta from '@/components/ui/core/Cta';
 import truncate from '@/components/utils/truncate';
+import { useUser } from '@/context/UserContext';
+import { addPrebuiltProjects } from '@/redux/features/cartSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import { IPrebuiltProject } from '@/types/prebuiltProjects';
-import { ArrowRight } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function PreProjectCard({
   project,
 }: {
   project: IPrebuiltProject;
 }) {
+  const dispatch = useAppDispatch();
+  const { user } = useUser();
   return (
     <div className="group/card relative bg-white rounded-md shadow-sm hover:shadow-lg transition-all duration-500 overflow-hidden border border-gray-100 ">
       {/* Image Container */}
@@ -55,7 +61,7 @@ export default function PreProjectCard({
         </h3>
 
         <p className="text-gray-600 text-sm leading-relaxed mb-4">
-          {truncate(project.shortDescription, 60)}
+          {truncate(project.shortDescription, 50)}
         </p>
 
         {/* Technologies */}
@@ -76,14 +82,30 @@ export default function PreProjectCard({
         </div>
 
         {/* Footer */}
-        <div className="pt-4 border-t border-gray-100 ">
-          <Link
-            href={`/prebuiltProjects/${project._id}`}
-            className="text-primary hover:text-primary font-medium text-sm flex items-center gap-1 group/link"
-          >
-            Details
-            <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-200" />
-          </Link>
+        <div className="flex items-center pt-4 border-t border-gray-100 lg:justify-between gap-5">
+          <div>
+            <Cta
+              outline={true}
+              className="!p-1 !gap-0"
+              text="Details"
+              renderIcon={false}
+              hasLink={true}
+              path={`/prebuiltProjects/${project._id}`}
+            />
+          </div>
+
+          {user?.role !== 'admin' && (
+            <div>
+              <Cta
+                onClick={() => dispatch(addPrebuiltProjects(project))}
+                outline={true}
+                className="!p-1 !gap-0"
+                text=""
+                renderIcon={false}
+                icon={<ShoppingCart className="w-6 h-6" />}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

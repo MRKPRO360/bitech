@@ -3,7 +3,7 @@
 
 import { logout } from '@/services/authService';
 import { IUser } from '@/types';
-import { LayoutDashboard, LogOut, User } from 'lucide-react';
+import { LayoutDashboard, LogOut, ShoppingCart, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
@@ -72,6 +72,15 @@ export default function NormalDropdown({
             <LayoutDashboard className="w-4 h-4 text-gray-800" />
             Dashboard
           </Link>
+          {user?.role && user.role !== 'admin' && (
+            <Link
+              href="/cart"
+              className="flex items-center gap-x-3 w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              <ShoppingCart className="w-4 h-4 text-gray-800" />
+              Cart
+            </Link>
+          )}
           <button
             onClick={handleLogout}
             className="flex items-center gap-x-3 w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 cursor-pointer"
