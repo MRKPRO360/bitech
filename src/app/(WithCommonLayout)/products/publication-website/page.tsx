@@ -12,7 +12,7 @@ const statsData = [
   { value: 50, suffix: '%', label: 'Time Saved', color: 'text-orange-600' },
 ];
 
-import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
+import publicationWebsite from '@/assets/publication.png';
 
 function PublicationWebsitePage() {
   return (
@@ -21,7 +21,7 @@ function PublicationWebsitePage() {
       <ProductHero
         title="Modern Publication & News Website"
         description="Launch your digital magazine or news platform with a stylish, responsive, and easy-to-manage publication system built for high performance."
-        image={pharmacyDashboard}
+        image={publicationWebsite}
         alt="Pharmacy Software Dashboard"
         path="/"
       />

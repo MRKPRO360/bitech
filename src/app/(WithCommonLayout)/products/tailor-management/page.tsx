@@ -17,7 +17,7 @@ const statsData = [
   { value: 80, label: '% Paperwork Reduced', color: 'text-orange-600' },
 ];
 
-import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
+import tailorWebsite from '@/assets/tailor.png';
 
 function TailorManagementPage() {
   return (
@@ -26,7 +26,7 @@ function TailorManagementPage() {
       <ProductHero
         title="Tailor Management Software"
         description="Designed for modern tailoring shops to manage orders, customers, and deliveries with ease. Focus on creativity — let the system handle operations."
-        image={pharmacyDashboard}
+        image={tailorWebsite}
         alt="Pharmacy Software Dashboard"
         path="/"
       />

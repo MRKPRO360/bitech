@@ -12,7 +12,7 @@ const statsData = [
   { value: 40, label: '% Sales Increase', color: 'text-orange-600' },
 ];
 
-import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
+import ecommerceWebsite from '@/assets/ecommerce.jpg';
 
 function ECommereceWebsitePage() {
   return (
@@ -21,7 +21,7 @@ function ECommereceWebsitePage() {
       <ProductHero
         title="Next-Gen E-Commerce Website Solution"
         description="Build your online store with blazing-fast performance, modern UI, and integrated payment gateways. Sell smarter and scale faster."
-        image={pharmacyDashboard}
+        image={ecommerceWebsite}
         alt="Pharmacy Software Dashboard"
         path="/"
       />

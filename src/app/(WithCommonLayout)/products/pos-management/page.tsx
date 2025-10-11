@@ -17,7 +17,7 @@ const statsData = [
   { value: 25, label: '% Sales Growth', color: 'text-orange-600' },
 ];
 
-import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
+import posWebsite from '@/assets/pos.png';
 
 function PosManagementPage() {
   return (
@@ -26,7 +26,7 @@ function PosManagementPage() {
       <ProductHero
         title="Smart POS Management Software"
         description="Simplify sales, manage inventory, and analyze business growth with our modern POS system designed for retail and restaurant businesses."
-        image={pharmacyDashboard}
+        image={posWebsite}
         alt="Pharmacy Software Dashboard"
         path="/"
       />

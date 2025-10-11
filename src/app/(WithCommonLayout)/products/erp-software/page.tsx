@@ -17,7 +17,7 @@ const statsData = [
   { value: 99, suffix: '%', label: 'System Uptime', color: 'text-orange-600' },
 ];
 
-import pharmacyDashboard from '@/assets/pharmacy-dashboard.png';
+import erpWebsite from '@/assets/erp.png';
 
 function ErpSoftwarePage() {
   return (
@@ -28,7 +28,7 @@ function ErpSoftwarePage() {
         description="Integrate your business operations — from HR to finance — into one
               unified ERP platform that drives efficiency and data-driven
               decision making."
-        image={pharmacyDashboard}
+        image={erpWebsite}
         alt="Pharmacy Software Dashboard"
         path="/"
       />
