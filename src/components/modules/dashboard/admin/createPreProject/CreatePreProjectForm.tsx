@@ -173,12 +173,6 @@ export default function CreatePreProjectForm() {
         })
       );
 
-      console.log({
-        ...data,
-        features: data.features.map((feature) => feature.value),
-        technologies: data.technologies.map((tech) => tech.value),
-      });
-
       // Append thumbnail
       if (data.images.thumbnail && data.images.thumbnail[0]) {
         formData.append('thumbnail', data.images.thumbnail[0]);
@@ -192,8 +186,6 @@ export default function CreatePreProjectForm() {
       }
 
       const res = await createPrebuiltProject(formData);
-
-      console.log(res);
 
       if (res.success) {
         toast.success('Project created successfully!', { id: toastId });
@@ -463,8 +455,8 @@ export default function CreatePreProjectForm() {
                         placeholder="Select technologies..."
                         emptyIndicator="No technologies found."
                         creatable
-                        maxSelected={10}
-                        onMaxSelected={(maxLimit) => {
+                        maxSelected={20}
+                        onMaxSelected={() => {
                           toast.warning('Maximum technology reached!');
                         }}
                       />
@@ -481,7 +473,7 @@ export default function CreatePreProjectForm() {
 
                   <p className="text-xs text-gray-500">
                     Start typing to search or create new technologies. Maximum
-                    10 technologies allowed.
+                    20 technologies allowed.
                   </p>
                 </div>
                 {/* <div>

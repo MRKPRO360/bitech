@@ -44,6 +44,8 @@ export const signupAdmin = async (userData: FormData) => {
 
     return result;
   } catch (error: any) {
+    console.log(error);
+
     return Error(error);
   }
 };

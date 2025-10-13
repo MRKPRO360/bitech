@@ -33,12 +33,9 @@ export const getAllEmployees = async (
       }
     );
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch employees: ${res.statusText}`);
-    }
-    return res.json();
+    return await res.json();
   } catch (err: any) {
-    throw new Error(err);
+    return Error(err);
   }
 };
 
@@ -51,37 +48,29 @@ export const getSingleEmployee = async (id: string) => {
       }
     );
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch employee: ${res.statusText}`);
-    }
-
-    return res.json();
+    return await res.json();
   } catch (err: any) {
-    throw new Error(err);
+    return Error(err);
   }
 };
 
 export const createEmployee = async (payload: FormData) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/employees`, {
-      method: 'POST',
-      headers: {
-        Authorization: (await cookies()).get('accessToken')?.value || '',
-      },
-      body: payload,
-      next: { tags: ['employees'] },
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/users/create-employee`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: (await cookies()).get('accessToken')?.value || '',
+        },
+        body: payload,
+        next: { tags: ['employees'] },
+      }
+    );
 
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(
-        errorData.message || `Failed to create employees: ${res.statusText}`
-      );
-    }
-
-    return res.json();
+    return await res.json();
   } catch (error: any) {
-    throw new Error(error);
+    return Error(error);
   }
 };
 
@@ -100,17 +89,9 @@ export const changeEmployeeStatus = async (payload: FieldValues) => {
       }
     );
 
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(
-        errorData.message ||
-          `Failed to change employee status: ${res.statusText}`
-      );
-    }
-
-    return res.json();
+    return await res.json();
   } catch (err: any) {
-    throw new Error(err);
+    return Error(err);
   }
 };
 
@@ -128,16 +109,9 @@ export const updateEmployee = async (id: string, payload: FormData) => {
       }
     );
 
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(
-        errorData.message || `Failed to update employees: ${res.statusText}`
-      );
-    }
-
-    return res.json();
+    return await res.json();
   } catch (error: any) {
-    throw new Error(error);
+    return Error(error);
   }
 };
 

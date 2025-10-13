@@ -29,3 +29,9 @@ export interface IEmployee {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface IEmployeeForm
+  extends Omit<IEmployee, 'profileImg' | 'skills'> {
+  profileImg?: File[];
+  skills: { value: string; label: string }[];
+}

@@ -1,4 +1,10 @@
-function CreateEmployePage() {
-  return <div>CreateEmployePage</div>;
+import CreatgeEmployee from '@/components/modules/dashboard/admin/createEmployee';
+
+function CreateEmployeePage() {
+  return (
+    <>
+      <CreatgeEmployee />
+    </>
+  );
 }
-export default CreateEmployePage;
+export default CreateEmployeePage;

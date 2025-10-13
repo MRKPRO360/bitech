@@ -1,8 +1,10 @@
-import AllEmployees from '@/components/modules/dashboard/customer/all-employees';
-import { getAllEmployees } from '@/services/employee';
+import CustomerOrders from '@/components/modules/dashboard/customer/orders';
 
-async function AllEmployeesPage() {
-  const { data } = await getAllEmployees();
-  return <AllEmployees data={data.result} />;
+async function CustomerAllOrdersPage() {
+  return (
+    <>
+      <CustomerOrders />
+    </>
+  );
 }
-export default AllEmployeesPage;
+export default CustomerAllOrdersPage;
