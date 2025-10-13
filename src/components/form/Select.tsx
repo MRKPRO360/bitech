@@ -17,7 +17,7 @@ interface SelectProps {
   register?: UseFormRegisterReturn;
   id?: string;
   value?: string;
-  onChange: (e: any) => void;
+  onChange?: (e: any) => void;
 }
 
 const Select: React.FC<SelectProps> = ({

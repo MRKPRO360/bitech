@@ -9,12 +9,12 @@ import { TableColumn } from '@/types/table';
 import DataTable from '@/components/ui/core/DataTable';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
 import Para from '@/components/ui/core/Para';
-import Modal from '@/components/ui/core/Modal';
 import formateDate from '@/components/utils/formateDate';
 
 import { IEmployee } from '@/types';
-import ContentModal from '@/components/ui/core/ContentModal';
 import StatusUpdateModal from './StatusUpdateModal';
+import { changeEmployeeStatus, revalidateEmployees } from '@/services/employee';
+import { revalidateTag } from 'next/cache';
 
 const EmployeesTable = ({ employees }: { employees: IEmployee[] }) => {
   const router = useRouter();
@@ -23,7 +23,7 @@ const EmployeesTable = ({ employees }: { employees: IEmployee[] }) => {
     useState<IEmployee | null>(null);
 
   const handleView = (employee: IEmployee) => {
-    router.push(`/employees/${employee._id}`);
+    router.push(`/dashboard/employee/${employee._id}`);
   };
 
   const handleEdit = (employee: IEmployee) => {
@@ -33,25 +33,6 @@ const EmployeesTable = ({ employees }: { employees: IEmployee[] }) => {
   const handleChangeStatus = (employee: IEmployee) => {
     setEmployeeStatusUpdate(employee);
     setShowStatusChangeModal(true);
-  };
-
-  const confirmStatusUpdate = async () => {
-    // if (!employeeToDelete) return;
-    // const toastId = toast.loading('Deleting employee...');
-    // try {
-    //   const res = await deletePrebuiltemployee(employeeToDelete._id);
-    //   if (res.success) {
-    //     toast.success('employee deleted successfully.', { id: toastId });
-    //     await revalidatePrebuiltemployees();
-    //   }
-    // } catch (error: any) {
-    //   toast.error(error.message || 'Failed to delete employee.', {
-    //     id: toastId,
-    //   });
-    // } finally {
-    //   setShowStatusChangeModal(false);
-    //   setEmployeeToDelete(null);
-    // }
   };
 
   const columns: TableColumn<IEmployee>[] = [
@@ -64,7 +45,7 @@ const EmployeesTable = ({ employees }: { employees: IEmployee[] }) => {
           alt="Employee profile image"
           width={100}
           height={100}
-          className="rounded-md"
+          className="rounded-md h-16 w-16 object-cover"
         />
       ),
     },
@@ -163,15 +144,24 @@ const EmployeesTable = ({ employees }: { employees: IEmployee[] }) => {
             open={showStatusUpdateModal}
             onOpenChange={setShowStatusChangeModal}
             onConfirm={async (data, employee) => {
+              const toastId = toast.loading('Updating employee status...');
               try {
-                const toastId = toast.loading('Updating employee status...');
-                // TODO: Replace this with your API call
-                // await updateEmployeeStatus(employee._id, { status: data.status });
-                toast.success(`Status updated to ${data.status}`, {
+                const res = await changeEmployeeStatus({
+                  _id: employee._id,
+                  status: data.status,
+                  exitReason: data.reason,
+                });
+
+                if (res.success) {
+                  revalidateEmployees();
+                  toast.success(`Status updated to ${data.status}`, {
+                    id: toastId,
+                  });
+                }
+              } catch (error: any) {
+                toast.error(error.message || 'Failed to update status', {
                   id: toastId,
                 });
-              } catch (error: any) {
-                toast.error(error.message || 'Failed to update status');
               } finally {
                 setShowStatusChangeModal(false);
                 setEmployeeStatusUpdate(null);
