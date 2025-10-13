@@ -8,3 +8,4 @@ export * from './selectOption';
 export * from './signupValues';
 export * from './searchParams';
 export * from './order';
+export * from './employee';

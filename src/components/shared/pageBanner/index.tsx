@@ -63,7 +63,7 @@ export default function PageBanner({
           </div>
 
           <Image
-            className="opacity-30 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            className="opacity-30 w-[400px] h-[400px] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
             src={birds}
             width={400}
             height={400}

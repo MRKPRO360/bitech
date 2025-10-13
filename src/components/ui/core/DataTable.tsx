@@ -2,7 +2,14 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Edit, Trash2, Eye, Loader2, MoreVertical } from 'lucide-react';
+import {
+  Edit,
+  Trash2,
+  Eye,
+  Loader2,
+  MoreVertical,
+  RefreshCcw,
+} from 'lucide-react';
 import { TableColumn, TableProps } from '@/types/table';
 
 const RowActions = <T,>({
@@ -11,12 +18,14 @@ const RowActions = <T,>({
   onView,
   onEdit,
   onDelete,
+  onChangeStatus,
 }: {
   item: T;
   actions: string[];
   onView?: (item: T) => void;
   onEdit?: (item: T) => void;
   onDelete?: (item: T) => void;
+  onChangeStatus?: (item: T) => void;
 }) => {
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState<{
@@ -54,7 +63,7 @@ const RowActions = <T,>({
       <button
         ref={buttonRef}
         onClick={handleOpen}
-        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition"
+        className="cursor-pointer p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition"
       >
         <MoreVertical className="w-5 h-5" />
       </button>
@@ -70,7 +79,7 @@ const RowActions = <T,>({
               left: position.left,
               zIndex: 9999,
             }}
-            className="w-32 bg-white border border-gray-200 rounded-lg shadow-lg"
+            className="max-w-40 bg-white border border-gray-200 rounded-lg shadow-lg"
           >
             <ul className="py-1 text-sm text-gray-700">
               {actions.includes('view') && onView && (
@@ -112,6 +121,19 @@ const RowActions = <T,>({
                   </button>
                 </li>
               )}
+              {actions.includes('changeStatus') && onChangeStatus && (
+                <li>
+                  <button
+                    onClick={() => {
+                      onChangeStatus(item);
+                      setOpen(false);
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 text-orange-600 transition cursor-pointer"
+                  >
+                    <RefreshCcw className="w-4 h-4" /> Change Status
+                  </button>
+                </li>
+              )}
             </ul>
           </div>,
           document.body
@@ -125,9 +147,10 @@ const DataTable = <T,>({
   columns,
   onEdit,
   onDelete,
+  onChangeStatus,
   onView,
   isLoading = false,
-  actions = ['view', 'edit', 'delete'],
+  actions = ['view', 'edit', 'changeStatus'],
 }: TableProps<T>) => {
   const renderCellContent = (column: TableColumn<T>, item: T) => {
     if (column.render)
@@ -225,6 +248,7 @@ const DataTable = <T,>({
                         onView={onView}
                         onEdit={onEdit}
                         onDelete={onDelete}
+                        onChangeStatus={onChangeStatus}
                       />
                     ) : (
                       renderCellContent(col, item)

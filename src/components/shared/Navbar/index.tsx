@@ -23,12 +23,16 @@ import {
   projectsItems,
   servicesItems,
 } from './navbar.const';
+import { ShoppingCart } from 'lucide-react';
+import { useAppSelector } from '@/redux/hooks';
+import { totalCartItemsSelector } from '@/redux/features/cartSlice';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function Navbar() {
   const navbarRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const totalItems = useAppSelector(totalCartItemsSelector);
 
   const { user, setIsLoading } = useUser();
 
@@ -131,6 +135,17 @@ function Navbar() {
             {/* 3rd item */}
             <div>
               <div className="lg:flex text-lg items-center gap-6 hidden font-bold">
+                {user?.email && user.role !== 'admin' && (
+                  <Link href="/cart" className="flex items-center relative">
+                    <ShoppingCart className="w-6 h-6 text-gray-800 transition-colors duration-300 hover:text-primary" />
+
+                    {totalItems > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        {totalItems}
+                      </span>
+                    )}
+                  </Link>
+                )}
                 {user?.email ? (
                   <NormalDropdown setIsLoading={setIsLoading} user={user} />
                 ) : (
@@ -152,7 +167,11 @@ function Navbar() {
                 )}
               </div>
 
-              <MobileDrawer user={user} setIsLoading={setIsLoading} />
+              <MobileDrawer
+                totalItems={totalItems}
+                user={user}
+                setIsLoading={setIsLoading}
+              />
             </div>
           </div>
         </Container>

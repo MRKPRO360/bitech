@@ -72,15 +72,7 @@ export default function NormalDropdown({
             <LayoutDashboard className="w-4 h-4 text-gray-800" />
             Dashboard
           </Link>
-          {user?.role && user.role !== 'admin' && (
-            <Link
-              href="/cart"
-              className="flex items-center gap-x-3 w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-            >
-              <ShoppingCart className="w-4 h-4 text-gray-800" />
-              Cart
-            </Link>
-          )}
+
           <button
             onClick={handleLogout}
             className="flex items-center gap-x-3 w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 cursor-pointer"

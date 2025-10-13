@@ -16,6 +16,8 @@ interface SelectProps {
   error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
   register?: UseFormRegisterReturn;
   id?: string;
+  value?: string;
+  onChange: (e: any) => void;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -26,19 +28,22 @@ const Select: React.FC<SelectProps> = ({
   register,
   defaultValue = '',
   id = '',
+  value = '',
+  onChange,
 }) => {
   return (
     <div>
       <select
+        onChange={onChange}
         id={id}
         defaultValue={defaultValue}
         {...register}
-        className={`focus:border-primary   text-gray-800 px-2 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 h-11 w-full appearance-none  text-sm shadow-theme-xs placeholder:text-gray-400  focus:outline-hidden  cursor-pointer $ ${
+        className={`focus:border-primary   text-gray-800 px-2 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 h-11 w-full appearance-none  text-sm shadow-theme-xs placeholder:text-gray-400  focus:outline-hidden  cursor-pointer ${
           error ? 'border-red-500' : 'border-gray-300 focus:border-primary'
         }  ${className}`}
       >
         {/* Placeholder option */}
-        <option value="" disabled className="text-gray-700">
+        <option value={value} disabled className="text-gray-700">
           {placeholder}
         </option>
         {/* Map over options */}

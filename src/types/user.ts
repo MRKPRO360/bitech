@@ -1,8 +1,3 @@
-export interface ICartAddress extends IAddress {
-  name: string;
-  email: string;
-}
-
 export interface IAddress {
   country: string;
   city: string;

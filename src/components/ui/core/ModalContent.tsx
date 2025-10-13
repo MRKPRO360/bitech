@@ -5,7 +5,7 @@ import Cta from './Cta';
 
 interface ModalProps {
   title: string;
-  description?: string;
+  description?: React.ReactNode;
   onConfirm: () => Promise<void>;
   confirmText?: string;
   cancelText?: string;
@@ -14,7 +14,7 @@ interface ModalProps {
   onOpenChange?: (open: boolean) => void;
 }
 
-const Modal = ({
+const ModalContent = ({
   title,
   description,
   onConfirm,
@@ -49,13 +49,13 @@ const Modal = ({
         onClick={() => setOpen(true)}
         className="inline-flex cursor-pointer"
       >
-        {children}
+        x
       </span>
 
       {/* Overlay */}
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-all duration-200">
-          {/* Modal box */}
+          {/* Content box */}
           <div className="bg-white rounded-xl shadow-2xl w-[90%] max-w-md p-6 relative">
             {/* Title */}
             <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
@@ -64,6 +64,8 @@ const Modal = ({
             {description && (
               <div className="text-gray-600 mt-2 text-sm">{description}</div>
             )}
+
+            {children && <div>{children}</div>}
 
             {/* Footer CTA buttons */}
             <div className="flex justify-end gap-3 mt-6">
@@ -79,7 +81,7 @@ const Modal = ({
                 onClick={handleConfirm}
                 isSubmitting={loading}
                 submittingText="Processing..."
-                className="!bg-red-500 hover:!bg-red-600 !text-sm"
+                className="!text-sm"
                 renderIcon={false}
               />
             </div>
@@ -89,4 +91,4 @@ const Modal = ({
     </>
   );
 };
-export default Modal;
+export default ModalContent;

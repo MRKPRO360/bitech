@@ -11,6 +11,7 @@ import {
   PlusSquare,
   List,
   ClipboardCheck,
+  IdCard,
 } from 'lucide-react';
 
 export type IMenuItem = {
@@ -34,6 +35,27 @@ export const adminMenu: IMenuItem[] = [
     icon: Users,
     children: [
       { title: 'All Users', href: '/dashboard/admin/manage-users', icon: List },
+    ],
+  },
+  {
+    title: 'Employess',
+    icon: IdCard,
+    children: [
+      {
+        title: 'All Employees',
+        href: '/dashboard/employee',
+        icon: IdCard,
+      },
+      {
+        title: 'Manage Employees',
+        href: '/dashboard/admin/all-employees',
+        icon: List,
+      },
+      {
+        title: 'Create An Employee',
+        href: '/dashboard/admin/create-employee',
+        icon: List,
+      },
     ],
   },
   {
@@ -92,10 +114,19 @@ export const adminMenu: IMenuItem[] = [
 // =======================
 export const customerMenu: IMenuItem[] = [
   {
+    title: 'All Employees',
+    href: '/dashboard/employee',
+    icon: IdCard,
+  },
+  {
     title: 'My Orders',
     icon: ClipboardList,
     children: [
-      { title: 'My Orders', href: '/customer/my-orders', icon: ClipboardList },
+      {
+        title: 'My Orders',
+        href: '/dashboard/customer/my-orders',
+        icon: ClipboardList,
+      },
     ],
   },
   {

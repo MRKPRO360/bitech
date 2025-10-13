@@ -1,6 +1,6 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
-import { Home, Menu, X } from 'lucide-react';
+import { Home, Menu, ShoppingCart, X } from 'lucide-react';
 import Link from 'next/link';
 import ExpandableMenu from './ExpandableMenu';
 import {
@@ -15,9 +15,10 @@ import NormalDropdown from './NormalDropdown';
 interface IMoblieDrawer {
   user: IUser | null;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  totalItems: number;
 }
 
-const MobileDrawer = ({ user, setIsLoading }: IMoblieDrawer) => {
+const MobileDrawer = ({ user, setIsLoading, totalItems }: IMoblieDrawer) => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
 
@@ -95,7 +96,7 @@ const MobileDrawer = ({ user, setIsLoading }: IMoblieDrawer) => {
         <nav className="p-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
           <ul className="space-y-4">
             <div className="flex flex-col lg:hidden gap-6 text-lg font-semibold text-gray-900">
-              <div className="flex gap-5 items-center">
+              <div className="flex gap-5 sm:gap-8 items-center">
                 <Link
                   href="/"
                   className="hover:text-primary duration-200 flex items-center gap-2"
@@ -105,6 +106,21 @@ const MobileDrawer = ({ user, setIsLoading }: IMoblieDrawer) => {
                   </span>
                   Home
                 </Link>
+
+                {user?.email && user.role !== 'admin' && (
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    href="/cart"
+                    className="flex items-center relative"
+                  >
+                    <ShoppingCart className="w-6 h-6 text-gray-800 transition-colors duration-300 hover:text-primary" />
+                    {totalItems > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        {totalItems}
+                      </span>
+                    )}
+                  </Link>
+                )}
 
                 {user?.email && (
                   <NormalDropdown setIsLoading={setIsLoading} user={user} />

@@ -97,6 +97,10 @@ export const orderedPrebuiltProjects = (state: RootState) =>
 
 export const orderSelector = (state: RootState) => state.cart;
 
+export const totalCartItemsSelector = (state: RootState) => {
+  return state.cart.prebuiltProjects.length + state.cart.services.length;
+};
+
 export default cartSlice.reducer;
 
 export const {

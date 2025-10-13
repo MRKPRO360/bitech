@@ -84,7 +84,7 @@ const Input: FC<InputProps> = ({
           defaultValue={defaultValue}
           value={value}
           disabled={disabled}
-          rows={10}
+          rows={rows}
           className={clsx(
             inputClasses,
             type !== 'textarea' ? 'h-11' : 'resize-none'

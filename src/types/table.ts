@@ -11,6 +11,7 @@ export interface TableProps<T> {
   onEdit?: (data: T) => void;
   onDelete?: (data: T) => void;
   onView?: (data: T) => void;
+  onChangeStatus?: (data: T) => void;
   isLoading?: boolean;
-  actions?: ('view' | 'edit' | 'delete')[];
+  actions?: ('view' | 'edit' | 'delete' | 'changeStatus')[];
 }

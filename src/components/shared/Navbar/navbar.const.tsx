@@ -172,7 +172,7 @@ export const projectsItems = [
     icon: <FolderKanban className="w-4 h-4" />,
   },
   {
-    label: 'Our Prebuilt Projects',
+    label: 'Templates',
     href: '/prebuiltProjects',
     icon: <Rocket className="w-4 h-4" />,
   },
