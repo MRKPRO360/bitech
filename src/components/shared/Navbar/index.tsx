@@ -87,13 +87,16 @@ function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
               <Image
-                className="w-10 h-10"
+                style={{
+                  color: 'black',
+                }}
+                className="w-24 h-7"
                 src={logo}
                 alt="bi tech"
                 width={30}
                 height={30}
               />
-              <span className="text-lg lg:text-xl font-bold">BiTech</span>
+              {/* <span className="text-lg lg:text-xl font-bold">BiTech</span> */}
             </Link>
             {/* Navlink */}
             <div className="hidden lg:flex items-center gap-6 text-lg font-bold">

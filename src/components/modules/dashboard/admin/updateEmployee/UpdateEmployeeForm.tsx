@@ -45,6 +45,8 @@ export default function UpdateEmployeeForm({
   const [step, setStep] = useState(1);
   const totalSteps = 3;
 
+  console.log(employee);
+
   const defaultValues = useMemo(() => {
     if (!employee) return;
     return {
@@ -287,9 +289,9 @@ export default function UpdateEmployeeForm({
                     Phone Number <span className="text-red-500">*</span>
                   </Label>
                   <Input
-                    type="number"
+                    // type="number"
                     id="phoneNumber"
-                    placeholder="e.g., +8801712345678"
+                    placeholder="e.g., 01712345678"
                     register={register('phoneNumber', {
                       required: 'Phone number is required',
                       pattern: {

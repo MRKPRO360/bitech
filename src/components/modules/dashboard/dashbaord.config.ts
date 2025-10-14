@@ -27,7 +27,7 @@ export type IMenuItem = {
 export const adminMenu: IMenuItem[] = [
   {
     title: 'Dashboard',
-    href: '/dashboard/admin',
+    href: '/dashboard/profile',
     icon: LayoutDashboard,
   },
   {

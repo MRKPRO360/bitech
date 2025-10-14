@@ -3,12 +3,15 @@ import { useState } from 'react';
 import { Menu } from 'lucide-react';
 import SidebarItem from './SidebarItem';
 import { IMenuItem } from './dashbaord.config';
-import logo from '@/assets/file.png';
+import logo from '@/assets/logo.png';
 import Link from 'next/link';
 import Image from 'next/image';
+import NormalDropdown from '@/components/ui/core/NormalDropdown';
+import { useUser } from '@/context/UserContext';
 
 export default function Sidebar({ menu }: { menu: IMenuItem[] }) {
   const [open, setOpen] = useState(false);
+  const { user, setIsLoading } = useUser();
 
   return (
     <>
@@ -23,18 +26,19 @@ export default function Sidebar({ menu }: { menu: IMenuItem[] }) {
       {/* Sidebar */}
       <aside
         className={`fixed top-0 left-0 h-full w-64 bg-white  transform transition-transform duration-200 z-40 
-          ${open ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`}
+          ${
+            open ? 'translate-x-0' : '-translate-x-full'
+          } md:translate-x-0 flex flex-col`}
       >
-        <div className="py-3 px-4  font-bold text-xl border border-grey/20 h-16">
+        <div className="px-8 py-4    border-r border-b border-grey/20 h-16">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              className="w-10 h-10"
+              className="w-24 h-7"
               src={logo}
               alt="bi tech"
               width={30}
               height={30}
             />
-            <span className="text-lg lg:text-xl font-bold">BiTech</span>
           </Link>
         </div>
         <nav className="p-4 space-y-2 border-r border-grey/20 h-full">
@@ -42,6 +46,10 @@ export default function Sidebar({ menu }: { menu: IMenuItem[] }) {
             <SidebarItem key={item.title} item={item} />
           ))}
         </nav>
+        <div className="p-4 flex items-center gap-2 border-r border-grey/20">
+          <NormalDropdown setIsLoading={setIsLoading} user={user!} />
+          <span>{user?.email}</span>
+        </div>
       </aside>
     </>
   );
