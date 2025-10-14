@@ -1,7 +1,7 @@
 // app/dashboard/admin/create-employee/page.tsx
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler, Path, Controller } from 'react-hook-form';
 import {
@@ -26,7 +26,7 @@ import ImageUpload from '@/components/ui/core/ImageUpload';
 import Cta from '@/components/ui/core/Cta';
 import Container from '@/components/ui/core/Container';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
-import { IEmployeeForm } from '@/types/employee';
+import { IEmployee, IEmployeeForm } from '@/types/employee';
 import {
   DEPARTMENT_OPTIONS,
   DESIGNATION_OPTIONS,
@@ -34,12 +34,29 @@ import {
   SKILLS_OPTIONS,
 } from '@/components/modules/employee/employee.const';
 import MultipleSelector from '@/components/ui/core/MultipleSelector';
-import { createEmployee } from '@/services/employee';
+import { updateEmployee } from '@/services/employee';
 
-export default function CreateEmployeeForm() {
+export default function UpdateEmployeeForm({
+  employee,
+}: {
+  employee: IEmployee;
+}) {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const totalSteps = 3;
+
+  const defaultValues = useMemo(() => {
+    if (!employee) return;
+    return {
+      ...employee,
+      skills: employee.skills.map((skill) => ({
+        value: skill,
+        label: skill,
+      })),
+      dateOfBirth: new Date(employee?.dateOfBirth).toISOString(),
+      joiningDate: new Date(employee?.joiningDate).toISOString(),
+    };
+  }, [employee]);
 
   const {
     register,
@@ -50,21 +67,12 @@ export default function CreateEmployeeForm() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<IEmployeeForm>({
-    defaultValues: {
-      role: 'employee',
-      gender: 'Other',
-      skills: [{ value: '', label: '' }],
-      address: {
-        country: 'Bangladesh',
-        city: 'Dhaka',
-        zipCode: '1205',
-      },
-    },
+    defaultValues,
   });
 
   // Step Navigation
   const handleNext = async () => {
-    let fieldsToValidate: Path<IEmployeeForm>[] = [];
+    let fieldsToValidate: Path<IEmployee>[] = [];
 
     if (step === 1) {
       fieldsToValidate = [
@@ -100,6 +108,14 @@ export default function CreateEmployeeForm() {
   const onSubmit: SubmitHandler<IEmployeeForm> = async (data) => {
     const { profileImg, ...rest } = data;
 
+    const cleanData = {
+      ...data,
+      skills: data.skills.map((skill) => skill.value).filter((t) => t),
+    };
+
+    delete (cleanData as any).createdAt;
+    delete (cleanData as any).updatedAt;
+
     const formData = new FormData();
 
     // Append main data
@@ -107,6 +123,9 @@ export default function CreateEmployeeForm() {
       'data',
       JSON.stringify({
         ...rest,
+        _id: employee._id,
+        dateOfBirth: new Date(data?.dateOfBirth).toISOString(),
+        joiningDate: new Date(data?.joiningDate).toISOString(),
         skills: data.skills
           .map((skill) => skill.value)
           .filter((skill) => skill !== ''),
@@ -118,20 +137,22 @@ export default function CreateEmployeeForm() {
       formData.append('file', data.profileImg[0]);
     }
 
-    const toastId = toast.loading('Creating employee...');
+    const toastId = toast.loading('Updating employee...');
     try {
-      const res = await createEmployee(formData);
+      const res = await updateEmployee(formData);
+      console.log('res', res);
 
       if (res.success) {
-        toast.success('Employee created successfully!', { id: toastId });
+        toast.success('Employee updated successfully!', { id: toastId });
         router.push('/dashboard/admin/all-employees');
         reset();
       } else {
         toast.error(res?.message, { id: toastId });
       }
-    } catch (error) {
-      toast.error('Failed to create employee', { id: toastId });
-      console.error('Error creating employee:', error);
+    } catch (error: any) {
+      toast.error(error?.message || 'Failed to update employee', {
+        id: toastId,
+      });
     }
   };
 
@@ -147,9 +168,9 @@ export default function CreateEmployeeForm() {
             <ChevronLeft className="w-4 h-4" />
             Back to Employees
           </Link>
-          <SecondaryHeading>Add New Employee</SecondaryHeading>
+          <SecondaryHeading>Update Employee</SecondaryHeading>
           <p className="text-gray-600 mt-2">
-            Add a new employee to your organization
+            Update employee to your organization
           </p>
         </div>
 
@@ -489,6 +510,9 @@ export default function CreateEmployeeForm() {
                         trigger('profileImg');
                       }
                     }}
+                    initialImages={
+                      employee.profileImg ? [employee.profileImg as string] : []
+                    }
                   />
 
                   <Input type="hidden" register={register('profileImg')} />
@@ -523,10 +547,10 @@ export default function CreateEmployeeForm() {
                   </button>
                 ) : (
                   <Cta
-                    text="Create Employee"
+                    text="Update Employee"
                     renderIcon={false}
                     isSubmitting={isSubmitting}
-                    submittingText="Creating..."
+                    submittingText="Updating..."
                     type="submit"
                   />
                 )}

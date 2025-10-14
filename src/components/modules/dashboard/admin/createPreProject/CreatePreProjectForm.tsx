@@ -123,8 +123,6 @@ export default function CreatePreProjectForm() {
   });
 
   const featured = watch('featured', false);
-  // const thumbnail = watch('images.thumbnail');
-  // const gallery = watch('images.gallery');
 
   // Step Navigation
   const handleNext = async () => {

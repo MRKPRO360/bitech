@@ -12,7 +12,7 @@ export interface IEmployee {
   role: 'employee';
   iat?: number;
   exp?: number;
-  profileImg?: string;
+  profileImg?: File[] | string;
   phoneNumber?: string;
   address?: IAddress;
   user?: IUser;
@@ -31,7 +31,11 @@ export interface IEmployee {
 }
 
 export interface IEmployeeForm
-  extends Omit<IEmployee, 'profileImg' | 'skills'> {
-  profileImg?: File[];
+  extends Omit<
+    IEmployee,
+    //  'profileImg' |
+    'skills'
+  > {
+  // profileImg?: File[];
   skills: { value: string; label: string }[];
 }

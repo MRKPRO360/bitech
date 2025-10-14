@@ -95,23 +95,20 @@ export const changeEmployeeStatus = async (payload: FieldValues) => {
   }
 };
 
-export const updateEmployee = async (id: string, payload: FormData) => {
+export const updateEmployee = async (payload: FormData) => {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/employees/${id}`,
-      {
-        method: 'PATCH',
-        headers: {
-          Authorization: (await cookies()).get('accessToken')?.value || '',
-        },
-        body: payload,
-        next: { tags: ['employees'] },
-      }
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/employees`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: (await cookies()).get('accessToken')?.value || '',
+      },
+      body: payload,
+      next: { tags: ['employees'] },
+    });
 
     return await res.json();
   } catch (error: any) {
-    return Error(error);
+    throw new Error(error);
   }
 };
 

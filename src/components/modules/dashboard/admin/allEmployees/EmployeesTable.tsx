@@ -14,7 +14,6 @@ import formateDate from '@/components/utils/formateDate';
 import { IEmployee } from '@/types';
 import StatusUpdateModal from './StatusUpdateModal';
 import { changeEmployeeStatus, revalidateEmployees } from '@/services/employee';
-import { revalidateTag } from 'next/cache';
 
 const EmployeesTable = ({ employees }: { employees: IEmployee[] }) => {
   const router = useRouter();
@@ -27,7 +26,7 @@ const EmployeesTable = ({ employees }: { employees: IEmployee[] }) => {
   };
 
   const handleEdit = (employee: IEmployee) => {
-    router.push(`/dashboard/admin/update-employee/${employee._id}`);
+    router.push(`/dashboard/admin/updateEmployee/${employee._id}`);
   };
 
   const handleChangeStatus = (employee: IEmployee) => {

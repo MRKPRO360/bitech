@@ -79,7 +79,7 @@ const RowActions = <T,>({
               left: position.left,
               zIndex: 9999,
             }}
-            className="max-w-40 bg-white border border-gray-200 rounded-lg shadow-lg"
+            className="w-40 bg-white border border-gray-200 rounded-lg shadow-lg"
           >
             <ul className="py-1 text-sm text-gray-700">
               {actions.includes('view') && onView && (
