@@ -3,26 +3,32 @@
 
 import { logout } from '@/services/authService';
 import { IUser } from '@/types';
-import { LayoutDashboard, LogOut, ShoppingCart, User } from 'lucide-react';
+import clsx from 'clsx';
+import { LayoutDashboard, LogOut, User } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState, useRef, useEffect, Dispatch, SetStateAction } from 'react';
 
 interface INormalDropdown {
   setIsLoading: Dispatch<SetStateAction<boolean>>;
   user: IUser;
+  isBottom?: boolean;
 }
 
 export default function NormalDropdown({
   user,
   setIsLoading,
+  isBottom = false,
 }: INormalDropdown) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const handleLogout = () => {
     logout();
     setIsLoading(true);
+    router.push('/');
   };
 
   // outside click handler
@@ -57,7 +63,14 @@ export default function NormalDropdown({
 
       {/* Dropdown Menu */}
       {open && (
-        <div className="absolute -left-1/2 transform -translate-x-1/2 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg py-2 z-50">
+        <div
+          className={clsx(
+            'absolute  transform mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg py-2 z-50',
+            isBottom
+              ? '-top-1/2 -translate-y-1/2 left-1/2 translate-x-1/4'
+              : '-left-1/2 -translate-x-1/2 '
+          )}
+        >
           <Link
             href={'/dashboard/profile'}
             className="flex items-center gap-x-3 w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

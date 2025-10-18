@@ -47,7 +47,11 @@ export default function Sidebar({ menu }: { menu: IMenuItem[] }) {
           ))}
         </nav>
         <div className="p-4 flex items-center gap-2 border-r border-grey/20">
-          <NormalDropdown setIsLoading={setIsLoading} user={user!} />
+          <NormalDropdown
+            isBottom={true}
+            setIsLoading={setIsLoading}
+            user={user!}
+          />
           <span>{user?.email}</span>
         </div>
       </aside>

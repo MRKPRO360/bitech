@@ -17,6 +17,8 @@ export interface IUser {
   iat?: number;
   exp?: number;
   profileImg?: string;
+  method?: string;
+  isDeleted?: boolean;
   status?: 'in-progress' | 'blocked';
   phoneNumber?: string;
   address?: IAddress;

@@ -3,7 +3,7 @@ import { getCurrentUser } from './services/authService';
 
 type Role = keyof typeof roleBasedPrivateRoutes;
 
-const authRoutes = ['/signin', '/signup'];
+const authRoutes = ['/signin', '/signup', '/dashboard'];
 
 const roleBasedPrivateRoutes = {
   cutomer: [/^\/customer/, '/profile', '/update-profile', '/change-password'],
@@ -56,6 +56,7 @@ export const config = {
     '/admin/:path*',
     '/signin',
     '/signup',
+    '/dashboard',
     '/profile',
     '/update-profile',
     '/change-password',

@@ -1,5 +1,7 @@
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
+import FacebookProvider from 'next-auth/providers/facebook';
+
 import { NextAuthOptions } from 'next-auth';
 import { cookies } from 'next/headers';
 
@@ -9,9 +11,24 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GITHUB_ID!,
       clientSecret: process.env.GITHUB_SECRET!,
     }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          scope: 'public_profile,email', // include both
+        },
+      },
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
+      // authorization: {
+      //   params: {
+      //     scope:
+      //       'openid email profile https://www.googleapis.com/auth/user.phonenumbers.read',
+      //   },
+      // },
     }),
   ],
   callbacks: {

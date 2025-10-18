@@ -1,9 +1,15 @@
 import Profile from '@/components/modules/dashboard/profile';
+import { getMe } from '@/services/authService';
 
-function ProfilePage() {
+async function ProfilePage() {
+  const res = await getMe();
+  console.log(res.data);
+
   return (
     <>
-      <Profile />
+      {/* <Profile data={res.data} /> */}
+
+      <h1>Hello</h1>
     </>
   );
 }
