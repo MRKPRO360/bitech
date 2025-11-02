@@ -15,10 +15,16 @@ import NormalDropdown from './NormalDropdown';
 interface IMoblieDrawer {
   user: IUser | null;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
+  setUser: Dispatch<SetStateAction<IUser | null>>;
   totalItems: number;
 }
 
-const MobileDrawer = ({ user, setIsLoading, totalItems }: IMoblieDrawer) => {
+const MobileDrawer = ({
+  user,
+  setIsLoading,
+  totalItems,
+  setUser,
+}: IMoblieDrawer) => {
   const [isOpen, setIsOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
 
@@ -123,7 +129,11 @@ const MobileDrawer = ({ user, setIsLoading, totalItems }: IMoblieDrawer) => {
                 )}
 
                 {user?.email && (
-                  <NormalDropdown setIsLoading={setIsLoading} user={user} />
+                  <NormalDropdown
+                    setIsLoading={setIsLoading}
+                    user={user}
+                    setUser={setUser}
+                  />
                 )}
               </div>
 

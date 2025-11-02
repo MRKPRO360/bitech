@@ -11,7 +11,7 @@ import { useUser } from '@/context/UserContext';
 
 export default function Sidebar({ menu }: { menu: IMenuItem[] }) {
   const [open, setOpen] = useState(false);
-  const { user, setIsLoading } = useUser();
+  const { user, setIsLoading, setUser } = useUser();
 
   return (
     <>
@@ -48,6 +48,7 @@ export default function Sidebar({ menu }: { menu: IMenuItem[] }) {
         </nav>
         <div className="p-4 flex items-center gap-2 border-r border-grey/20">
           <NormalDropdown
+            setUser={setUser}
             isBottom={true}
             setIsLoading={setIsLoading}
             user={user!}

@@ -1,4 +1,4 @@
-import { adminMenu, getMenuByRole } from './dashbaord.config';
+import { getMenuByRole } from './dashbaord.config';
 import Sidebar from './Sidebar';
 
 import Topbar from './Topbar';

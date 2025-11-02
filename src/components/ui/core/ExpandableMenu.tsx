@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef, Dispatch, SetStateAction } from 'react';
+import { useRef, Dispatch, SetStateAction } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';

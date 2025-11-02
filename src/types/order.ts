@@ -3,9 +3,13 @@ import { IPrebuiltProject } from './prebuiltProjects';
 export type IStatus = 'Pending' | 'Completed' | 'Cancelled';
 
 export interface IOrder {
+  _id: string;
   user: string;
   services: string[];
-  projects: IPrebuiltProject[];
+  projects: {
+    _id: string;
+    project: IPrebuiltProject;
+  }[];
   amount: number;
   paymentMethod?: 'Cash' | 'Card' | 'Online';
   orderStatus?: IStatus;

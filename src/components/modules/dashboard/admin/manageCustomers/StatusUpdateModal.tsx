@@ -2,31 +2,27 @@
 
 import { FieldValues, useForm } from 'react-hook-form';
 
-import { IEmployee } from '@/types';
+import { IUser } from '@/types';
 import Select from '@/components/form/Select';
 import ModalContent from '@/components/ui/core/ModalContent';
 import Label from '@/components/form/Label';
-import Input from '@/components/form/input/InputField';
 
 // Define the status options
 const STATUS_OPTIONS = [
-  { value: 'Active', label: 'Active' },
-  { value: 'Inactive', label: 'Inactive' },
-  { value: 'On Leave', label: 'On Leave' },
-  { value: 'Resigned', label: 'Resigned' },
-  { value: 'Alumni', label: 'Alumni' },
+  { value: 'in-progress', label: 'In Progress' },
+  { value: 'blocked', label: 'Blocked' },
 ];
 
 interface StatusUpdateModalProps {
-  employee: IEmployee | null;
+  customer: IUser | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onConfirm: (data: FieldValues, employee: IEmployee) => Promise<void>;
+  onConfirm: (data: FieldValues, customer: IUser) => Promise<void>;
   isLoading?: boolean;
 }
 
 const StatusUpdateModal = ({
-  employee,
+  customer,
   open,
   onOpenChange,
   onConfirm,
@@ -40,19 +36,13 @@ const StatusUpdateModal = ({
     watch,
   } = useForm<FieldValues>({
     defaultValues: {
-      status: employee?.status as
-        | 'Active'
-        | 'Inactive'
-        | 'On Leave'
-        | 'Resigned'
-        | 'Alumni',
-      reason: '',
+      status: customer?.status as 'in-progress' | 'blocked',
     },
   });
 
   const selectedStatus = watch('status');
 
-  // Reset form when employee changes
+  // Reset form when customer changes
   const handleOpenChange = (newOpen: boolean) => {
     if (!newOpen) {
       reset();
@@ -61,23 +51,18 @@ const StatusUpdateModal = ({
   };
 
   const onSubmit = async (data: FieldValues) => {
-    if (employee) {
-      await onConfirm(data, employee);
+    if (customer) {
+      await onConfirm(data, customer);
       reset();
     }
   };
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Active':
+      case 'in-progress':
         return 'text-green-600 bg-green-50 border-green-200';
-      case 'Inactive':
+      case 'blocked':
         return 'text-red-600 bg-red-50 border-red-200';
-      case 'On Leave':
-        return 'text-blue-600 bg-blue-50 border-blue-200';
-      case 'Resigned':
-        return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-      case 'Alumni':
-        return 'text-purple-600 bg-purple-50 border-purple-200';
+
       default:
         return 'text-gray-600 bg-gray-50 border-gray-200';
     }
@@ -85,29 +70,29 @@ const StatusUpdateModal = ({
 
   return (
     <ModalContent
-      title="Update Employee Status"
+      title="Update customer Status"
       description={
-        employee ? (
+        customer ? (
           <div className="space-y-2">
             <p>
-              Update the employment status for{' '}
+              Update the custoemer status for{' '}
               <span className="font-semibold">
-                {employee.name.firstName} {employee.name.lastName}
+                {customer.name.firstName} {customer.name.lastName}
               </span>
             </p>
             <div className="flex items-center gap-2 text-sm">
               <span>Current Status:</span>
               <span
                 className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(
-                  employee.status
+                  customer.status || ''
                 )}`}
               >
-                {employee.status}
+                {customer.status}
               </span>
             </div>
           </div>
         ) : (
-          <p>Update employee status</p>
+          <p>Update customer status</p>
         )
       }
       confirmText={isLoading ? 'Updating...' : 'Update Status'}
@@ -123,19 +108,6 @@ const StatusUpdateModal = ({
           <Select register={register('status')} options={STATUS_OPTIONS} />
         </div>
 
-        {selectedStatus === 'Resigned' && (
-          <div className="space-y-3">
-            <Label htmlFor="exit">Exit Reason</Label>
-            <Input
-              rows={3}
-              type="textarea"
-              placeholder="Why employee would like to resigned?"
-              register={register('reason')}
-            />
-            {/* <Select register={register('status')} options={STATUS_OPTIONS} /> */}
-          </div>
-        )}
-
         {/* Status Preview */}
         {selectedStatus && (
           <div className="p-4  focus:border-primary  bg-transparent text-gray-800  w-full px-2 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10">
@@ -149,16 +121,10 @@ const StatusUpdateModal = ({
                 {selectedStatus}
               </span>
               <span className="text-sm text-gray-600">
-                {selectedStatus === 'Active' &&
-                  'Employee will be active and able to work'}
-                {selectedStatus === 'Inactive' &&
-                  'Employee will be inactive and unable to work'}
-                {selectedStatus === 'On Leave' &&
-                  'Employee will be on temporary leave'}
-                {selectedStatus === 'Resigned' &&
-                  'Employee has resigned and is no longer with the company'}
-                {selectedStatus === 'Alumni' &&
-                  'Employee is an alumni and no longer actively employed'}
+                {selectedStatus === 'in-progress' &&
+                  'customer will be active and able to work'}
+                {selectedStatus === 'blocked' &&
+                  'customer will be blocked and unable to do any action!'}
               </span>
             </div>
           </div>
@@ -167,7 +133,7 @@ const StatusUpdateModal = ({
         {/* Additional Information */}
         <div className="text-xs text-gray-500 space-y-1">
           <p>• Status changes will take effect immediately</p>
-          <p>• Employees will be notified of status changes</p>
+          <p>• customers will be notified of status changes</p>
           <p>• All changes are logged for audit purposes</p>
         </div>
       </div>

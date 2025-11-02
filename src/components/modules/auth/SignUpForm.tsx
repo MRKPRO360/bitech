@@ -7,6 +7,7 @@ import Cta from '@/components/ui/core/Cta';
 import ImageUpload from '@/components/ui/core/ImageUpload';
 import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
 import { countriesOptions } from '@/constant/country';
+import { useSocialLogin } from '@/hooks/useSocialLogin';
 import { signupCustomer } from '@/services/authService';
 import { ISignupValues } from '@/types';
 import {
@@ -89,13 +90,17 @@ export default function SignUpForm() {
 
       if (res.success) {
         toast.success('Successfully signed up!', { id: toastId });
-        router.push('/dashboard');
+        router.push('/dashboard/profile');
         reset();
+      } else {
+        toast.error(res.message);
       }
     } catch (err: any) {
       toast.error(err?.message || 'Something went wrong!', { id: toastId });
     }
   };
+
+  const { handleSocialLogin } = useSocialLogin();
 
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full overflow-y-auto no-scrollbar pb-10">
@@ -118,12 +123,18 @@ export default function SignUpForm() {
           </div>
           <div>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5">
-              <button className="inline-flex items-center justify-center gap-3 py-3 text-sm font-normal text-gray-700 transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200 hover:text-gray-800 cursor-pointer">
-                <FcGoogle className="w-7 h-7" />
+              <button
+                onClick={() => handleSocialLogin('google')}
+                className="cursor-pointer inline-flex items-center justify-center gap-3 py-3 text-sm font-normal text-gray-700 transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200 hover:text-gray-800 "
+              >
+                <FcGoogle className="text-xl" />
                 Sign up with Google
               </button>
-              <button className="inline-flex items-center justify-center gap-3 py-3 text-sm font-normal text-gray-700 transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200 hover:text-gray-800">
-                <FaFacebookF className="w-7 h-7 text-blue-700" />
+              <button
+                onClick={() => handleSocialLogin('facebook')}
+                className="inline-flex items-center justify-center gap-3 py-3 text-sm font-normal text-gray-700 transition-colors bg-gray-100 rounded-lg px-7 hover:bg-gray-200 hover:text-gray-800 cursor-pointer"
+              >
+                <FaFacebookF className="text-blue-500 text-xl" />
                 Sign up with Facebook
               </button>
             </div>

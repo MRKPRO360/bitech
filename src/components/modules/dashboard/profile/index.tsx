@@ -34,6 +34,7 @@ import {
 import { IUser } from '@/types';
 import Image from 'next/image';
 import Cta from '@/components/ui/core/Cta';
+import avatar from '@/assets/avatar.png';
 
 function Profile({ data }: { data: IUser }) {
   const profileRef = useRef<HTMLDivElement>(null);
@@ -131,7 +132,7 @@ function Profile({ data }: { data: IUser }) {
                     <Image
                       width={200}
                       height={200}
-                      src={data?.profileImg as string}
+                      src={(data?.profileImg as string) || avatar}
                       alt={`${data?.fullName}`}
                       className="w-full h-full object-cover"
                     />

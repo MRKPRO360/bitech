@@ -8,12 +8,8 @@ import WandWithText from '@/components/ui/Wand';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 import { useFadeUp } from '@/hooks/FadeUp';
 import {
-  Package,
-  Pill,
   CreditCard,
-  BarChart3,
   Users,
-  Stethoscope,
   BookOpen,
   ClipboardList,
   Mail,

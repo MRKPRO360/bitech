@@ -467,7 +467,7 @@ export default function UpdatePreProjectForm({
                         emptyIndicator="No technologies found."
                         creatable
                         maxSelected={10}
-                        onMaxSelected={(maxLimit) => {
+                        onMaxSelected={() => {
                           toast.warning('Maximum technology reached!');
                         }}
                       />

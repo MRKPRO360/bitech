@@ -1,9 +1,6 @@
-// app/employees/[id]/page.tsx
 'use client';
 
-import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { gsap } from 'gsap';
 import Image from 'next/image';
 import {
   ArrowLeft,
@@ -19,24 +16,11 @@ import {
   Clock,
   Building,
   User,
-  Edit,
-  Share2,
 } from 'lucide-react';
 import { IEmployee } from '@/types/employee';
 
-// Mock data - replace with your API call
-
 export default function EmployeeDetails({ employee }: { employee: IEmployee }) {
   const router = useRouter();
-  //   const [loading, setLoading] = useState(true);
-
-  // Refs for GSAP animations
-  const pageRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const profileRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
-  const detailsRef = useRef<HTMLDivElement>(null);
-  const skillsRef = useRef<HTMLDivElement>(null);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -99,10 +83,10 @@ export default function EmployeeDetails({ employee }: { employee: IEmployee }) {
   const experience = calculateExperience(employee.joiningDate);
 
   return (
-    <div ref={pageRef} className="min-h-screen py-8">
+    <div className="min-h-screen py-8">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
-        <div ref={headerRef} className="mb-8">
+        <div className="mb-8">
           <div className="flex items-center gap-4">
             <button
               onClick={() => router.push('/dashboard/employee')}
@@ -118,10 +102,7 @@ export default function EmployeeDetails({ employee }: { employee: IEmployee }) {
           {/* Left Column - Profile & Stats */}
           <div className="lg:col-span-1 space-y-6">
             {/* Profile Card */}
-            <div
-              ref={profileRef}
-              className="bg-white rounded-md shadow-md p-6 border border-gray-100"
-            >
+            <div className="bg-white rounded-md shadow-md p-6 border border-gray-100">
               <div className="text-center">
                 <div className="relative inline-block mb-4">
                   <div className="w-32 h-32 rounded-md overflow-hidden ring-4 ring-white ring-opacity-50 shadow-md mx-auto">
@@ -185,7 +166,7 @@ export default function EmployeeDetails({ employee }: { employee: IEmployee }) {
             </div>
 
             {/* Stats Cards */}
-            <div ref={statsRef} className="space-y-4">
+            <div className="space-y-4">
               <div className="bg-white rounded-md shadow-md p-6 border border-gray-100">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
@@ -233,10 +214,7 @@ export default function EmployeeDetails({ employee }: { employee: IEmployee }) {
           {/* Right Column - Details & Skills */}
           <div className="lg:col-span-2 space-y-6">
             {/* Personal Details */}
-            <div
-              ref={detailsRef}
-              className="bg-white rounded-md shadow-md p-6 border border-gray-100"
-            >
+            <div className="bg-white rounded-md shadow-md p-6 border border-gray-100">
               <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                 <User className="w-5 h-5 text-blue-500" />
                 Personal Information
@@ -332,7 +310,7 @@ export default function EmployeeDetails({ employee }: { employee: IEmployee }) {
                 Skills & Expertise
               </h2>
 
-              <div ref={skillsRef} className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3">
                 {employee.skills.map((skill, index) => (
                   <span
                     key={index}

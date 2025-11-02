@@ -1,7 +1,7 @@
 'use client';
 
 import formateDate from '@/components/utils/formateDate';
-import { useStaggerChildren } from '@/hooks/CardStagger';
+// import { useStaggerChildren } from '@/hooks/CardStagger';
 import { IEmployee } from '@/types/employee';
 import Image from 'next/image';
 import { Mail, Phone, MapPin, DollarSign, Briefcase } from 'lucide-react'; // ✅ Import icons
@@ -12,10 +12,10 @@ interface EmployeeCardProps {
 }
 
 const EmployeeCard = ({ employee }: EmployeeCardProps) => {
-  const cardRef = useStaggerChildren<HTMLDivElement>({
-    y: 30,
-    duration: 0.6,
-  });
+  // const cardRef = useStaggerChildren<HTMLDivElement>({
+  //   y: 30,
+  //   duration: 0.6,
+  // });
 
   const statusColors = {
     Active: 'bg-green-100 text-green-800 border-green-200',

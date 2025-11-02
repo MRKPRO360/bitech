@@ -20,7 +20,6 @@ import ProjectHero from './projectHero';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 import SubHeading from '@/components/ui/core/SubHeading';
 import Para from '@/components/ui/core/Para';
-import SecondaryHeading from '@/components/ui/core/SecondaryHeading';
 import formateDate from '@/components/utils/formateDate';
 
 function ProjectDetails({ project }: { project: IProject }) {

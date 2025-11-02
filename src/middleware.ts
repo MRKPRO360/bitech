@@ -3,7 +3,7 @@ import { getCurrentUser } from './services/authService';
 
 type Role = keyof typeof roleBasedPrivateRoutes;
 
-const authRoutes = ['/signin', '/signup', '/dashboard'];
+const authRoutes = ['/signin', '/signup'];
 
 const roleBasedPrivateRoutes = {
   cutomer: [/^\/customer/, '/profile', '/update-profile', '/change-password'],
@@ -37,6 +37,11 @@ export const middleware = async (request: NextRequest) => {
         )
       );
     }
+  }
+
+  // Allow access to dashboard for any logged-in user
+  if (pathname === '/dashboard') {
+    return NextResponse.next();
   }
 
   if (userInfo?.role && roleBasedPrivateRoutes[userInfo?.role as Role]) {

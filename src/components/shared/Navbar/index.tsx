@@ -34,7 +34,7 @@ function Navbar() {
   const pathname = usePathname();
   const totalItems = useAppSelector(totalCartItemsSelector);
 
-  const { user, setIsLoading } = useUser();
+  const { user, setIsLoading, setUser } = useUser();
 
   useGSAP(
     () => {
@@ -150,7 +150,11 @@ function Navbar() {
                   </Link>
                 )}
                 {user?.email ? (
-                  <NormalDropdown setIsLoading={setIsLoading} user={user} />
+                  <NormalDropdown
+                    setIsLoading={setIsLoading}
+                    setUser={setUser}
+                    user={user}
+                  />
                 ) : (
                   <Link
                     href="/signin"
@@ -174,6 +178,7 @@ function Navbar() {
                 totalItems={totalItems}
                 user={user}
                 setIsLoading={setIsLoading}
+                setUser={setUser}
               />
             </div>
           </div>

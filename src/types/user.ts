@@ -1,3 +1,5 @@
+import { IOrder } from './order';
+
 export interface IAddress {
   country: string;
   city: string;
@@ -24,6 +26,7 @@ export interface IUser {
   address?: IAddress;
   user?: IUser;
   rating?: string;
+  orders?: IOrder[];
   createdAt: string;
   updatedAt: string;
 }

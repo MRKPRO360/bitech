@@ -1,4 +1,3 @@
-import Profile from '@/components/modules/dashboard/profile';
 import { getMe } from '@/services/authService';
 
 async function ProfilePage() {

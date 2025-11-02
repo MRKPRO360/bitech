@@ -27,14 +27,18 @@ export type IMenuItem = {
 export const adminMenu: IMenuItem[] = [
   {
     title: 'Dashboard',
-    href: '/dashboard/profile',
+    href: '/dashboard',
     icon: LayoutDashboard,
   },
   {
-    title: 'Manage Users',
+    title: 'All Customers',
     icon: Users,
     children: [
-      { title: 'All Users', href: '/dashboard/admin/manage-users', icon: List },
+      {
+        title: 'Manage Customers',
+        href: '/dashboard/admin/manage-customers',
+        icon: List,
+      },
     ],
   },
   {
@@ -59,13 +63,13 @@ export const adminMenu: IMenuItem[] = [
     ],
   },
   {
-    title: 'Manage Orders',
+    title: 'Orders',
     icon: ClipboardCheck,
     href: '/dashboard/admin/manage-orders',
     children: [
       {
-        title: 'All Orders',
-        href: '/dashboard/admin/manage-orders',
+        title: 'Manage Orders',
+        href: '/dashboard/admin/manage-project-orders',
         icon: List,
       },
     ],
@@ -102,7 +106,7 @@ export const adminMenu: IMenuItem[] = [
     title: 'Settings',
     icon: Settings,
     children: [
-      { title: 'View Profile', href: '/profile', icon: UserCog },
+      { title: 'View Profile', href: '/dashboard', icon: UserCog },
       { title: 'Update Profile', href: '/update-profile', icon: Settings },
       { title: 'Change Password', href: '/change-password', icon: KeySquare },
     ],

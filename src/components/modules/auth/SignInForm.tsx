@@ -46,7 +46,7 @@ export default function SignInForm() {
         toast.success('Logged in successfully!');
         setIsLoading(true);
         // REDIRECTING USER
-        router.push(redirect || '/');
+        router.push(redirect || '/dashboard');
         setIsLoading(true);
       } else {
         toast.error(res.message);
