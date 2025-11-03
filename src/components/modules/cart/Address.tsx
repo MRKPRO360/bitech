@@ -116,7 +116,7 @@ export default function Address({ data }: { data: IUser }) {
               <p className="text-base font-semibold text-center sm:text-start">
                 Wan&apos;t to change personal information? &nbsp;
                 <Link
-                  href="/update-profile"
+                  href="/dashboard/update-profile"
                   className="underline underline-offset-4  text-brand-500 hover:text-brand-600 dark:text-brand-400 decoration-2 decoration-primary"
                 >
                   Update Profile

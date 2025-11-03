@@ -107,7 +107,11 @@ export const adminMenu: IMenuItem[] = [
     icon: Settings,
     children: [
       { title: 'View Profile', href: '/dashboard', icon: UserCog },
-      { title: 'Update Profile', href: '/update-profile', icon: Settings },
+      {
+        title: 'Update Profile',
+        href: '/dashboard/update-profile',
+        icon: Settings,
+      },
       { title: 'Change Password', href: '/change-password', icon: KeySquare },
     ],
   },
@@ -142,8 +146,8 @@ export const customerMenu: IMenuItem[] = [
     title: 'Settings',
     icon: Settings,
     children: [
-      { title: 'View Profile', href: '/profile', icon: UserCog },
-      { title: 'Update Profile', href: '/update-profile', icon: Settings },
+      { title: 'View Profile', href: '/dashboard', icon: UserCog },
+      { title: 'Update Profile', href: '/dashboard/update-profile' },
       { title: 'Change Password', href: '/change-password', icon: KeySquare },
     ],
   },

@@ -1,8 +1,6 @@
 import { IOrder } from '@/types';
 import { IMeta } from '@/types/meta';
-import SubHeading from '@/components/ui/core/SubHeading';
-import AllProjectsOrderTable from './AllProjectsOrderTable';
-import Container from '@/components/ui/core/Container';
+
 import AllProjectOrdersInfo from './AllProjectOrdersInfo';
 import TablePagination from '@/components/ui/core/TablePagination';
 

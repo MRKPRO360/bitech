@@ -174,11 +174,15 @@ function Profile({ data }: { data: IUser }) {
                 </div>
 
                 {/* Edit Button */}
-                <Cta text="Edit Profile" />
+                <Cta
+                  hasLink={true}
+                  path="/dashboard/update-profile"
+                  text="Edit Profile"
+                />
               </div>
 
               {/* Info Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Personal Information */}
                 <div
                   ref={addToCardsRef}

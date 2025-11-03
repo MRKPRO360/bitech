@@ -168,7 +168,7 @@ export const updateCustomer = async (userData: FormData) => {
 
 export const updateAdmin = async (userData: FormData) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admin`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/admins`, {
       method: 'PATCH',
       headers: {
         Authorization: (await cookies()).get('accessToken')!.value,

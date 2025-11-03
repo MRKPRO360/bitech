@@ -11,7 +11,7 @@ import {
 } from '@/redux/features/cartSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { createOrder } from '@/services/cart';
-import { IUser } from '@/types';
+import { IOrder, IUser } from '@/types';
 
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -42,12 +42,16 @@ export default function PaymentDetails({ data }: { data: IUser }) {
         throw new Error('Cart is empty, what are you trying to order ??');
       }
 
+      const formattedProjects = order.prebuiltProjects.map((project) => ({
+        _id: project._id, // Assuming the line item ID is the project ID
+        project: project,
+      }));
       const res = await createOrder({
         user: data?.user?._id,
         services: order.services,
-        projects: order.prebuiltProjects,
+        projects: formattedProjects,
         amount: subTotalPrebuiltProject,
-      });
+      } as Partial<IOrder>);
 
       if (res.success) {
         toast.success(res.message, { id: orderLoading });

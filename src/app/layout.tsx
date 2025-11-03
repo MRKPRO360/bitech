@@ -3,6 +3,7 @@ import { Nunito } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'sonner';
 import Providers from '@/providers';
+import SplashScreren from '@/components/shared/splashScreen';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -31,7 +32,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${nunito.className}`}>
-      <body>
+      <body className="relative">
+        <SplashScreren />
         <Providers>
           <Toaster richColors position="top-center" />
           {children}

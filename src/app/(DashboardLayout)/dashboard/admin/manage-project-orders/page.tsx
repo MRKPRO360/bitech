@@ -13,10 +13,6 @@ async function ManageProjectOrdersPage({
     data: { result, meta },
   } = await getAllProjectOrders(query.page as string, '10', query);
 
-  return (
-    <div>
-      <ManageProjectOrders meta={meta} orders={result} />
-    </div>
-  );
+  return <ManageProjectOrders meta={meta} orders={result} />;
 }
 export default ManageProjectOrdersPage;
