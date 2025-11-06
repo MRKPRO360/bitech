@@ -77,9 +77,9 @@ function TeamGroup() {
         ref={fadeRef}
         className="max-w-lg mx-auto mb-5 text-center flex flex-col justify-center items-center"
       >
-        <WandWithText text="Team Members" />
+        <WandWithText text="Leadership" />
 
-        <SecondaryHeading>Our Awesome Team</SecondaryHeading>
+        <SecondaryHeading>Our Exceptional Leaders </SecondaryHeading>
         <Para className="mt-5">
           Meet the dedicated individuals behind our success, working together to
           bring you the best.

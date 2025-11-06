@@ -179,63 +179,169 @@ export default function Employees({ employees }: { employees: IEmployee[] }) {
   // Get designation icon and color
 
   const getDesignationConfig = (designation: string) => {
-    const configs: {
-      [key: string]: {
-        icon: JSX.Element;
-        color: string;
-        bgColor: string;
-      };
-    } = {
-      Intern: {
-        icon: <GraduationCap className="w-6 h-6" />,
-        color: 'text-purple-600',
-        bgColor: 'bg-purple-50 border-purple-200',
-      },
-      'Junior Developer': {
-        icon: <Laptop className="w-6 h-6" />,
-        color: 'text-blue-600',
-        bgColor: 'bg-blue-50 border-blue-200',
-      },
-      'Mid Developer': {
-        icon: <Zap className="w-6 h-6" />,
-        color: 'text-green-600',
-        bgColor: 'bg-green-50 border-green-200',
-      },
-      'Senior Developer': {
-        icon: <Rocket className="w-6 h-6" />,
-        color: 'text-orange-600',
-        bgColor: 'bg-orange-50 border-orange-200',
-      },
-      'Team Lead': {
+    const configs: Record<
+      string,
+      { icon: JSX.Element; color: string; bgColor: string }
+    > = {
+      // Advisory Board
+      'Advisory Board Member': {
         icon: <Crown className="w-6 h-6" />,
         color: 'text-yellow-600',
         bgColor: 'bg-yellow-50 border-yellow-200',
       },
-      'Project Manager': {
+
+      // Leadership
+      Chairman: {
+        icon: <Crown className="w-6 h-6" />,
+        color: 'text-amber-600',
+        bgColor: 'bg-amber-50 border-amber-200',
+      },
+      'Managing Director': {
         icon: <BarChart3 className="w-6 h-6" />,
         color: 'text-indigo-600',
         bgColor: 'bg-indigo-50 border-indigo-200',
       },
-      Designer: {
-        icon: <Palette className="w-6 h-6" />,
-        color: 'text-pink-600',
-        bgColor: 'bg-pink-50 border-pink-200',
+      'Chief Executive Officer': {
+        icon: <Rocket className="w-6 h-6" />,
+        color: 'text-purple-600',
+        bgColor: 'bg-purple-50 border-purple-200',
       },
-      'HR Manager': {
+      'Chief Technical Officer': {
+        icon: <Laptop className="w-6 h-6" />,
+        color: 'text-blue-600',
+        bgColor: 'bg-blue-50 border-blue-200',
+      },
+      'General Manager': {
         icon: <Handshake className="w-6 h-6" />,
+        color: 'text-green-600',
+        bgColor: 'bg-green-50 border-green-200',
+      },
+
+      // Operations
+      'Chief Operation Officer': {
+        icon: <Zap className="w-6 h-6" />,
+        color: 'text-orange-600',
+        bgColor: 'bg-orange-50 border-orange-200',
+      },
+      'Senior Operation Officer': {
+        icon: <User className="w-6 h-6" />,
+        color: 'text-lime-600',
+        bgColor: 'bg-lime-50 border-lime-200',
+      },
+      'Operation Manager': {
+        icon: <BarChart3 className="w-6 h-6" />,
         color: 'text-teal-600',
         bgColor: 'bg-teal-50 border-teal-200',
       },
-      'QA Engineer': {
-        icon: <Search className="w-6 h-6" />,
-        color: 'text-red-600',
-        bgColor: 'bg-red-50 border-red-200',
+      'Operation Engineer': {
+        icon: <Laptop className="w-6 h-6" />,
+        color: 'text-sky-600',
+        bgColor: 'bg-sky-50 border-sky-200',
       },
-      'Marketing Executive': {
+      'Customer Relationship Officer': {
+        icon: <Handshake className="w-6 h-6" />,
+        color: 'text-rose-600',
+        bgColor: 'bg-rose-50 border-rose-200',
+      },
+
+      // Office Admin
+      'HR & Admin': {
+        icon: <User className="w-6 h-6" />,
+        color: 'text-cyan-600',
+        bgColor: 'bg-cyan-50 border-cyan-200',
+      },
+      'Accounts & Finance': {
+        icon: <BarChart3 className="w-6 h-6" />,
+        color: 'text-emerald-600',
+        bgColor: 'bg-emerald-50 border-emerald-200',
+      },
+      'Office Executive': {
+        icon: <User className="w-6 h-6" />,
+        color: 'text-gray-600',
+        bgColor: 'bg-gray-50 border-gray-200',
+      },
+
+      // Sales & Marketing
+      'Head Of Sales': {
+        icon: <Megaphone className="w-6 h-6" />,
+        color: 'text-fuchsia-600',
+        bgColor: 'bg-fuchsia-50 border-fuchsia-200',
+      },
+      'Chief Marketing Officer': {
+        icon: <Megaphone className="w-6 h-6" />,
+        color: 'text-pink-600',
+        bgColor: 'bg-pink-50 border-pink-200',
+      },
+      'Senior Marketing Executive': {
         icon: <Megaphone className="w-6 h-6" />,
         color: 'text-cyan-600',
         bgColor: 'bg-cyan-50 border-cyan-200',
       },
+      'Sales & Marketing Executive': {
+        icon: <Megaphone className="w-6 h-6" />,
+        color: 'text-blue-600',
+        bgColor: 'bg-blue-50 border-blue-200',
+      },
+
+      // Developer
+      'Software Engineer': {
+        icon: <Laptop className="w-6 h-6" />,
+        color: 'text-blue-600',
+        bgColor: 'bg-blue-50 border-blue-200',
+      },
+      'Senior Software Developer': {
+        icon: <Rocket className="w-6 h-6" />,
+        color: 'text-orange-600',
+        bgColor: 'bg-orange-50 border-orange-200',
+      },
+      'Junior Software Developer': {
+        icon: <GraduationCap className="w-6 h-6" />,
+        color: 'text-purple-600',
+        bgColor: 'bg-purple-50 border-purple-200',
+      },
+      'Flutter Developer': {
+        icon: <Zap className="w-6 h-6" />,
+        color: 'text-sky-600',
+        bgColor: 'bg-sky-50 border-sky-200',
+      },
+      'Full Stack Developer': {
+        icon: <Laptop className="w-6 h-6" />,
+        color: 'text-indigo-600',
+        bgColor: 'bg-indigo-50 border-indigo-200',
+      },
+      'Frontend Developer': {
+        icon: <Laptop className="w-6 h-6" />,
+        color: 'text-green-600',
+        bgColor: 'bg-green-50 border-green-200',
+      },
+      'Backend Developer': {
+        icon: <Laptop className="w-6 h-6" />,
+        color: 'text-teal-600',
+        bgColor: 'bg-teal-50 border-teal-200',
+      },
+
+      // Designer & Editor
+      'Graphic Designer': {
+        icon: <Palette className="w-6 h-6" />,
+        color: 'text-pink-600',
+        bgColor: 'bg-pink-50 border-pink-200',
+      },
+      'UI/UX Designer': {
+        icon: <Palette className="w-6 h-6" />,
+        color: 'text-purple-600',
+        bgColor: 'bg-purple-50 border-purple-200',
+      },
+      'SEO & Digital Marketing Officer': {
+        icon: <Search className="w-6 h-6" />,
+        color: 'text-cyan-600',
+        bgColor: 'bg-cyan-50 border-cyan-200',
+      },
+      'Video Editor': {
+        icon: <Zap className="w-6 h-6" />,
+        color: 'text-yellow-600',
+        bgColor: 'bg-yellow-50 border-yellow-200',
+      },
+
       Other: {
         icon: <User className="w-6 h-6" />,
         color: 'text-gray-600',
@@ -254,8 +360,8 @@ export default function Employees({ employees }: { employees: IEmployee[] }) {
           ref={fadeRef}
           className="max-w-xl mx-auto mb-8 text-center flex flex-col justify-center items-center"
         >
-          <WandWithText text="Team Members" />
-          <SecondaryHeading>Our Amazing Team</SecondaryHeading>
+          <WandWithText text="Employees" />
+          <SecondaryHeading>Our Professional People</SecondaryHeading>
           <Para className="mt-5">
             Meet the talented professionals who make our company great.
             We&apos;re proud of every member of our growing family.

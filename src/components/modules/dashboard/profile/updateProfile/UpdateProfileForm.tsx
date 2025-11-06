@@ -201,7 +201,13 @@ export default function UpdateProfileForm({ profile }: { profile: IUser }) {
                   <Input
                     id="phone"
                     placeholder="Enter your phone number"
-                    register={register('phoneNumber')}
+                    register={register('phoneNumber', {
+                      required: 'Phone number is required',
+                      pattern: {
+                        value: /^(?:\+88|88)?(01[3-9]\d{8})$/,
+                        message: 'Please enter a valid phone number',
+                      },
+                    })}
                     error={errors.phoneNumber}
                   />
                 </div>

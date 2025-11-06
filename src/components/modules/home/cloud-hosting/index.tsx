@@ -10,15 +10,48 @@ import { Check } from 'lucide-react';
 import { useFadeUp } from '@/hooks/FadeUp';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 
+import cloudDatabase from '@/assets/cloud-database.png';
+import hosting from '@/assets/cloud-computing.png';
+import fileStorage from '@/assets/folder.png';
+import fileSync from '@/assets/sync.png';
+import forexTrading from '@/assets/market.png';
+import remoteDesktop from '@/assets/remote-desktop.png';
+import emailServers from '@/assets/email-hosting.png';
+import hybridCloud from '@/assets/cloud-server.png';
+
 const services = [
-  'Cloud Databases',
-  'Website Hosting',
-  'File Storage',
-  'Forex Trading',
-  'File Backups',
-  'Remote Desktop',
-  'Email Servers',
-  'Hybrid Cloud',
+  {
+    icon: cloudDatabase,
+    title: 'Cloud Databases',
+  },
+  {
+    icon: hosting,
+    title: 'Website Hosting',
+  },
+  {
+    icon: fileStorage,
+    title: 'File Storage',
+  },
+  {
+    icon: forexTrading,
+    title: 'Forex Trading',
+  },
+  {
+    icon: fileSync,
+    title: 'File Backups',
+  },
+  {
+    icon: remoteDesktop,
+    title: 'Remote Desktop',
+  },
+  {
+    icon: emailServers,
+    title: 'Email Servers',
+  },
+  {
+    icon: hybridCloud,
+    title: 'Hybrid Cloud',
+  },
 ];
 
 function CloudHosting() {
@@ -36,6 +69,7 @@ function CloudHosting() {
       <div className="flex flex-col lg:flex-row items-center my-24 md:my-30 lg:my-40 gap-10 lg:gap-2">
         <div className="flex-1" ref={leftColRef}>
           <Image
+            className="w-full h-full"
             src={serviceImg}
             alt="Cloud Hosting"
             width={500}
@@ -59,17 +93,25 @@ function CloudHosting() {
           >
             {services.map((service, i) => (
               <div
-                className="flex items-center gap-2 p-4 shadow-lg shadow-primary/5 group"
+                className="flex items-center gap-6 p-4 shadow-lg shadow-primary/5 hover:shadow-primary/10 rounded-sm transition duration-300
+                "
+                // group
                 key={i}
               >
-                <div className="bg-grey/15 transition duration-400 ease-in-out group-hover:bg-primary p-1 rounded-sm">
+                <Image
+                  src={service.icon}
+                  alt={service.title}
+                  width={50}
+                  height={50}
+                />
+                {/* <div className="bg-grey/15 transition duration-400 ease-in-out group-hover:bg-primary p-1 rounded-sm">
                   <Check
                     strokeWidth={2}
                     className="h-5 w-5 md:w-8 md:h-8 group-hover:text-white"
                   />
-                </div>
+                </div> */}
                 <h4 className="text-base sm:text-lg font-extrabold">
-                  {service}
+                  {service.title}
                 </h4>
               </div>
             ))}

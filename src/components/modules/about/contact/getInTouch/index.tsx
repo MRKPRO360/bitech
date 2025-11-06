@@ -9,6 +9,7 @@ import contactImg from '@/assets/contact.png';
 import Image from 'next/image';
 import ContactForm from './ContactForm';
 import { useStaggerChildren } from '@/hooks/CardStagger';
+
 function GetInTouch() {
   const fadeRef = useFadeUp({ y: 20, stagger: 0.2 });
   const formRef = useStaggerChildren<HTMLDivElement>({
@@ -41,7 +42,7 @@ function GetInTouch() {
           width={400}
           height={400}
         />
-        <div className="flex-1">
+        <div className="w-full flex-1">
           <ContactForm />
         </div>
       </div>

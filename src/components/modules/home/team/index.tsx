@@ -15,6 +15,7 @@ import { useStaggerChildren } from '@/hooks/CardStagger';
 import { ImFacebook, ImTwitter } from 'react-icons/im';
 import { FaLinkedinIn } from 'react-icons/fa6';
 import { RiInstagramFill } from 'react-icons/ri';
+import Cta from '@/components/ui/core/Cta';
 
 const teamMembers = [
   {
@@ -131,6 +132,9 @@ function Teams() {
             </span>
           </div>
         ))}
+      </div>
+      <div className="flex items-center justify-center">
+        <Cta hasLink={true} path="/about/team" text="All Members" />
       </div>
     </Container>
   );

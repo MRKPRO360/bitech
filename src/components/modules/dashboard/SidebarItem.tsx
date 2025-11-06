@@ -1,5 +1,8 @@
 'use client';
-import { useState } from 'react';
+import {
+  //  useEffect, useRef,
+  useState,
+} from 'react';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 import { IMenuItem } from './dashbaord.config';
@@ -7,16 +10,32 @@ import { IMenuItem } from './dashbaord.config';
 export default function SidebarItem({ item }: { item: IMenuItem }) {
   const [open, setOpen] = useState(false);
   const Icon = item?.icon;
+  // const sidebarLinkRef = useRef<HTMLDivElement>(null);
+
+  // useEffect(() => {
+  //   const handleClickOutside = (e: MouseEvent) => {
+  //     if (
+  //       sidebarLinkRef.current &&
+  //       !sidebarLinkRef.current.contains(e.target as Node)
+  //     ) {
+  //       setOpen(false);
+  //     }
+  //   };
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => document.removeEventListener('mousedown', handleClickOutside);
+  // }, []);
 
   return (
-    <div>
+    <div
+    //  ref={sidebarLinkRef}
+    >
       {item.children ? (
         <button
           onClick={() => setOpen(!open)}
-          className="flex items-center justify-between w-full px-4 py-2 text-left hover:bg-gray-100 rounded-md"
+          className="flex items-center justify-between w-full px-4 py-2 text-left hover:bg-gray-100 rounded-md cursor-pointer"
         >
           <span className="flex items-center gap-2">
-            {Icon && <Icon className="h-5 w-5" />}
+            {Icon && <Icon className="h-5 w-5 text-primary" />}
             {item.title}
           </span>
           <ChevronDown
@@ -30,7 +49,7 @@ export default function SidebarItem({ item }: { item: IMenuItem }) {
           href={item.href!}
           className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-md"
         >
-          {Icon && <Icon className="h-5 w-5" />}
+          {Icon && <Icon className="h-5 w-5 text-primary" />}
           {item.title}
         </Link>
       )}

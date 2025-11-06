@@ -4,6 +4,7 @@ import './globals.css';
 import { Toaster } from 'sonner';
 import Providers from '@/providers';
 import SplashScreren from '@/components/shared/splashScreen';
+import ScrollToTop from '@/components/ui/core/ScrollToTop';
 
 const nunito = Nunito({
   subsets: ['latin'],
@@ -31,12 +32,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${nunito.className}`}>
+    <html suppressHydrationWarning={false} lang="en" className={`${nunito.className}`}>
       <body className="relative">
         <SplashScreren />
         <Providers>
           <Toaster richColors position="top-center" />
           {children}
+          <ScrollToTop />
         </Providers>
       </body>
     </html>

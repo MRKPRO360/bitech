@@ -9,15 +9,48 @@ import { Check } from 'lucide-react';
 import { useFadeUp } from '@/hooks/FadeUp';
 import { useStaggerChildren } from '@/hooks/CardStagger';
 
+import responsiveness from '@/assets/laptop.png';
+import designReact from '@/assets/ui.png';
+import laravel from '@/assets/php.png';
+import appDevelopment from '@/assets/app-development.png';
+import uiUx from '@/assets/ux.png';
+import eCommerce from '@/assets/shopping.png';
+import print from '@/assets/print.png';
+import readyDesign from '@/assets/web-design.png';
+
 const desginAndDevelopmentItems = [
-  'Responsive',
-  'Design React',
-  'Development Apps',
-  'Development Laravel',
-  'Development UX/UI',
-  'Design E-commerce',
-  'Design Print',
-  'Ready Design',
+  {
+    title: 'Responsive',
+    icon: responsiveness,
+  },
+  {
+    title: 'Design React',
+    icon: designReact,
+  },
+  {
+    title: 'Development Apps',
+    icon: appDevelopment,
+  },
+  {
+    title: 'Development Laravel',
+    icon: laravel,
+  },
+  {
+    title: 'Development UX/UI',
+    icon: uiUx,
+  },
+  {
+    title: 'Design E-commerce',
+    icon: eCommerce,
+  },
+  {
+    title: 'Design Print',
+    icon: print,
+  },
+  {
+    title: 'Ready Design',
+    icon: readyDesign,
+  },
 ];
 
 function DesingAndDevelopment() {
@@ -49,26 +82,34 @@ function DesingAndDevelopment() {
           >
             {desginAndDevelopmentItems.map((service, i) => (
               <div
-                className="flex items-center gap-2 p-4 shadow-lg shadow-primary/5 group"
+                className="flex items-center gap-6 p-4 shadow-lg shadow-primary/5 hover:shadow-primary/10 rounded-sm transition duration-300
+                            "
+                // group
                 key={i}
               >
-                <div className="bg-grey/15 transition duration-400 ease-in-out group-hover:bg-primary p-1 rounded-sm">
-                  <Check
-                    strokeWidth={2}
-                    className="h-5 w-5 md:w-8 md:h-8 group-hover:text-white"
-                  />
-                </div>
+                <Image
+                  src={service.icon}
+                  alt={service.title}
+                  width={50}
+                  height={50}
+                />
+                {/* <div className="bg-grey/15 transition duration-400 ease-in-out group-hover:bg-primary p-1 rounded-sm">
+                              <Check
+                                strokeWidth={2}
+                                className="h-5 w-5 md:w-8 md:h-8 group-hover:text-white"
+                              />
+                            </div> */}
                 <h4 className="text-base sm:text-lg font-extrabold">
-                  {service}
+                  {service.title}
                 </h4>
               </div>
             ))}
           </div>
         </div>
 
-        <div ref={rightColRef}>
+        <div className="flex-1" ref={rightColRef}>
           <Image
-            className="flex-1"
+            className=" w-full h-full"
             src={serviceImg}
             alt="Cloud Hosting"
             width={500}

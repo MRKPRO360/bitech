@@ -25,7 +25,7 @@ export default function Sidebar({ menu }: { menu: IMenuItem[] }) {
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 h-full w-64 bg-white  transform transition-transform duration-200 z-40 
+        className={`fixed hide-scrollbar overflow-y-auto top-0 left-0 h-full  w-64 bg-white  transform transition-transform duration-200 z-40 
           ${
             open ? 'translate-x-0' : '-translate-x-full'
           } md:translate-x-0 flex flex-col`}
@@ -46,7 +46,7 @@ export default function Sidebar({ menu }: { menu: IMenuItem[] }) {
             <SidebarItem key={item.title} item={item} />
           ))}
         </nav>
-        <div className="p-4 flex items-center gap-2 border-r border-grey/20">
+        <div className="p-4 flex items-center gap-2 border-r border-grey/20 ">
           <NormalDropdown
             setUser={setUser}
             isBottom={true}

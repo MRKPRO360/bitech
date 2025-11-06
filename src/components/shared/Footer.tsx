@@ -2,7 +2,7 @@
 
 import Container from '@/components/ui/core/Container';
 import Image from 'next/image';
-import logo from '@/assets/file.png';
+import logo from '@/assets/logo.png';
 import Para from '../ui/core/Para';
 import { Mail, MapPin, Phone } from 'lucide-react';
 import Link from 'next/link';
@@ -16,6 +16,7 @@ import {
   FaLinkedinIn,
   FaTwitter,
 } from 'react-icons/fa';
+import Cta from '../ui/core/Cta';
 
 function Footer() {
   const footerRef = useRef<HTMLDivElement>(null);
@@ -54,8 +55,20 @@ function Footer() {
           {/* 1st col */}
           <div className="">
             <div className="flex items-center gap-2">
-              <Image src={logo} alt="bi tech" width={30} height={30} />
-              <span className="text-lg font-bold">BiTech</span>
+              {/* <Image src={logo} alt="bi tech" width={30} height={30} /> */}
+              <Link href="/" className="flex items-center gap-2">
+                <Image
+                  style={{
+                    color: 'black',
+                  }}
+                  className="w-24 h-7"
+                  src={logo}
+                  alt="bi tech"
+                  width={30}
+                  height={30}
+                />
+                {/* <span className="text-lg font-bold">BiTech</span> */}
+              </Link>
             </div>
             <Para className="my-2">
               BiTech is a leading IT company specializing in software, web, and
@@ -177,6 +190,10 @@ function Footer() {
           </div>
         </div>
         <div className="border border-gray-100 mb-5" />
+
+        {/* <div className="text-center">
+          <Cta text="Back to Top" />
+        </div> */}
 
         <div className="flex flex-col md:flex-row items-center justify-between ">
           <Para>

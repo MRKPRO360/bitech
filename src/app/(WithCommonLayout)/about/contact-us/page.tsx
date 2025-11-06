@@ -2,7 +2,7 @@ import ContactInfo from '@/components/modules/about/contact/contactInfo';
 import GetInTouch from '@/components/modules/about/contact/getInTouch';
 import PageBanner from '@/components/shared/pageBanner';
 
-function ContactUsPage() {
+async function ContactUsPage() {
   return (
     <>
       <PageBanner title="Contact Us" />

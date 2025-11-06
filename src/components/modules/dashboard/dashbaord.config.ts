@@ -12,6 +12,7 @@ import {
   List,
   ClipboardCheck,
   IdCard,
+  Mails,
 } from 'lucide-react';
 
 export type IMenuItem = {
@@ -103,6 +104,16 @@ export const adminMenu: IMenuItem[] = [
     ],
   },
   {
+    title: 'All Mails',
+    icon: Mails,
+    children: [
+      {
+        title: 'Manage Mails',
+        href: '/dashboard/admin/manage-mails',
+      },
+    ],
+  },
+  {
     title: 'Settings',
     icon: Settings,
     children: [
@@ -112,7 +123,11 @@ export const adminMenu: IMenuItem[] = [
         href: '/dashboard/update-profile',
         icon: Settings,
       },
-      { title: 'Change Password', href: '/change-password', icon: KeySquare },
+      {
+        title: 'Change Password',
+        href: '/dashboard/change-password',
+        icon: KeySquare,
+      },
     ],
   },
 ];
@@ -143,12 +158,21 @@ export const customerMenu: IMenuItem[] = [
     children: [{ title: 'Cart', href: '/cart', icon: ShoppingCart }],
   },
   {
+    title: 'My Mails',
+    href: '/dashboard/customer/my-mails',
+    icon: Mails,
+  },
+  {
     title: 'Settings',
     icon: Settings,
     children: [
       { title: 'View Profile', href: '/dashboard', icon: UserCog },
       { title: 'Update Profile', href: '/dashboard/update-profile' },
-      { title: 'Change Password', href: '/change-password', icon: KeySquare },
+      {
+        title: 'Change Password',
+        href: '/dashboard/change-password',
+        icon: KeySquare,
+      },
     ],
   },
 ];

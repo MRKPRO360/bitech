@@ -90,7 +90,7 @@ function Cta({
           text === '' ? 'gap-0' : 'gap-2'
         )}
       >
-        {icon ? icon : renderIcon && <FaArrowRightLong />}
+        {!isSubmitting && icon ? icon : renderIcon && <FaArrowRightLong />}
         {isSubmitting && (
           <LoaderCircle className="animate-spin w-6 h-6 text-white group-hover:text-primary" />
         )}

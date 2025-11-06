@@ -9,7 +9,7 @@ import Review from '@/components/modules/home/review';
 import Solutions from '@/components/modules/home/solutions';
 import Start from '@/components/modules/home/start-project';
 import Teams from '@/components/modules/home/team';
-import PricingAndPlans from '@/components/modules/pricingPlan';
+// import PricingAndPlans from '@/components/modules/pricingPlan';
 
 function HomePage() {
   return (
@@ -22,7 +22,7 @@ function HomePage() {
       <Teams />
       <Projects />
       <Review />
-      <PricingAndPlans />
+      {/* <PricingAndPlans /> */}
       <Blogs />
       <Map coords={[23.8103, 90.4125]} />
       <Start />

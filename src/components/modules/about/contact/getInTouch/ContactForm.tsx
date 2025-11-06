@@ -1,199 +1,187 @@
 'use client';
 
+import Input from '@/components/form/input/InputField';
+import Label from '@/components/form/Label';
 import Cta from '@/components/ui/core/Cta';
+import { getMe } from '@/services/authService';
+import { createAMessage } from '@/services/mailService';
+import { IMail } from '@/types/mail';
+import { SendHorizontal } from 'lucide-react';
+import { useEffect } from 'react';
 
-import { CircleAlert, File, Mail, Phone, UserCircle } from 'lucide-react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 function ContactForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    reset,
 
-  const onSubmit = (data: FieldValues) => {
+    formState: { errors, isSubmitting },
+  } = useForm<IMail>();
+
+  const onSubmit = async (data: IMail) => {
+    const toastId = toast.loading('Sending your message...');
     console.log(data);
+
+    //    user: Types.ObjectId;
+    // phone: string;
+    // name: IUserName;
+    // email: string;
+    // isDeleted: boolean;
+    // description: string;
+    // subject: string;
+
+    try {
+      const res = await createAMessage({
+        phoneNumber: data.phoneNumber,
+        name: data.name,
+        email: data.email,
+        description: data.description,
+        subject: data.subject,
+        user: data.user?._id,
+      });
+      console.log(res);
+      if (res.success) {
+        toast.success('Successfully sent your message!', { id: toastId });
+        reset();
+      } else {
+        toast.error(res.message, { id: toastId });
+      }
+    } catch (err: any) {
+      toast.error(err?.message || 'Something went wrong!', { id: toastId });
+    }
   };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await getMe();
+        if (res.data) reset(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchUser();
+  }, [reset]);
 
   return (
     <form
-      className="shadow-xl rounded-md p-6 md:p-8 border border-gray-100/60 backdrop-blur-sm space-y-4"
+      className="shadow-md rounded-md p-6 md:p-8 border border-gray-100/60 backdrop-blur-sm space-y-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {/* Name */}
-      <div className="relative">
-        <label
-          htmlFor="name"
-          className="block text-gray-700 font-semibold mb-1"
-        >
-          Name
-        </label>
-        <div className="relative">
-          <UserCircle className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary/90" />
-
-          <input
-            id="name"
-            type="text"
-            placeholder="John Doe"
-            className={`w-full pl-10 pr-4 py-2 border border-grey/20 rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 ${
-              errors.name
-                ? 'border-red-500 focus:ring-red-200'
-                : 'border-gray-300 focus:border-primary focus:ring-blue-200'
-            }`}
-            {...register('name', { required: 'Name is required' })}
+      <div className="space-y-5">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {/* <!-- First Name --> */}
+          <div className="sm:col-span-1">
+            <Label htmlFor="fname">
+              First Name<span className="text-red-500">*</span>
+            </Label>
+            <Input
+              id="fname"
+              placeholder="Enter your first name"
+              register={register('name.firstName', {
+                required: 'First name is required',
+              })}
+              error={errors.name?.firstName}
+            />
+          </div>
+          {/* <!-- Last Name --> */}
+          <div className="sm:col-span-1">
+            <Label htmlFor="lname">
+              Last Name<span className="text-red-500">*</span>
+            </Label>
+            <Input
+              register={register('name.lastName', {
+                required: 'Last name is required',
+              })}
+              id="lname"
+              placeholder="Enter your last name"
+              error={errors.name?.lastName}
+            />
+          </div>
+        </div>
+        {/* <!-- Email --> */}
+        <div>
+          <Label>
+            Email<span className="text-red-500">*</span>
+          </Label>
+          <Input
+            error={errors.email}
+            register={register('email', {
+              required: 'Email is required',
+            })}
+            placeholder="Enter your email"
+            type="email"
           />
         </div>
-        {errors.name && (
-          <p className="bg-red-100/90 rounded-2xl text-red-800 text-sm mt-1 inline-flex px-1 py-0.5 gap-0.5">
-            {typeof errors.name.message === 'string'
-              ? errors.name.message
-              : 'Invalid name'}
-
-            <CircleAlert className="text-red-800" size={20} />
-          </p>
-        )}
-      </div>
-
-      <div className="relative">
-        <label
-          htmlFor="email"
-          className="block text-gray-700 font-semibold mb-1"
-        >
-          Email
-        </label>
-        <div className="relative">
-          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary/90" />
-          <input
-            id="name"
-            type="text"
-            placeholder="John Doe"
-            className={`w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 ${
-              errors.name
-                ? 'border-red-500 focus:ring-red-200'
-                : 'border-gray-300 focus:border-primary focus:ring-blue-200'
-            }`}
-            {...register('name', { required: 'Name is required' })}
-          />
-        </div>
-        {errors.email && (
-          <p className="bg-red-100/90 rounded-2xl text-red-800 text-sm mt-1 inline-flex px-1 py-0.5 gap-0.5">
-            {typeof errors.email.message === 'string'
-              ? errors.email.message
-              : 'Invalid email'}
-
-            <CircleAlert className="text-red-800" size={20} />
-          </p>
-        )}
       </div>
 
       <div className="grid grid-cols-2 gap-2">
         {/* Phone */}
-        <div className="relative">
-          <label
-            htmlFor="phone"
-            className="block text-gray-700 font-semibold mb-1"
-          >
-            Phone Number
-          </label>
-          <div className="relative">
-            <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary/90" />
-            <input
-              id="phone"
-              type="tel"
-              placeholder="+1234567890"
-              {...register('phone')}
-              className={`w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 ${
-                errors.phone
-                  ? 'border-red-500 focus:ring-red-200'
-                  : 'border-gray-300 focus:border-primary focus:ring-blue-200'
-              }`}
-              {...register('phone', {
-                required: 'Phone is required',
-                minLength: {
-                  value: 10,
-                  message: 'Phone must be at least 10 numbers',
-                },
-              })}
-            />
-          </div>
-          {errors.phone && (
-            <p className="bg-red-100/90 rounded-2xl text-red-800 text-sm mt-1 inline-flex px-1 py-0.5 gap-0.5">
-              {typeof errors.phone.message === 'string'
-                ? errors.phone.message
-                : 'Invalid phone number'}
-
-              <CircleAlert className="text-red-800" size={20} />
-            </p>
-          )}
+        <div>
+          <Label htmlFor="phone">
+            Phone <span className="text-red-500">*</span>
+          </Label>
+          <Input
+            id="phone"
+            placeholder="Enter your phone number"
+            register={register('phoneNumber', {
+              required: 'Phone number is required',
+              pattern: {
+                value: /^(?:\+88|88)?(01[3-9]\d{8})$/,
+                message: 'Please enter a valid phone number',
+              },
+            })}
+            error={errors.phoneNumber}
+          />
         </div>
 
         {/* Subject */}
-        <div className="relative">
-          <label
-            htmlFor="subject"
-            className="block text-gray-700 font-semibold mb-1"
-          >
-            Subject
-          </label>
-          <div className="relative">
-            <File className="absolute left-3 top-1/2 transform -translate-y-1/2 text-primary/90" />
-            <input
-              id="subject"
-              placeholder="Want to create a website"
-              className={`w-full pl-10 pr-4 py-2 border rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 ${
-                errors.subject
-                  ? 'border-red-500 focus:ring-red-200'
-                  : 'border-gray-300 focus:border-primary focus:ring-blue-200'
-              }`}
-              {...register('subject', {
-                required: 'Subject is required',
-              })}
-            />
-          </div>
-          {errors.subject && (
-            <p className="bg-red-100/90 rounded-2xl text-red-800 text-sm mt-1 inline-flex px-1 py-0.5 gap-0.5">
-              {typeof errors.subject.message === 'string'
-                ? errors.subject.message
-                : 'Invalid subject'}
-
-              <CircleAlert className="text-red-800" size={20} />
-            </p>
-          )}
+        <div>
+          <Label htmlFor="subject">
+            Subject <span className="text-red-500 ">*</span>
+          </Label>
+          <Input
+            id="subject"
+            placeholder="Want to create a website"
+            register={register('subject', {
+              required: 'Subject is required',
+            })}
+            error={errors.subject}
+          />
         </div>
       </div>
-
-      {/* Description */}
-      <div className="w-full">
-        <label
-          htmlFor="description"
-          className="block text-gray-700 font-semibold mb-1"
-        >
-          Write Your Message
-        </label>
-        <textarea
+      <div>
+        <Label htmlFor="description">
+          Write Your Message <span className="text-red-500">*</span>
+        </Label>
+        <Input
+          type="textarea"
           id="description"
-          rows={4}
-          className={`w-full pl-3 pr-4 py-2 border rounded-md focus:outline-none shadow-primary/10 hover:shadow-md focus:ring-4 focus:ring-primary/10 ${
-            errors.description
-              ? 'border-red-800'
-              : 'focus:border-primary border-gray-300'
-          }`}
-          {...register('description', {
+          rows={5}
+          placeholder="Detailed description of your project..."
+          register={register('description', {
             required: 'Description is required',
+            minLength: {
+              value: 20,
+              message: 'Description must be at least 20 characters',
+            },
           })}
-          placeholder="I am delighted that..."
-        ></textarea>
-        {errors.description && (
-          <p className="bg-red-100/90 rounded-2xl text-red-800 text-sm mt-1 inline-flex px-1 py-0.5 gap-0.5">
-            {typeof errors.description.message === 'string'
-              ? errors.description.message
-              : 'Description is required'}
-            <CircleAlert className="text-red-800" size={20} />
-          </p>
-        )}
+          error={errors.description}
+        />
       </div>
-      <Cta text="Submit" />
+
+      <Cta
+        icon={<SendHorizontal />}
+        renderIcon={false}
+        isSubmitting={isSubmitting}
+        submittingText="Sending Message..."
+        type="submit"
+        text="Send Message"
+      />
     </form>
   );
 }

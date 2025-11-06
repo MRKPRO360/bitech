@@ -146,13 +146,12 @@ function Profile({ data }: { data: IUser }) {
                 <div className="flex-1 text-center lg:text-left">
                   <div className="flex items-center justify-center lg:justify-start gap-3 mb-2">
                     <h2 className="text-3xl md:text-4xl font-bold ">
-                      {data?.fullName}
+                      {`${data.name.firstName} ${data.name.lastName}`}
                     </h2>
                     <span className="px-3 py-1 bg-purple-500/20 border border-purple-400/50 rounded-full text-sm font-medium">
                       {data?.user?.role}
                     </span>
                   </div>
-                  <p className="text-lg mb-4">{data?.fullName}</p>
                   <div className="flex items-center justify-center lg:justify-start gap-4 ">
                     <div className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />

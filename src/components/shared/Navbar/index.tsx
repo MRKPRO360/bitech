@@ -48,11 +48,8 @@ function Navbar() {
           if (self.isActive) {
             // Scrolled down
             gsap.to(navbarRef.current, {
-              backgroundColor: 'rgba(255, 255, 255, .5)',
+              backgroundColor: 'rgba(255, 255, 255, 0.5)',
               boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
-              color: '#171717',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
               duration: 0.3,
             });
             gsap.to(inner, {
@@ -80,7 +77,10 @@ function Navbar() {
   );
 
   return (
-    <nav ref={navbarRef} className="fixed top-0 left-0 z-[100] w-full ">
+    <nav
+      ref={navbarRef}
+      className="fixed top-0 left-0 z-[100] w-full backdrop-blur-md bg-[rgba(255,255,255,0.2)] transition-all duration-300"
+    >
       <div className="navbar-inner">
         <Container>
           <div className="flex items-center justify-between py-4 font-semibold">
@@ -96,7 +96,6 @@ function Navbar() {
                 width={30}
                 height={30}
               />
-              {/* <span className="text-lg lg:text-xl font-bold">BiTech</span> */}
             </Link>
             {/* Navlink */}
             <div className="hidden lg:flex items-center gap-6 text-lg font-bold">
